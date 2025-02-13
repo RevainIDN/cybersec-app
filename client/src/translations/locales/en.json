@@ -1,0 +1,9 @@
+{
+	"navbar": {
+		"home": "Home",
+		"ip": "IP Check",
+		"leaks": "Leaks",
+		"passwords": "Passwords",
+		"reports": "Reports"
+	}
+}
