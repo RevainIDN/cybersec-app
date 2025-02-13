@@ -1,0 +1,27 @@
+.navbar {
+	position: relative;
+	display: flex;
+	gap: 20px;
+	border: 2px #0034EE solid;
+	border-radius: 48px;
+	background-color: transparent;
+}
+
+.navbar-link {
+	position: relative;
+	padding: 15px 25px;
+	border-radius: 48px;
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	overflow: hidden;
+}
+
+.navbar-active-bg {
+	position: absolute;
+	inset: 0;
+	background-color: #153E6C;
+	border-radius: 48px;
+	z-index: -1;
+}
