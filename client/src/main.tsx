@@ -5,7 +5,7 @@ import './styles/index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename='/cybersec-app'>
+  <BrowserRouter basename='/cybersec-app/'>
     <App />
   </BrowserRouter>,
 )

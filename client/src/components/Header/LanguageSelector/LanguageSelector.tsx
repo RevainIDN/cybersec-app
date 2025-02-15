@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 const languages = [
 	{ code: 'en', label: 'English' },
-	{ code: 'ru', label: 'Russian' },
-	{ code: 'ua', label: 'Ukrainian' },
+	{ code: 'ru', label: 'Русский' },
+	{ code: 'ua', label: 'Українська' },
 ]
 
 export default function LanguageSelector() {
@@ -25,7 +25,7 @@ export default function LanguageSelector() {
 
 	return (
 		<div className='lang-selector' onClick={handleClickSelector}>
-			<img className='selector-icon' src="public/icon_lang.svg" alt="Lang" />
+			<img className='selector-icon' src="icon_lang.svg" alt="Lang" />
 			<p className='selector-language'>{languages.find(l => l.code === currentLanguage)?.label}</p>
 			<img className='selector-icon' src="expand_down.svg" alt="down" />
 			<AnimatePresence>

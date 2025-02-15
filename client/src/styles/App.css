@@ -1,37 +1,9 @@
 #root {
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
 }
 
 body {
-  min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
-}
-
-body::before,
-body::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  width: 150%;
-  height: 150%;
-  opacity: 0.6;
-  z-index: -1;
-}
-
-body::before {
-  left: -50%;
-  background: radial-gradient(circle, #01196e 0%, transparent 50%);
-}
-
-body::after {
-  right: -50%;
-  background: radial-gradient(circle, #01196e 0%, transparent 50%);
-}
-
-body>* {
-  position: relative;
-  z-index: 1;
 }
