@@ -5,5 +5,70 @@
 		"leaks": "Leaks",
 		"passwords": "Passwords",
 		"reports": "Reports"
+	},
+	"homePage": {
+		"heroSection": {
+			"title": "Ensure Complete Network Security with SecureNet",
+			"subtitle": "Analyze threats, check IP addresses, detect data leaks, and protect passwords — all in one solution",
+			"button": "Get Started"
+		},
+		"servicesSection": {
+			"title": "Comprehensive Cybersecurity in One Place",
+			"subtitle": "Our tools help you prevent threats, protect sensitive data, and strengthen your network security",
+			"blocks": {
+				"checkIp": {
+					"title": "IP Address Check",
+					"description": "Analyze IP addresses and detect threats. Quickly block malicious sources."
+				},
+				"dataLeaks": {
+					"title": "Data Leak Detection",
+					"description": "Check if your data has been leaked. We analyze leak databases to protect your information."
+				},
+				"passwords": {
+					"title": "Password Assessment",
+					"description": "Check the strength of your passwords and get recommendations for improving them."
+				},
+				"reports": {
+					"title": "Report Generation",
+					"description": "Receive detailed security reports and insights into current threats to your network."
+				}
+			}
+		},
+		"protectionToolsSection": {
+			"title": "How Does SecureNet Protect Your Data?",
+			"subtitle": "Four key tools that provide complete security for your network, helping you prevent attacks, protect sensitive information, and respond quickly to threats. SecureNet offers solutions that can instantly identify potential risks and alert you to potential incidents, ensuring protection at every stage.",
+			"cards": {
+				"card1": {
+					"title": "IP Address Check",
+					"description": "Thousands of new threats emerge online every second. Our IP analysis tool allows you to instantly check if a given IP address is a source of malicious activity. We use threat databases and cyber intelligence to keep your network safe.",
+					"button": "Check IP"
+				},
+				"card2": {
+					"title": "Data Leak Detection",
+					"description": "Your clients' and company's data may be publicly exposed due to breaches on third-party services. SecureNet analyzes data leaks across millions of compromised records and alerts you if your data has been exposed.",
+					"button": "Find Leaks"
+				},
+				"card3": {
+					"title": "Password Strength Assessment",
+					"description": "A weak password is an open door for hackers. Our tool helps you determine how strong your password is and provides recommendations to improve it. We also check if your passwords have been leaked in data breaches.",
+					"button": "Check Password"
+				},
+				"card4": {
+					"title": "Security Reports",
+					"description": "Security requires monitoring. Our tool automatically analyzes your network and generates detailed reports on potential threats. Use these insights to protect your business or personal accounts.",
+					"button": "View Report"
+				}
+			}
+		},
+		"threatCaseSection": {
+			"title": "Learn About Potential Threats and How SecureNet Solves Them",
+			"subtitle": "Real cyberattack cases and security solutions to help you prevent data loss:",
+			"strongCase": "Case: ",
+			"strongSolution": "Solution: ",
+			"strongResult": "Result: ",
+			"case": "Many users reuse the same password across different websites. After a popular service was hacked, cybercriminals gained access to millions of credentials and started using them to break into other accounts.",
+			"solution": "Users who checked their passwords with our service discovered that their credentials had been compromised. This allowed them to change their passwords in time and secure their accounts.",
+			"result": "Thousands of users avoided account theft and financial losses."
+		}
 	}
 }
