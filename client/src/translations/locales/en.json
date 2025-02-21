@@ -70,5 +70,91 @@
 			"solution": "Users who checked their passwords with our service discovered that their credentials had been compromised. This allowed them to change their passwords in time and secure their accounts.",
 			"result": "Thousands of users avoided account theft and financial losses."
 		}
+	},
+	"passwordPage": {
+		"passwordCheck": {
+			"title": "How strong is your password?",
+			"subtitle": "Your password is the first line of defense for your data. Make sure it is complex enough and has not been leaked. Enter your password below and we will assess its security.",
+			"button": "Clear",
+			"passwordStrength": {
+				"0": "very weak",
+				"1": "weak",
+				"2": "average",
+				"3": "strong",
+				"4": "very strong"
+			},
+			"strengthLabel": "Password strength: ",
+			"crackTimeLabel": "Time to hack: ",
+			"recommendationsLabel": "Recommendations: ",
+			"timeToCrack": {
+				"minute": "minute",
+				"minutes": "minutes",
+				"hour": "hour",
+				"hours": "hours",
+				"day": "day",
+				"days": "days",
+				"week": "week",
+				"weeks": "weeks",
+				"month": "month",
+				"months": "months",
+				"year": "year",
+				"years": "years",
+				"centuries": "centuries"
+			},
+			"recommendations": {
+				"use_a_few_words,_avoid_common_phrases": "Use a few words, avoid common phrases",
+				"no_need_for_symbols,_digits,_or_uppercase_letters": "No need for symbols, digits, or uppercase letters",
+				"add_another_word_or_two_uncommon_words_are_better_": "Add another word or two. Uncommon words are better.",
+				"use_a_longer_keyboard_pattern_with_more_turns": "Use a longer and more complex keyboard pattern with more turns.",
+				"avoid_repeated_words_and_characters": "Avoid repeated words and characters.",
+				"avoid_sequences": "Avoid sequences.",
+				"avoid_recent_years": "Avoid recent years",
+				"avoid_years_that_are_associated_with_you": "Avoid years that are associated with you",
+				"avoid_dates_and_years_that_are_associated_with_you": "Avoid dates and years that are associated with you.",
+				"capitalization_doesn_t_help_very_much": "Capitalization doesn't help very much. Try using other methods to strengthen the password.",
+				"all-uppercase_is_almost_as_easy_to_guess_as_all-lowercase": "All-uppercase is almost as easy to guess as all-lowercase",
+				"predictable_substitutions_like_instead_of_a_don_t_help_very_much": "Predictable substitutions like '@' instead of 'a' don't help very much"
+			},
+			"warnings": {
+				"straight_rows_of_keys_are_easy_to_guess": "Straight rows of keys are easy to guess. Avoid them.",
+				"short_keyboard_patterns_are_easy_to_guess": "Short keyboard patterns are easy to guess. Try using longer, more random combinations.",
+				"repeats_like_aaa_are_easy_to_guess": "Repeats like 'aaa' are easy to guess. Avoid them.",
+				"sequences_like_abc_or_6543_are_easy_to_guess": "Sequences like 'abc' or '6543' are easy to guess. Better to use random characters or more complex combinations.",
+				"repeats_like_abcabcabc_are_only_slightly_harder_to_guess_than_abc_": "Repeats like 'abcabcabc' are only slightly harder to guess than 'abc'. Avoid such patterns.",
+				"recent_years_are_easy_to_guess": "Recent years are easy to guess",
+				"dates_are_often_easy_to_guess": "Dates are often easy to guess. Avoid using personal dates (such as birthdates or anniversaries).",
+				"a_word_by_itself_is_easy_to_guess": "A word by itself is easy to guess. Try adding characters or numbers to complicate the password.",
+				"this_is_a_top_10_common_password": "This is a top-10 common password. Using such passwords significantly lowers security. Try creating a unique and complex password.",
+				"this_is_a_top_100_common_password": "This is a top-100 common password. Using such passwords significantly lowers security. Try creating a unique and complex password.",
+				"this_is_a_very_common_password": "This is a very common password.",
+				"this_is_similar_to_a_commonly_used_password": "This is similar to a commonly used password",
+				"names_and_surnames_by_themselves_are_easy_to_guess": "Names and surnames by themselves are easy to guess",
+				"common_names_and_surnames_are_easy_to_guess": "Common names and surnames are easy to guess"
+			}
+		},
+		"PasswordGenerator": {
+			"title": "Create a strong password",
+			"subtitle": "Your data is protected! Use the password generator to create a unique and secure password that complies with cybersecurity best practices. Customize the settings and copy the ready password with one click.",
+			"userPasswords": "Your password:",
+			"passwordLength": "Password length:",
+			"passwordQuantity": "Number of passwords:",
+			"otherPasswords": "Other passwords:",
+			"uppercaseLetters": "Uppercase letters",
+			"lowercaseLetters": "Lowercase letters",
+			"numbers": "Numbers",
+			"symbols": "Symbols",
+			"copied": "Copied",
+			"indication": "Specify the number of passwords in the settings",
+			"qaDropDown": {
+				"question1": "What is considered a strong password?",
+				"answer1": "A strong password should be long, at least 12 characters (ideally 16 or more). It should include both uppercase and lowercase letters, numbers, and special characters like @, #, $, %. It’s important that the password doesn't contain easily guessable combinations, such as names, birthdates, or common phrases like '123456' or 'password'. These passwords are easy to crack.",
+				"question2": "Is it okay to use the same password for all accounts?",
+				"answer2": "Using the same password for all accounts is a huge security risk. If one account is compromised, an attacker can easily access your other accounts as well. To protect your data, it’s important to use unique passwords for each service, and consider using a password manager to securely store and manage them.",
+				"question3": "How can I remember all my passwords?",
+				"answer3": "The best way to remember all your passwords is to use password managers like Bitwarden, 1Password, or KeePass. These tools help securely store and generate strong passwords for each service. If you prefer to write passwords down manually, make sure to protect them with a password or store them in encrypted files. It's not recommended to keep passwords in unprotected notes or documents.",
+				"question4": "How often should I change my password?",
+				"answer4": "If your password is long, complex, and unique, you don’t need to change it unless there has been a data breach or suspicious activity. However, if the service recommends a password change or if you’re notified of a potential data breach, you should change it immediately. Regularly updating your passwords helps increase your security."
+			}
+		}
 	}
 }
