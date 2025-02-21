@@ -6,31 +6,38 @@ import { useTranslation } from 'react-i18next';
 import { passwordStrengthStyles, getTranslatedCrackTime } from './passwordStrengthHelpers';
 
 export default function PasswordCheck() {
-	const [userPassword, setUserPassword] = useState<string>('');
-	const [checkedPassword, setCheckedPassword] = useState<ZXCVBNResult | null>(null);
 	const { t } = useTranslation();
 
+	// Локальное логическое состояние
+	const [userPassword, setUserPassword] = useState<string>('');
+	// Локальное ui состояние
+	const [checkedPassword, setCheckedPassword] = useState<ZXCVBNResult | null>(null);
+
+	// Обработчик ввода пароля
 	const handleInputUserPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newPassword = e.target.value;
 		setUserPassword(newPassword);
 		setCheckedPassword(zxcvbn(newPassword));
 	}
 
+	// Обработчик изменения внешний отступов поля ввода пароля
 	useEffect(() => {
 		if (userPassword === '') { setCheckedPassword(null) };
 	}, [userPassword])
 
 	return (
 		<div className='password-check section'>
+			{/* Поле ввода пароля */}
 			<div className='input-cont'>
 				<input
-					className='check-input'
+					className='passwords-input'
 					type="text"
 					placeholder='Qwerty123!'
 					style={passwordStrengthStyles[checkedPassword?.score ?? 5]}
+					value={userPassword}
 					onChange={handleInputUserPassword}
 				/>
-				<button className='check-btn button'>{t('passwordPage.passwordCheck.button')}</button>
+				<button className='check-btn button' onClick={() => setUserPassword('')}>{t('passwordPage.passwordCheck.button')}</button>
 			</div>
 
 			{/* Основной контейнер информации */}
