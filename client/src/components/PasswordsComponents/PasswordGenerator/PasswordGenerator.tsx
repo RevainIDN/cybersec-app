@@ -91,7 +91,7 @@ export default function PasswordGenerator() {
 			<h1 className='password-generator-title'>{t('passwordPage.PasswordGenerator.userPasswords')}</h1>
 			<div className='generate-input-cont'>
 				<input
-					className='passwords-input generate-input'
+					className='generate-input'
 					type="text"
 					readOnly
 					maxLength={32}

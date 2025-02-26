@@ -76,7 +76,6 @@ button {
 }
 
 /* Задний фон лендинг-компонентов */
-
 .section::before,
 .section::after {
 	content: "";
@@ -96,4 +95,32 @@ button {
 .section::after {
 	right: -50%;
 	background: radial-gradient(circle, #01196e 0%, transparent 45%);
+}
+
+/* Общий стиль */
+
+input {
+	color: #e0e6f4;
+	background-color: rgba(0, 52, 238, 0.1);
+	letter-spacing: 2px;
+	border: none;
+	border-radius: 16px;
+	outline: 2px #021a71 solid;
+	padding: 0 20px;
+	transition: outline 0.3s;
+}
+
+input:focus {
+	outline: 2px #0034EE solid;
+}
+
+.input-btn {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	transform: translateY(-50%);
+	height: 80%;
+	border-radius: 16px;
+	color: #fff;
+	background-color: #0034EE;
 }

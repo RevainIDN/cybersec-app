@@ -1,16 +1,13 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
 import './styles/App.css'
+import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import HomePage from './pages/HomePage/HomePage'
-import IpPage from './pages/IpPage/IpPage'
+import IpPage from './pages/AnalysisPage/AnalysisPage'
 import LeaksPage from './pages/LeaksPage/LeaksPage'
 import PasswordsPage from './pages/PasswordsPage/PasswordsPage'
 import ReportsPage from './pages/ReportsPage/ReportsPage'
 
 export default function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header />

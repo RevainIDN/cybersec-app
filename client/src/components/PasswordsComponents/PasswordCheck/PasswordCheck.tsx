@@ -37,7 +37,7 @@ export default function PasswordCheck() {
 					value={userPassword}
 					onChange={handleInputUserPassword}
 				/>
-				<button className='check-btn button' onClick={() => setUserPassword('')}>{t('passwordPage.passwordCheck.button')}</button>
+				<button className='input-btn button' onClick={() => setUserPassword('')}>{t('passwordPage.passwordCheck.button')}</button>
 			</div>
 
 			{/* Основной контейнер информации */}
