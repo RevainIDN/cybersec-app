@@ -1,0 +1,22 @@
+.load-cont {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.load {
+	width: 125px;
+	height: 125px;
+	border-radius: 50%;
+	background: radial-gradient(farthest-side, #420dd3 80%, #0000) top / 9px 9px no-repeat, conic-gradient(#0000 30%, #420dd3);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+	animation: move 1.5s linear infinite;
+}
+
+@keyframes move {
+	100% {
+		transform: rotate(360deg);
+	}
+}

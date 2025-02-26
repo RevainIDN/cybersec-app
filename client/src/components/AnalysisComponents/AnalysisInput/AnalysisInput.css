@@ -1,0 +1,39 @@
+.analysis-cont {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.analysis-btns {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.analysis-btn {
+	width: 200px;
+	height: 50px;
+	color: #FAFAFADE;
+	background-color: transparent;
+	border-bottom: 2px #021a71 solid;
+}
+
+.analysis-btn--active {
+	color: #c1c1ffde;
+	border-bottom: 2px #0034EE solid;
+}
+
+.analysis-input-cont {
+	position: relative;
+	width: 70%;
+}
+
+.analysis-input {
+	width: 100%;
+	height: 60px;
+	padding-right: 100px;
+}
+
+.analysis-input::placeholder {
+	color: #606b90;
+}

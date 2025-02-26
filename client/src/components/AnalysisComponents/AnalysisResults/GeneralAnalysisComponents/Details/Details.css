@@ -1,0 +1,60 @@
+.details {
+	display: flex;
+	flex-direction: column;
+	font-weight: 300;
+	color: #FAFAFADE;
+}
+
+.details-item {
+	font-size: 0.9rem;
+	margin-bottom: 20px;
+}
+
+.ip-details {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.details-item h1 {
+	font-size: 1.25rem;
+	padding: 3px 0;
+	border-bottom: 2px #021a71 solid;
+	margin-bottom: 10px;
+}
+
+.details-cont {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	width: 100%;
+	max-height: 500px;
+	overflow-y: auto;
+	font-size: 0.8rem;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+
+.details-desc {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 50%;
+	font-size: 0.8rem;
+}
+
+.details-table {
+	width: 100%;
+}
+
+.popularity-table {
+	width: 500px;
+}
+
+.popularity .details-table {
+	width: 500px;
+}
+
+.nodata {
+	font-size: 1.5rem;
+	letter-spacing: 1px;
+}

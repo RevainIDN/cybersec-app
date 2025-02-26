@@ -1,0 +1,73 @@
+.analysis-result {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.analysis-details {
+	display: flex;
+	gap: 50px;
+	width: 100%;
+	outline: 2px #021a71 solid;
+	background-color: #03144e;
+	border-radius: 3px;
+	padding: 20px 2px;
+	margin: 0 auto;
+}
+
+.analysis-no-data {
+	text-align: center;
+}
+
+.analysis-scale {
+	display: flex;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.analysis-scale h2 {
+	font-size: 0.9rem;
+}
+
+.analysis-progress {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 200px;
+}
+
+.analysis-notification-alert {
+	color: #FF5A50;
+}
+
+.analysis-info {
+	width: 100%;
+	height: 100%;
+}
+
+.analysis-dynamic-info {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 50%;
+}
+
+.analysis-dynamic-item {
+	padding: 0 10px;
+	border-left: 1px #0034EE solid;
+	border-right: 1px #0034EE solid;
+}
+
+.analysis-tags {
+	display: flex;
+	gap: 6px;
+	width: 100%;
+}
+
+.analysis-tag {
+	padding: 3px 8px;
+	background-color: #021a71;
+	border-radius: 20px;
+}

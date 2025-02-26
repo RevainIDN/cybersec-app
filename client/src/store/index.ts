@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import passwordsReducer from './passwordsSlice';
+import analysisReducer from './analysisSlice'
 
 const store = configureStore({
 	reducer: {
 		passwords: passwordsReducer,
+		analysis: analysisReducer,
 	},
 });
 
