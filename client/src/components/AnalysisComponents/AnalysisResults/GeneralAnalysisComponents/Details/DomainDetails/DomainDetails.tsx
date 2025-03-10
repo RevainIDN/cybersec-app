@@ -1,41 +1,175 @@
-import { DomainVirusTotalResponse } from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
+import { DomainVirusTotalResponse, DNSRecord } from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
 import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
+import { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
+// Константы для классов
+const CLASS_NAMES = {
+	CONTAINER: "details-cont",
+	ITEM: "details-item",
+	DESC: "details-desc",
+	TABLE: "details-table",
+	CERT_TABLE: "details-table cert-table",
+	NO_DATA: "analysis-no-data",
+	NODATA: "nodata",
+} as const;
+
+// Типизация
 interface DomainDetailsProps {
 	domainAnalysisResults: DomainVirusTotalResponse | null;
 }
 
-export default function DomainDetails({ domainAnalysisResults }: DomainDetailsProps) {
-	// Деструктурируем атрибуты из данных анализа IP
-	const { attributes } = domainAnalysisResults?.data || {};
+interface DetailsTableProps<T> {
+	title: string;
+	headers: string[];
+	data: T[];
+	columns: (keyof T)[];
+}
 
-	// Функция для рендеринга таблиц данных (DNS, сертификат, популярность)
-	const renderTable = (headers: string[], rows: any[], columns: string[]) => (
-		<table className="details-table">
+// Утилита для рендеринга ключ-значение
+const renderDetail = (label: string, value?: string | number) => (
+	value && (
+		<li className={CLASS_NAMES.DESC}>
+			<span>{label}:</span> <span>{value}</span>
+		</li>
+	)
+);
+
+// Компонент для таблиц
+const DetailsTable = <T,>({
+	title,
+	headers,
+	data,
+	columns,
+}: DetailsTableProps<T>) => (
+	<li className={CLASS_NAMES.ITEM}>
+		<h1>{title}</h1>
+		<table className={CLASS_NAMES.TABLE}>
 			<thead>
-				<tr>
-					{headers.map((header, idx) => (
-						<th key={idx}>{header}</th>
-					))}
-				</tr>
+				<tr>{headers.map((header, i) => <th key={i}>{header}</th>)}</tr>
 			</thead>
 			<tbody>
-				{rows.map((row, idx) => (
+				{data.map((row, idx) => (
 					<tr key={idx}>
 						{columns.map((col) => (
-							<td key={col}>{row[col]}</td>
+							<td key={String(col)}>{String(row[col])}</td>
 						))}
 					</tr>
 				))}
 			</tbody>
 		</table>
-	);
+	</li>
+);
 
-	// Проверка на наличие данных на странице
-	const hasData = attributes && (
+// Подкомпоненты
+const CategoriesSection = ({ categories, t }: { categories: Record<string, string>, t: TFunction }) => (
+	categories && Object.keys(categories).length > 0 && (
+		<li className={CLASS_NAMES.ITEM}>
+			<h1>{t('analysisPage.analyzedData.details.domain.categories')}</h1>
+			<ul className={CLASS_NAMES.CONTAINER}>
+				{Object.entries(categories).map(([key, value]) => renderDetail(key, value))}
+			</ul>
+		</li>
+	)
+);
+
+const PopularitySection = ({ popularity_ranks, t }: { popularity_ranks: Record<string, { rank: number; timestamp: number }>, t: TFunction }) => (
+	popularity_ranks && Object.keys(popularity_ranks).length > 0 && (
+		<DetailsTable
+			title={t('analysisPage.analyzedData.details.domain.popularity')}
+			headers={[
+				t('analysisPage.analyzedData.details.domain.tableHeaderPopularity1'),
+				t('analysisPage.analyzedData.details.domain.tableHeaderPopularity2'),
+				t('analysisPage.analyzedData.details.domain.tableHeaderPopularity3')
+			]}
+			data={Object.entries(popularity_ranks).map(([key, rankData]) => ({
+				rank: rankData.rank,
+				position: key,
+				timestamp: convertTimestamp(rankData.timestamp),
+			}))}
+			columns={["position", "rank", "timestamp"]}
+		/>
+	)
+);
+
+const DnsRecordsSection = ({ last_dns_records, t }: { last_dns_records: DNSRecord[], t: TFunction }) => (
+	last_dns_records && last_dns_records.length > 0 && (
+		<DetailsTable
+			title={t('analysisPage.analyzedData.details.domain.dns')}
+			headers={[
+				t('analysisPage.analyzedData.details.domain.tableHeaderDns1'),
+				t('analysisPage.analyzedData.details.domain.tableHeaderDns2'),
+				t('analysisPage.analyzedData.details.domain.tableHeaderDns3')
+			]}
+			data={last_dns_records}
+			columns={["type", "ttl", "value"]}
+		/>
+	)
+);
+
+const HttpsCertificateSection = ({ attributes, t }: { attributes: DomainVirusTotalResponse['data']['attributes'], t: TFunction }) => (
+	attributes?.last_https_certificate && Object.keys(attributes.last_https_certificate).length > 0 && (
+		<li className={CLASS_NAMES.ITEM}>
+			<h1>{t('analysisPage.analyzedData.details.domain.httpsCert')}</h1>
+			<table className={CLASS_NAMES.CERT_TABLE}>
+				<thead>
+					<tr>
+						<th>{t('analysisPage.analyzedData.details.domain.tableHeaderHttps1')}</th>
+						<th>{t('analysisPage.analyzedData.details.domain.tableHeaderHttps2')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{[
+						{ label: "JARM Fingerprint", value: attributes.jarm },
+						{ label: "Version", value: attributes.last_https_certificate.version },
+						{ label: "Serial Number", value: attributes.last_https_certificate.serial_number },
+						{ label: "Thumbprint", value: attributes.last_https_certificate.thumbprint },
+						{ label: "Signature Algorithm", value: attributes.last_https_certificate.cert_signature?.signature_algorithm },
+						{ label: "Issuer", value: attributes.last_https_certificate.issuer ? `${attributes.last_https_certificate.issuer.C || ''} ${attributes.last_https_certificate.issuer.O || ''} ${attributes.last_https_certificate.issuer.CN || ''}`.trim() : '' },
+						{ label: "Subject", value: attributes.last_https_certificate.subject?.CN },
+						{ label: "Subject Public Key Info", value: attributes.last_https_certificate.public_key?.algorithm },
+						{ label: "Public Key", value: attributes.last_https_certificate.public_key?.ec ? 'EC' : 'Unknown' },
+					].map((row, idx) => (
+						row.value && (
+							<tr key={idx}>
+								<td>{row.label}</td>
+								<td>{row.value}</td>
+							</tr>
+						)
+					))}
+				</tbody>
+			</table>
+		</li>
+	)
+);
+
+const WhoisSection = ({ whois }: { whois: string }) => (
+	whois && whois.trim().length > 0 && (
+		<li className={CLASS_NAMES.ITEM}>
+			<h1>WHOIS</h1>
+			<ul className={CLASS_NAMES.CONTAINER}>
+				{whois.split("\n").map((line, index) => (
+					<li key={index} className={CLASS_NAMES.DESC}><span>{line}</span></li>
+				))}
+			</ul>
+		</li>
+	)
+);
+
+// Основной компонент
+export default function DomainDetails({ domainAnalysisResults }: DomainDetailsProps) {
+	const { t } = useTranslation();
+
+	const attributes = domainAnalysisResults?.data?.attributes;
+
+	if (!domainAnalysisResults || !domainAnalysisResults.data || !attributes) {
+		return <p className={CLASS_NAMES.NO_DATA}>No data</p>;
+	}
+
+	const hasData = (
 		(attributes.categories && Object.keys(attributes.categories).length > 0) ||
 		(attributes.popularity_ranks && Object.keys(attributes.popularity_ranks).length > 0) ||
-		(attributes.last_dns_records && Object.keys(attributes.last_dns_records).length > 0) ||
+		(attributes.last_dns_records && attributes.last_dns_records.length > 0) ||
 		(attributes.last_https_certificate && Object.keys(attributes.last_https_certificate).length > 0) ||
 		(attributes.whois && attributes.whois.trim().length > 0)
 	);
@@ -44,95 +178,14 @@ export default function DomainDetails({ domainAnalysisResults }: DomainDetailsPr
 		<>
 			{hasData ? (
 				<>
-					{/* Категории домена */}
-					{attributes?.categories && Object.keys(attributes.categories).length > 0 && (
-						<li className="details-item">
-							<h1>Категории</h1>
-							<ul className="details-cont">
-								{Object.entries(attributes.categories).map(([key, value]) => (
-									<li className="details-desc" key={key}>
-										<span>{key}:</span> <span>{value}</span>
-									</li>
-								))}
-							</ul>
-						</li>
-					)}
-
-					{/* Популярность домена */}
-					{attributes?.popularity_ranks && Object.keys(attributes.popularity_ranks).length > 0 && (
-						<li className="details-item popularity">
-							<h1>Популярность</h1>
-							{renderTable(
-								["Рейтинг", "Позиция", "Время загрузки"],
-								Object.entries(attributes.popularity_ranks).map(([key, rankData]) => ({
-									rank: rankData.rank,
-									position: key,
-									timestamp: convertTimestamp(rankData.timestamp),
-								})),
-								["position", "rank", "timestamp"]
-							)}
-						</li>
-					)}
-
-					{/* Последние записи DNS */}
-					{attributes?.last_dns_records && Object.keys(attributes.last_dns_records).length > 0 && (
-						<li className="details-item">
-							<h1>Последние записи DNS</h1>
-							{renderTable(
-								["Тип записи", "TTL", "Значение"],
-								attributes.last_dns_records,
-								["type", "ttl", "value"]
-							)}
-						</li>
-					)}
-
-					{/* Последний HTTPS Сертификат */}
-					{attributes?.last_https_certificate && Object.keys(attributes.last_https_certificate).length > 0 && (
-						<li className="details-item">
-							<h1>Последний HTTPS Сертификат</h1>
-							<table className="details-table cert-table">
-								<thead>
-									<tr>
-										<th>Тип записи</th>
-										<th>Значение</th>
-									</tr>
-								</thead>
-								<tbody>
-									{[
-										{ label: "JARM Fingerprint", value: attributes.jarm },
-										{ label: "Version", value: attributes.last_https_certificate.version },
-										{ label: "Serial Number", value: attributes.last_https_certificate.serial_number },
-										{ label: "Thumbprint", value: attributes.last_https_certificate.thumbprint },
-										{ label: "Signature Algorithm", value: attributes.last_https_certificate.cert_signature.signature_algorithm },
-										{ label: "Issuer", value: `${attributes.last_https_certificate.issuer.C} ${attributes.last_https_certificate.issuer.O} ${attributes.last_https_certificate.issuer.CN}` },
-										{ label: "Subject", value: attributes.last_https_certificate.subject.CN },
-										{ label: "Subject Public Key Info", value: attributes.last_https_certificate.public_key.algorithm },
-										{ label: "Public Key", value: attributes.last_https_certificate.public_key.ec ? 'EC' : 'Unknown' },
-									].map((row, idx) => (
-										<tr key={idx}>
-											<td>{row.label}</td>
-											<td>{row.value}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</li>
-					)}
-
-					{/* WHOIS информация */}
-					{attributes?.whois && attributes.whois.trim().length > 0 && (
-						<li className="details-item">
-							<h1>WHOIS</h1>
-							<ul className="details-cont">
-								{attributes.whois.split("\n").map((line, index) => (
-									<li key={index}><span>{line}</span></li>
-								))}
-							</ul>
-						</li>
-					)}
+					<CategoriesSection categories={attributes.categories} t={t} />
+					<PopularitySection popularity_ranks={attributes.popularity_ranks} t={t} />
+					<DnsRecordsSection last_dns_records={attributes.last_dns_records} t={t} />
+					<HttpsCertificateSection attributes={attributes} t={t} />
+					<WhoisSection whois={attributes.whois} />
 				</>
 			) : (
-				<h1 className="nodata">Данные не обнаружены</h1>
+				<h1 className={CLASS_NAMES.NODATA}>No data</h1>
 			)}
 		</>
 	);

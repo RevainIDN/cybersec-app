@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IpVirusTotalResponse, DomainVirusTotalResponse } from "../types/AnalysisTypes/analysisResultsTypes";
+import { IpVirusTotalResponse, DomainVirusTotalResponse, UrlVirusTotalResponse, FileVirusTotalResponse } from "../types/AnalysisTypes/analysisResultsTypes";
 
 interface AnalysisState {
 	isLoading: boolean,
 	selectedOption: string | null,
 	ipAnalysisResults: IpVirusTotalResponse | null,
 	domainAnalysisResults: DomainVirusTotalResponse | null,
+	urlAnalysisResults: UrlVirusTotalResponse | null,
+	fileAnalysisResults: FileVirusTotalResponse | null,
 }
 
 const initialState: AnalysisState = {
@@ -13,6 +15,8 @@ const initialState: AnalysisState = {
 	selectedOption: 'ip',
 	ipAnalysisResults: null,
 	domainAnalysisResults: null,
+	urlAnalysisResults: null,
+	fileAnalysisResults: null,
 }
 
 const analysisSlice = createSlice({
@@ -31,8 +35,14 @@ const analysisSlice = createSlice({
 		setDomainAnalysisResults: (state, action: PayloadAction<DomainVirusTotalResponse | null>) => {
 			state.domainAnalysisResults = action.payload;
 		},
+		setUrlAnalysisResults: (state, action: PayloadAction<UrlVirusTotalResponse | null>) => {
+			state.urlAnalysisResults = action.payload;
+		},
+		setFileAnalysisResults: (state, action: PayloadAction<FileVirusTotalResponse | null>) => {
+			state.fileAnalysisResults = action.payload;
+		},
 	}
 });
 
-export const { setIsLoading, setSelectedOption, setIpAnalysisResults, setDomainAnalysisResults } = analysisSlice.actions;
+export const { setIsLoading, setSelectedOption, setIpAnalysisResults, setDomainAnalysisResults, setUrlAnalysisResults, setFileAnalysisResults } = analysisSlice.actions;
 export default analysisSlice.reducer;

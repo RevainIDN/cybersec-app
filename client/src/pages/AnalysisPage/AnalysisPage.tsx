@@ -1,9 +1,14 @@
 import './AnalysisPage.css'
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import AnalysisInput from '../../components/AnalysisComponents/AnalysisInput/AnalysisInput';
-import IpDomainAnalysis from '../../components/AnalysisComponents/AnalysisResults/IpDomainAnalysis/IpDomainAnalysis';
+import AnalyzedData from '../../components/AnalysisComponents/AnalysisResults/AnalyzedData';
+import Loading from '../../components/GeneralComponents/Loading/Loading';
 
-export default function IpPage() {
+export default function AnalysisPage() {
+	const { isLoading } = useSelector((state: RootState) => state.analysis);
+
 	return (
 		<motion.div
 			className="analysis-page"
@@ -12,7 +17,8 @@ export default function IpPage() {
 			transition={{ duration: 0.5 }}
 		>
 			<AnalysisInput />
-			<IpDomainAnalysis />
+			{isLoading && <Loading />}
+			<AnalyzedData />
 		</motion.div>
 	)
 }

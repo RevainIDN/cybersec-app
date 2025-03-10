@@ -35,15 +35,57 @@
 	margin-bottom: 20px;
 }
 
-.details-desc {
+.details-property {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	width: 50%;
+	width: 35%;
+}
+
+.details-desc {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	width: 100%;
 	font-size: 0.8rem;
 }
 
+.detail-desc {
+	padding: 0 10px;
+	border-left: 1px #0034EE solid;
+	border-right: 1px #0034EE solid;
+}
+
+.details-desc-url span:last-child {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+.details-info {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 30px;
+}
+
+.details-info-file {
+	display: flex;
+	flex-direction: column;
+}
+
+.details-info-file strong {
+	font-size: 1rem;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+.details-desc-title {
+	font-size: 0.9rem;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
 .details-table {
-	width: 100%;
+	width: 90%;
+	font-size: 0.9rem;
 }
 
 .popularity-table {
