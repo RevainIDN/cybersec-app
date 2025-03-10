@@ -1,7 +1,19 @@
 {
+	"utils": {
+		"timeAgo": {
+			"seconds": "сек. назад",
+			"minutes": "мин. назад",
+			"hours": "ч. назад",
+			"days": "дн. назад",
+			"weeks": "нед. назад",
+			"months": "мес. назад",
+			"years1": "год назад",
+			"years2": "лет назад"
+		}
+	},
 	"navbar": {
 		"home": "Главная",
-		"ip": "Проверка IP",
+		"ip": "Анализ",
 		"leaks": "Утечки",
 		"passwords": "Пароли",
 		"reports": "Отчеты"
@@ -154,6 +166,137 @@
 				"answer3": "Лучший способ запомнить все пароли — это использовать менеджеры паролей, такие как Bitwarden, 1Password или KeePass. Эти инструменты помогут надежно хранить и генерировать сложные пароли для каждого сервиса. Если вы предпочитаете записывать пароли вручную, обязательно защищайте их паролем или используйте зашифрованные файлы для хранения. Не рекомендуется хранить пароли в открытых заметках или документах без защиты.",
 				"question4": "Как часто нужно менять пароль?",
 				"answer4": "Если ваш пароль длинный, сложный и уникальный, менять его не обязательно, пока не произошло утечек данных или появления признаков подозрительной активности. Однако если сервис рекомендует сменить пароль или если вам сообщили о возможной утечке данных, рекомендуется немедленно сменить пароль. Регулярно обновляйте пароли для своих аккаунтов, чтобы повысить их безопасность."
+			}
+		}
+	},
+	"analysisPage": {
+		"analysisInput": {
+			"inputButton": "Анализ",
+			"isFileUploading": "Отправить файл",
+			"isFileUploaded": "Проводится анализ, подождите...",
+			"generalErrorMessage": "Введите значение для анализа",
+			"ipErrorMessage": "Введите корректный IP-адрес (например, 192.168.1.1)",
+			"domainErrorMessage": "Введите корректный домен (например, example.com)",
+			"urlErrorMessage": "Введите корректный URL (например, https://example.com)",
+			"fileErrorMessage": "Пожалуйста, выберите файл для анализа",
+			"fileSizeErrorMessage": "Файл превышает максимальный размер 32 МБ"
+		},
+		"analyzedData": {
+			"resultsSwitchingButtons": {
+				"detection": "Обнаружение",
+				"details": "Детали"
+			},
+			"generalInfo": {
+				"reputation": "Репутация: ",
+				"malwareAlertIp": "IP адрес",
+				"malwareAlertDomain": "домен",
+				"malwareAlertUrl": "URL",
+				"malwareAlertFile": "файл",
+				"malwareAlertObject": "обьект",
+				"malwareAlert1": "поставщиков безопасности пометили этот",
+				"malwareAlert2": "как вредоносный",
+				"lastAnalysisDate": "Дата последнего анализа: ",
+				"registration": "Регистрация: ",
+				"creationDate": "Дата создания: ",
+				"status": "Статус: ",
+				"noData": "Нет данных"
+			},
+			"details": {
+				"ip": {
+					"properties": "Основные свойства",
+					"network": "Сеть:",
+					"asn": "Номер автономной системы(ASN):",
+					"asl": "Владелец сети:",
+					"rir": "Региональный Интернет-регистратор:",
+					"country": "Страна:",
+					"continent": "Континент:"
+				},
+				"domain": {
+					"categories": "Категории",
+					"popularity": "Популярность",
+					"tableHeaderPopularity1": "Рейтинг",
+					"tableHeaderPopularity2": "Позиция",
+					"tableHeaderPopularity3": "Время загрузки",
+					"dns": "Последние записи DNS",
+					"tableHeaderDns1": "Тип записи",
+					"tableHeaderDns2": "TTL",
+					"tableHeaderDns3": "Значение",
+					"httpsCert": "Последний HTTPS Сертификат",
+					"tableHeaderHttps1": "Тип записи",
+					"tableHeaderHttps2": "Значение"
+				},
+				"url": {
+					"categories": "Категории",
+					"history": "История",
+					"firstSubmition": "Первая отправка",
+					"lastSubmission": "Последняя отправка",
+					"lastAnalysis": "Последний анализ",
+					"http": "HTTP-ответ",
+					"url": "Конечный URL-адрес",
+					"status": "Код статуса",
+					"body": "Длина тела",
+					"sha256": "SHA-256",
+					"headers": "Заголовки",
+					"html": "HTML-Информация",
+					"title": "Заголовок",
+					"meta": "Мета-теги"
+				},
+				"file": {
+					"properties": "Основные свойства",
+					"history": "История",
+					"creationTime": "Время создания",
+					"firstSubmition": "Первая отправка",
+					"lastSubmission": "Последняя отправка",
+					"lastAnalysis": "Последний анализ",
+					"names": "Имена",
+					"signatureInfo": "Информация о подписи",
+					"verification": "Проверка подписи",
+					"fileVersion": "Информация о версии файл",
+					"fileVersionCopyright": "Авторские права",
+					"fileVersionProduct": "Продукт",
+					"fileVersionDescription": "Описание",
+					"fileVersionOriginalName": "Исходное имя",
+					"fileVersionInternalName": "Внутреннее имя",
+					"fileVersionFileVersion": "Версия файла",
+					"fileVersionDateSigned": "Дата подписания",
+					"fileVersionDateComments": "Комментарии",
+					"signers": "Подписавшиеся",
+					"counterSigners": "Контрподписанты",
+					"x509": "Сертификаты X509",
+					"portableExecutableInfo": "Информация о переносимом исполняемом файле",
+					"compilerProducts": "Компиляторы продуктов",
+					"header": "Заголовок",
+					"timestamp": "Временная метка компиляции",
+					"entryPoint": "Точка входа",
+					"containedSections": "Содержащиеся разделы",
+					"sections": "Разделы",
+					"tableHeaderSections1": "Название",
+					"tableHeaderSections2": "Виртуальный адрес",
+					"tableHeaderSections3": "Виртуальный размер",
+					"tableHeaderSections4": "Исходный размер",
+					"tableHeaderSections5": "Энтропия",
+					"tableHeaderSections6": "MD5",
+					"tableHeaderSections7": "Chi2",
+					"imports": "Импорты",
+					"resourcesByType": "Содержащиеся ресурсы по типу",
+					"resourcesByLanguage": "Содержащиеся ресурсы по языку",
+					"containedResources": "Сохраненные ресурсы",
+					"tableHeaderResources1": "SHA-256",
+					"tableHeaderResources2": "Тип файла",
+					"tableHeaderResources3": "Тип",
+					"tableHeaderResources4": "Язык",
+					"tableHeaderResources5": "Энтропия",
+					"tableHeaderResources6": "Chi2",
+					"overlay": "Наложение",
+					"bundleInfo": "Информация о пакете",
+					"contentsMetadata": "Содержащиеся Метаданные",
+					"containedFiles": "Содержащиеся файлы",
+					"uncompressedSize": "Размер в несжатом виде",
+					"earliestModification": "Самая ранняя модификация контента",
+					"latestModification": "Последняя модификация контента",
+					"filesByType": "Содержащиеся файлы по типу",
+					"filesByExtension": "Содержащиеся файлы по расширению"
+				}
 			}
 		}
 	}

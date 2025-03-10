@@ -1,7 +1,19 @@
 {
+	"utils": {
+		"timeAgo": {
+			"seconds": "сек. тому",
+			"minutes": "хв. тому",
+			"hours": "г. тому",
+			"days": "дн. тому",
+			"weeks": "тиж. тому",
+			"months": "міс. тому",
+			"years1": "рік тому",
+			"years2": "років тому"
+		}
+	},
 	"navbar": {
 		"home": "Головна",
-		"ip": "Перевірка IP",
+		"ip": "Аналіз",
 		"leaks": "Витоки",
 		"passwords": "Паролі",
 		"reports": "Звіти"
@@ -154,6 +166,137 @@
 				"answer3": "Найкращий спосіб запам’ятати всі паролі — це використовувати менеджери паролів, такі як Bitwarden, 1Password чи KeePass. Ці інструменти допоможуть надійно зберігати та генерувати складні паролі для кожного сервісу. Якщо ви надаєте перевагу записувати паролі вручну, обов’язково захищайте їх паролем або використовуйте зашифровані файли для зберігання. Не рекомендується зберігати паролі в відкритих нотатках чи документах без захисту.",
 				"question4": "Як часто потрібно змінювати пароль?",
 				"answer4": "Якщо ваш пароль довгий, складний і унікальний, міняти його не обов'язково, якщо не сталося витоку даних або не з’явилися ознаки підозрілої активності. Однак якщо сервіс рекомендує змінити пароль або якщо вам повідомили про можливий витік даних, слід негайно змінити пароль. Регулярно оновлюйте паролі для своїх акаунтів, щоб підвищити їх безпеку."
+			}
+		}
+	},
+	"analysisPage": {
+		"analysisInput": {
+			"inputButton": "Аналіз",
+			"isFileUploading": "Відправити файл",
+			"isFileUploaded": "Проводиться аналіз, зачекайте...",
+			"generalErrorMessage": "Введіть значення для аналізу",
+			"ipErrorMessage": "Введіть коректну IP-адресу (наприклад, 192.168.1.1)",
+			"domainErrorMessage": "Введіть правильний домен (наприклад, example.com)",
+			"urlErrorMessage": "Введіть правильну URL-адресу (наприклад, https://example.com)",
+			"fileErrorMessage": "Будь ласка, виберіть файл для аналізу",
+			"fileSizeErrorMessage": "Файл перевищує максимальні 32 МБ"
+		},
+		"analyzedData": {
+			"resultsSwitchingButtons": {
+				"detection": "Виявлення",
+				"details": "Деталі"
+			},
+			"generalInfo": {
+				"reputation": "Репутація: ",
+				"malwareAlertIp": "IP адрес",
+				"malwareAlertDomain": "домен",
+				"malwareAlertUrl": "URL",
+				"malwareAlertFile": "файл",
+				"malwareAlertObject": "об'єкт",
+				"malwareAlert1": "постачальників безпеки помітили цей",
+				"malwareAlert2": "як шкідливий",
+				"lastAnalysisDate": "Дата останнього аналізу: ",
+				"registration": "Реєстрація: ",
+				"creationDate": "Дата створення: ",
+				"status": "Статус: ",
+				"noData": "Немає даних"
+			},
+			"details": {
+				"ip": {
+					"properties": "Основні властивості",
+					"network": "Мережа:",
+					"asn": "Номер автономної системи (ASN):",
+					"asl": "Власник мережі:",
+					"rir": "Регіональний Інтернет-реєстратор:",
+					"country": "Країна:",
+					"continent": "Континент:"
+				},
+				"domain": {
+					"categories": "Категорії",
+					"popularity": "Популярність",
+					"tableHeaderPopularity1": "Рейтинг",
+					"tableHeaderPopularity2": "Позиція",
+					"tableHeaderPopularity3": "Час завантаження",
+					"dns": "Останні записи DNS",
+					"tableHeaderDns1": "Тип запису",
+					"tableHeaderDns2": "TTL",
+					"tableHeaderDns3": "Значення",
+					"httpsCert": "Останній HTTPS Сертифікат",
+					"tableHeaderHttps1": "Тип запису",
+					"tableHeaderHttps2": "Значення"
+				},
+				"url": {
+					"categories": "Категорії",
+					"history": "Історія",
+					"firstSubmition": "Перше відправлення",
+					"lastSubmission": "Остання відправка",
+					"lastAnalysis": "Останній аналіз",
+					"http": "HTTP-відповідь",
+					"url": "Кінцева URL-адреса",
+					"status": "Код статусу",
+					"body": "Довжина тіла",
+					"sha256": "SHA-256",
+					"headers": "Заголовки",
+					"html": "HTML-Інформація",
+					"title": "Заголовок",
+					"meta": "Мета-теги"
+				},
+				"file": {
+					"properties": "Основні властивості",
+					"history": "Історія",
+					"creationTime": "Час створення",
+					"firstSubmition": "Перше відправлення",
+					"lastSubmission": "Остання відправка",
+					"lastAnalysis": "Останній аналіз",
+					"names": "Імена",
+					"signatureInfo": "Інформація про підпис",
+					"verification": "Перевірка підпису",
+					"fileVersion": "Інформація про версію файлу",
+					"fileVersionCopyright": "Авторські права",
+					"fileVersionProduct": "Продукт",
+					"fileVersionDescription": "Опис",
+					"fileVersionOriginalName": "Початкове ім'я",
+					"fileVersionInternalName": "Внутрішнє ім'я",
+					"fileVersionFileVersion": "Версія файлу",
+					"fileVersionDateSigned": "Дата підписання",
+					"fileVersionDateComments": "Коментарі",
+					"signers": "Підписалися",
+					"counterSigners": "Контрпідписанти",
+					"x509": "Сертифікати X509",
+					"portableExecutableInfo": "Інформація про переносний виконуваний файл",
+					"compilerProducts": "Компілятори продуктів",
+					"header": "Заголовок",
+					"timestamp": "Тимчасова мітка компіляції",
+					"entryPoint": "Точка входу",
+					"containedSections": "Змісти, що містяться",
+					"sections": "Розділи",
+					"tableHeaderSections1": "Назва",
+					"tableHeaderSections2": "Віртуальна адреса",
+					"tableHeaderSections3": "Віртуальний розмір",
+					"tableHeaderSections4": "Початковий розмір",
+					"tableHeaderSections5": "Ентропія",
+					"tableHeaderSections6": "MD5",
+					"tableHeaderSections7": "Chi2",
+					"imports": "Імпорти",
+					"resourcesByType": "Ресури, що містяться, за типом",
+					"resourcesByLanguage": "Розмісти, що містяться з мови",
+					"containedResources": "Збережені ресурси",
+					"tableHeaderResources1": "SHA-256",
+					"tableHeaderResources2": "Тип файлу",
+					"tableHeaderResources3": "Тип",
+					"tableHeaderResources4": "Мова",
+					"tableHeaderResources5": "Ентропія",
+					"tableHeaderResources6": "Chi2",
+					"overlay": "Накладення",
+					"bundleInfo": "Інформація про пакет",
+					"contentsMetadata": "Метадані, що містяться",
+					"containedFiles": "Файли, що містяться",
+					"uncompressedSize": "Розмір у стиснутому вигляді",
+					"earliestModification": "Найраніша модифікація контенту",
+					"latestModification": "Найпізніша модифікація контенту",
+					"filesByType": "Файли, що містяться за типом",
+					"filesByExtension": "Файли, що містяться з розширення"
+				}
 			}
 		}
 	}

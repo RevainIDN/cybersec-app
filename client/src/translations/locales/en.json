@@ -1,7 +1,19 @@
 {
+	"utils": {
+		"timeAgo": {
+			"seconds": "sec ago",
+			"minutes": "min ago",
+			"hours": "hours ago",
+			"days": "days ago",
+			"weeks": "weeks ago",
+			"months": "months ago",
+			"years1": "year ago",
+			"years2": "years ago"
+		}
+	},
 	"navbar": {
 		"home": "Home",
-		"ip": "IP Check",
+		"ip": "Analysis",
 		"leaks": "Leaks",
 		"passwords": "Passwords",
 		"reports": "Reports"
@@ -154,6 +166,137 @@
 				"answer3": "The best way to remember all your passwords is to use password managers like Bitwarden, 1Password, or KeePass. These tools help securely store and generate strong passwords for each service. If you prefer to write passwords down manually, make sure to protect them with a password or store them in encrypted files. It's not recommended to keep passwords in unprotected notes or documents.",
 				"question4": "How often should I change my password?",
 				"answer4": "If your password is long, complex, and unique, you don’t need to change it unless there has been a data breach or suspicious activity. However, if the service recommends a password change or if you’re notified of a potential data breach, you should change it immediately. Regularly updating your passwords helps increase your security."
+			}
+		}
+	},
+	"analysisPage": {
+		"analysisInput": {
+			"inputButton": "Analysis",
+			"isFileUploading": "Send file",
+			"isFileUploaded": "Analysis in progress, please wait...",
+			"generalErrorMessage": "Enter a value to analyze",
+			"ipErrorMessage": "Please enter a valid IP address (e.g. 192.168.1.1)",
+			"domainErrorMessage": "Please enter a valid domain (e.g. example.com)",
+			"urlErrorMessage": "Please enter a valid URL (e.g. https://example.com)",
+			"fileErrorMessage": "Please select a file to analyze",
+			"fileSizeErrorMessage": "The file exceeds the maximum size of 32 MB"
+		},
+		"analyzedData": {
+			"resultsSwitchingButtons": {
+				"detection": "Detection",
+				"details": "Details"
+			},
+			"generalInfo": {
+				"reputation": "Reputation: ",
+				"malwareAlertIp": "IP address",
+				"malwareAlertDomain": "domain",
+				"malwareAlertUrl": "URL",
+				"malwareAlertFile": "file",
+				"malwareAlertObject": "object",
+				"malwareAlert1": "security vendors have flagged this",
+				"malwareAlert2": "as malicious",
+				"lastAnalysisDate": "Date of last analysis: ",
+				"registration": "Registration: ",
+				"creationDate": "Date of creation: ",
+				"status": "Status: ",
+				"noData": "No data"
+			},
+			"details": {
+				"ip": {
+					"properties": "Main properties",
+					"network": "Network:",
+					"asn": "Autonomous System Number:",
+					"asl": "Autonomous System Label:",
+					"rir": "Regional Internet Registry:",
+					"country": "Country:",
+					"continent": "Continent:"
+				},
+				"domain": {
+					"categories": "Categories",
+					"popularity": "Popularity ranks",
+					"tableHeaderPopularity1": "Rating",
+					"tableHeaderPopularity2": "Position",
+					"tableHeaderPopularity3": "Loading time",
+					"dns": "Last DNS records",
+					"tableHeaderDns1": "Record type",
+					"tableHeaderDns2": "TTL",
+					"tableHeaderDns3": "Value",
+					"httpsCert": "Last HTTPS Certificate",
+					"tableHeaderHttps1": "Record type",
+					"tableHeaderHttps2": "Value"
+				},
+				"url": {
+					"categories": "Categories",
+					"history": "History",
+					"firstSubmition": "First Submission",
+					"lastSubmission": "Last Submission",
+					"lastAnalysis": "Last Analysis",
+					"http": "HTTP Response",
+					"url": "Final URL",
+					"status": "Status code",
+					"body": "Body length",
+					"sha256": "Body SHA-256",
+					"headers": "Headers",
+					"html": "HTML Info",
+					"title": "Title",
+					"meta": "Meta Tags"
+				},
+				"file": {
+					"properties": "Basic properties",
+					"history": "History",
+					"creationTime": "Creation time",
+					"firstSubmition": "First submission",
+					"lastSubmission": "Last submission",
+					"lastAnalysis": "Last analysis",
+					"names": "Names",
+					"signatureInfo": "Signature information",
+					"verification": "Signature verification",
+					"fileVersion": "File version information",
+					"fileVersionCopyright": "Copyright",
+					"fileVersionProduct": "Product",
+					"fileVersionDescription": "Description",
+					"fileVersionOriginalName": "Original name",
+					"fileVersionInternalName": "Internal name",
+					"fileVersionFileVersion": "File version",
+					"fileVersionDateSigned": "Signed date",
+					"fileVersionDateComments": "Comments",
+					"signers": "Signers",
+					"counterSigners": "Countersigners",
+					"x509": "X509 certificates",
+					"portableExecutableInfo": "Portable executable information",
+					"compilerProducts": "Compiler products",
+					"header": "Header",
+					"timestamp": "Compilation timestamp",
+					"entryPoint": "Entry point",
+					"containedSections": "Contained sections",
+					"sections": "Sections",
+					"tableHeaderSections1": "Name",
+					"tableHeaderSections2": "Virtual address",
+					"tableHeaderSections3": "Virtual size",
+					"tableHeaderSections4": "Raw size",
+					"tableHeaderSections5": "Entropy",
+					"tableHeaderSections6": "MD5",
+					"tableHeaderSections7": "Chi2",
+					"imports": "Imports",
+					"resourcesByType": "Contained resources by type",
+					"resourcesByLanguage": "Contained resources by language",
+					"containedResources": "Contained resources",
+					"tableHeaderResources1": "SHA-256",
+					"tableHeaderResources2": "File type",
+					"tableHeaderResources3": "Type",
+					"tableHeaderResources4": "Language",
+					"tableHeaderResources5": "Entropy",
+					"tableHeaderResources6": "Chi2",
+					"overlay": "Overlay",
+					"bundleInfo": "Bundle Information",
+					"contentsMetadata": "Contained Metadata",
+					"containedFiles": "Contained Files",
+					"uncompressedSize": "Uncompressed Size",
+					"earliestModification": "Earliest Content Modification",
+					"latestModification": "Latest Content Modification",
+					"filesByType": "Contained Files By Type",
+					"filesByExtension": "Contained Files By Extension"
+				}
 			}
 		}
 	}
