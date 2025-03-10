@@ -99,7 +99,7 @@ button {
 
 /* Общий стиль */
 
-input {
+input[type="text"] {
 	color: #e0e6f4;
 	background-color: rgba(0, 52, 238, 0.1);
 	letter-spacing: 2px;
