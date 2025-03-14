@@ -14,7 +14,7 @@
 	"navbar": {
 		"home": "Home",
 		"ip": "Analysis",
-		"leaks": "Leaks",
+		"leaks": "Vulnerabilities",
 		"passwords": "Passwords",
 		"reports": "Reports"
 	},

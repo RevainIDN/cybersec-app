@@ -30,8 +30,9 @@ export default function Navbar() {
 					{currentLink === path && (
 						<motion.div
 							className="navbar-active-bg"
-							layoutId="activeNavBg"
-							transition={{ type: "spring", stiffness: 500, damping: 40 }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
 						/>
 					)}
 				</Link>

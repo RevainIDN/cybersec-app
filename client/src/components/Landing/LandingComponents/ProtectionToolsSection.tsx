@@ -38,9 +38,9 @@ export default function ProtectionToolsSection() {
 		<motion.div
 			ref={ref}
 			className='about-cont section'
-			initial={{ opacity: 0, y: 50 }}
-			animate={inView ? { opacity: 1, y: 0 } : {}}
-			transition={{ duration: 0.6 }}
+			initial={{ opacity: 0 }}
+			animate={inView ? { opacity: 1 } : {}}
+			transition={{ duration: 1 }}
 		>
 			<div className='about-intro'>
 				<img className='about-img' src='landing_3.svg' alt='Landing' />

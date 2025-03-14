@@ -11,9 +11,9 @@ export default function ThreatCaseSection() {
 		<motion.div
 			ref={ref}
 			className='threat-cont section'
-			initial={{ opacity: 0, y: 50 }}
-			animate={inView ? { opacity: 1, y: 0 } : {}}
-			transition={{ duration: 0.6 }}
+			initial={{ opacity: 0 }}
+			animate={inView ? { opacity: 1 } : {}}
+			transition={{ duration: 1 }}
 		>
 			<div className='threat-info'>
 				<h1 className='threat-title title'>{t('homePage.threatCaseSection.title')}</h1>

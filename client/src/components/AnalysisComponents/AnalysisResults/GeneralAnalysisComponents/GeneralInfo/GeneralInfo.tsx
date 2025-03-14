@@ -1,11 +1,11 @@
 import './GeneralInfo.css';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { RootState } from '../../../../../store';
 import { timeAgo } from '../../../../../utils/timeAgo';
 import { formatBytes } from '../../../../../utils/formatBytes';
-import ProgressCircle from '../ProgressCircle/ProgressCircle';
 import { TFunction } from 'i18next';
+import { selectAnalysisInfo } from './generalInfoSelector';
+import ProgressCircle from '../ProgressCircle/ProgressCircle';
 
 // Константы для классов
 const CLASS_NAMES = {
@@ -21,18 +21,6 @@ const CLASS_NAMES = {
 
 // Типы для selectedOption
 type AnalysisOption = 'ip' | 'domain' | 'url' | 'file';
-
-// Получение данных в зависимости от выбранной опции
-const getAnalysisData = (selectedOption: string | null, state: RootState) => {
-	if (!selectedOption) return null;
-	switch (selectedOption as AnalysisOption) {
-		case 'ip': return state.analysis.ipAnalysisResults;
-		case 'domain': return state.analysis.domainAnalysisResults;
-		case 'url': return state.analysis.urlAnalysisResults;
-		case 'file': return state.analysis.fileAnalysisResults;
-		default: return null;
-	}
-};
 
 // Подкомпоненты для специфичных данных
 const IpDetails = ({ id }: { id: string }) => (
@@ -82,18 +70,16 @@ const FileDetails = ({ id, attributes }: { id: string, attributes: any }) => (
 export default function GeneralInfo() {
 	const { t } = useTranslation();
 
-	// Получение выбранного типа анализа из Redux
-	const { selectedOption } = useSelector((state: RootState) => state.analysis);
-	// Загрузка данных анализа
-	const data = getAnalysisData(selectedOption, useSelector((state: RootState) => state));
+	// Получаем меморизованные данные
+	const { selectedOption, analysisData } = useSelector(selectAnalysisInfo);
 
 	// Проверка на отсутствие данных
-	if (!data || !data.data) {
+	if (!analysisData || !analysisData.data) {
 		return <p className={CLASS_NAMES.NO_DATA}>{t('analysisPage.analyzedData.generalInfo.noData')}</p>;
 	}
 
 	// Деструктуризация атрибутов данных
-	const { last_analysis_results, last_analysis_date, reputation } = data.data.attributes;
+	const { last_analysis_results, last_analysis_date, reputation } = analysisData.data.attributes;
 
 	// Подсчет заражённых элементов и общего числа проверок
 	const infectedCount = last_analysis_results
@@ -114,10 +100,10 @@ export default function GeneralInfo() {
 	const renderSpecificDetails = () => {
 		if (!selectedOption) return null;
 		switch (selectedOption as AnalysisOption) {
-			case 'ip': return <IpDetails id={data.data.id} />;
-			case 'domain': return <DomainDetails id={data.data.id} attributes={data.data.attributes} t={t} />;
-			case 'url': return <UrlDetails attributes={data.data.attributes} t={t} />;
-			case 'file': return <FileDetails id={data.data.id} attributes={data.data.attributes} />;
+			case 'ip': return <IpDetails id={analysisData.data.id} />;
+			case 'domain': return <DomainDetails id={analysisData.data.id} attributes={analysisData.data.attributes} t={t} />;
+			case 'url': return <UrlDetails attributes={analysisData.data.attributes} t={t} />;
+			case 'file': return <FileDetails id={analysisData.data.id} attributes={analysisData.data.attributes} />;
 			default: return null;
 		}
 	};

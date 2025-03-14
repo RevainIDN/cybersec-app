@@ -10,15 +10,17 @@ export default function AnalysisPage() {
 	const { isLoading } = useSelector((state: RootState) => state.analysis);
 
 	return (
-		<motion.div
-			className="analysis-page"
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
-		>
-			<AnalysisInput />
-			{isLoading && <Loading />}
-			<AnalyzedData />
-		</motion.div>
+		<div className='section'>
+			<motion.div
+				className="analysis-page"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.5 }}
+			>
+				<AnalysisInput />
+				{isLoading && <Loading />}
+				<AnalyzedData />
+			</motion.div>
+		</div>
 	)
 }

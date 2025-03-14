@@ -159,7 +159,7 @@ export default function AnalysisInput() {
 	const selectedButton = buttonsValues.find(button => button.value === selectedOption);
 
 	return (
-		<div className='analysis-cont section'>
+		<div className='analysis-cont'>
 			<div className='analysis-btns'>
 				{buttonsValues.map((button) => (
 					<button

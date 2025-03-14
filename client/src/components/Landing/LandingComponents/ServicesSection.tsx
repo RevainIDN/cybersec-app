@@ -56,9 +56,9 @@ export default function ServicesSection() {
 			<motion.div
 				ref={ref}
 				className='services-info'
-				initial={{ opacity: 0, y: -50 }}
-				animate={inView ? { opacity: 1, y: 0 } : {}}
-				transition={{ duration: 0.6, ease: "easeOut" }}
+				initial={{ opacity: 0 }}
+				animate={inView ? { opacity: 1 } : {}}
+				transition={{ duration: 1 }}
 			>
 				<h1 className='services-title title'>{t("homePage.servicesSection.title")}</h1>
 				<h2 className='services-subtitle subtitle'>{t("homePage.servicesSection.subtitle")}</h2>

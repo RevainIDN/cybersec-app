@@ -26,7 +26,7 @@ export default function PasswordCheck() {
 	}, [userPassword])
 
 	return (
-		<div className='password-check section'>
+		<div className='password-check'>
 			{/* Поле ввода пароля */}
 			<div className='input-cont'>
 				<input

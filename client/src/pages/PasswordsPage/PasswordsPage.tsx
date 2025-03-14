@@ -17,47 +17,49 @@ export default function PasswordsPage() {
 	});
 
 	return (
-		<motion.div
-			className="passwords-page"
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
-		>
-			<h1 className="passwords-title">{t('passwordPage.passwordCheck.title')}</h1>
-			<h2 className="passwords-subtitle">{t('passwordPage.passwordCheck.subtitle')}</h2>
-			<PasswordCheck />
-			<h1 className="passwords-title">{t('passwordPage.PasswordGenerator.title')}</h1>
-			<h2 className="passwords-subtitle">{t('passwordPage.PasswordGenerator.subtitle')}</h2>
-			<div className="password-generator-cont">
-				<div className="password-generator-wrapper section">
-					<PasswordGenerator />
-					<PasswordListGenerator />
+		<div className='section'>
+			<motion.div
+				className="passwords-page"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.5 }}
+			>
+				<h1 className="passwords-title">{t('passwordPage.passwordCheck.title')}</h1>
+				<h2 className="passwords-subtitle">{t('passwordPage.passwordCheck.subtitle')}</h2>
+				<PasswordCheck />
+				<h1 className="passwords-title">{t('passwordPage.PasswordGenerator.title')}</h1>
+				<h2 className="passwords-subtitle">{t('passwordPage.PasswordGenerator.subtitle')}</h2>
+				<div className="password-generator-cont">
+					<div className="password-generator-wrapper">
+						<PasswordGenerator />
+						<PasswordListGenerator />
+					</div>
+					<motion.ul
+						className="qa-list"
+						ref={ref}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
+						transition={{ duration: 0.5 }}
+					>
+						<QADropDownList
+							question={t('passwordPage.PasswordGenerator.qaDropDown.question1')}
+							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer1')}
+						/>
+						<QADropDownList
+							question={t('passwordPage.PasswordGenerator.qaDropDown.question2')}
+							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer2')}
+						/>
+						<QADropDownList
+							question={t('passwordPage.PasswordGenerator.qaDropDown.question3')}
+							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer3')}
+						/>
+						<QADropDownList
+							question={t('passwordPage.PasswordGenerator.qaDropDown.question4')}
+							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer4')}
+						/>
+					</motion.ul>
 				</div>
-				<motion.ul
-					className="qa-list"
-					ref={ref}
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-					transition={{ duration: 0.5 }}
-				>
-					<QADropDownList
-						question={t('passwordPage.PasswordGenerator.qaDropDown.question1')}
-						answer={t('passwordPage.PasswordGenerator.qaDropDown.answer1')}
-					/>
-					<QADropDownList
-						question={t('passwordPage.PasswordGenerator.qaDropDown.question2')}
-						answer={t('passwordPage.PasswordGenerator.qaDropDown.answer2')}
-					/>
-					<QADropDownList
-						question={t('passwordPage.PasswordGenerator.qaDropDown.question3')}
-						answer={t('passwordPage.PasswordGenerator.qaDropDown.answer3')}
-					/>
-					<QADropDownList
-						question={t('passwordPage.PasswordGenerator.qaDropDown.question4')}
-						answer={t('passwordPage.PasswordGenerator.qaDropDown.answer4')}
-					/>
-				</motion.ul>
-			</div>
-		</motion.div>
+			</motion.div>
+		</div>
 	);
 }

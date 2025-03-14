@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import HomePage from './pages/HomePage/HomePage'
 import AnalysisPage from './pages/AnalysisPage/AnalysisPage'
-import LeaksPage from './pages/LeaksPage/LeaksPage'
+import VulnerabilitiesPage from './pages/VulnerabilitiesPage/VulnerabilitiesPage'
 import PasswordsPage from './pages/PasswordsPage/PasswordsPage'
 import ReportsPage from './pages/ReportsPage/ReportsPage'
 
@@ -22,7 +22,7 @@ export default function App() {
         />
         <Route
           path='/leaks'
-          element={<LeaksPage />}
+          element={<VulnerabilitiesPage />}
         />
         <Route
           path='/passwords'

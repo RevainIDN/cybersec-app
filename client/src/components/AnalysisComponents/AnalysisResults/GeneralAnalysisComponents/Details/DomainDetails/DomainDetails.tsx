@@ -29,7 +29,7 @@ interface DetailsTableProps<T> {
 // Утилита для рендеринга ключ-значение
 const renderDetail = (label: string, value?: string | number) => (
 	value && (
-		<li className={CLASS_NAMES.DESC}>
+		<li key={label} className={CLASS_NAMES.DESC}>
 			<span>{label}:</span> <span>{value}</span>
 		</li>
 	)
