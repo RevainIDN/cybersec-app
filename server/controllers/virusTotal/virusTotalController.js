@@ -1,4 +1,4 @@
-const { fetchVirusTotalFileReport } = require('../services/virusTotalService');
+const { fetchVirusTotalFileReport } = require('../../services/virusTotal/virusTotalService');
 
 const getVirusTotalFileReport = async (req, res) => {
     const { fileId } = req.params;

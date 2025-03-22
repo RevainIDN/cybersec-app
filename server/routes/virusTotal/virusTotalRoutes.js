@@ -4,8 +4,8 @@ const axios = require('axios');
 const FormData = require('form-data');
 const router = express.Router();
 const fs = require('fs');
-const { VT_API_KEY } = require('../config/config');
-const { getVirusTotalFileReport } = require('../controllers/virusTotalController');
+const { VT_API_KEY } = require('../../config/config');
+const { getVirusTotalFileReport } = require('../../controllers/virusTotal/virusTotalController');
 
 // Настройка multer для загрузки файла
 const upload = multer({ dest: 'uploads/' });

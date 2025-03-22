@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { VT_API_KEY } = require('../config/config');
+const { VT_API_KEY } = require('../../config/config');
 
 const getOptions = {
 	headers: {
