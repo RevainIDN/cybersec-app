@@ -299,5 +299,59 @@
 				}
 			}
 		}
+	},
+	"vulnerabilitiesPage": {
+		"title": "Find out how vulnerable your data is!",
+		"subtitle": "Your emails, passwords, and links may be at risk. Use the tools below to check them for leaks and hidden risks.",
+		"leakChecker": {
+			"title": "Checking for data leaks",
+			"text": "Enter your email or password to see if they were included in known leaks. We use HIBP to find traces of your data in compromised databases. This will help you change your passwords in time and protect your accounts.",
+			"email": "Email",
+			"password": "Password",
+			"adviсe": "Tips:",
+			"adviсe1": "Use complex and unique passwords.",
+			"adviсe2": "Enable 2FA.",
+			"adviсe3": "Regularly check your data.",
+			"mailResult": {
+				"leak": {
+					"title": "Your data was found in leaks!",
+					"description": "This means that your email was compromised as a result of a data leak. Attackers can use this information to hack your accounts.",
+					"info": "Detailed information:",
+					"date": "date: ",
+					"compromisedData": "Compromised data:",
+					"recommendations": "Recommendations:",
+					"recommendation1": "Urgently change your password on all services where it was used.",
+					"recommendation2": "Enable two-factor authentication (2FA).",
+					"recommendation3": "Do not reuse this email for important accounts."
+				},
+				"noLeak": {
+					"title": "Your data was not found in any leaks!",
+					"description": "Your email is not currently found in any known leaks. This is a good sign, but security is still important."
+				}
+			},
+			"passwordResult": {
+				"leak": {
+					"title": "Your data was found in leaks!",
+					"description": "This means that your password was compromised in a data leak. Attackers can use it to hack your accounts.",
+					"info1": "Password ",
+					"info2": " was found in ",
+					"info3": " leaks.",
+					"recommendations": "Recommendations:",
+					"recommendation1": "Urgently change your password on all services where it was used.",
+					"recommendation2": "Enable two-factor authentication (2FA).",
+					"recommendation3": "Do not reuse this password."
+				},
+				"noLeak": {
+					"title": "Your data was not found in any leaks!",
+					"description": "Your password is not currently found in any known leaks. This is a good sign, but security is still important."
+				}
+			}
+		},
+		"shortLinkDecoder": {
+			"title": "Deploying Short Links",
+			"text": "Enter a shortened URL (like bit.ly) to see where it leads. Short links can hide phishing or malicious sites. Find out the full address and protect yourself from hidden threats.",
+			"resultTitle": "Short URL converted",
+			"resultAdvice": "Find out if this site is safe! Go to the 'Analysis' section to check."
+		}
 	}
 }
