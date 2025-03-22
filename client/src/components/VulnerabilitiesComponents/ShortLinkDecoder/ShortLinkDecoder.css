@@ -1,0 +1,35 @@
+.leak-result-url {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 100%;
+	gap: 6px;
+	font-size: 1.2rem;
+	overflow: hidden;
+}
+
+.leak-result-url strong {
+	position: relative;
+	cursor: pointer;
+	border: 2px #0b31bd solid;
+	border-radius: 12px;
+	padding: 6px 10px;
+	transition: background-color 0.3s, transform 0.1s ease-in-out;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.leak-result-url strong .visible {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.leak-result-url {
+	border-top: 2px solid transparent;
+	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
+	padding: 10px 0;
+}

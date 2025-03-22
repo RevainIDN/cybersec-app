@@ -1,0 +1,180 @@
+.leak-pwnd,
+.leak-shorturl {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	margin-bottom: 50px;
+}
+
+.leak-desc-icon-cont {
+	position: absolute;
+	border: 1px #0b31bd solid;
+	border-radius: 20px;
+	padding: 5px;
+	transform: translateX(-35px);
+}
+
+.leak-desc-icon {
+	width: 16px;
+	height: 16px;
+}
+
+.leak-desc {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	font-size: 0.9rem;
+	margin-bottom: 40px;
+}
+
+.leak-desc-title {
+	position: relative;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	font-size: 1rem;
+	margin-bottom: 10px;
+}
+
+.leak-desc-text {
+	text-align: center;
+	font-weight: 200;
+	min-height: 70px;
+}
+
+.leak-input-cont {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.leak-input-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.leak-select {
+	position: absolute;
+	display: flex;
+	gap: 5px;
+	justify-content: space-between;
+	width: 200px;
+	height: 20px;
+	background-color: transparent;
+	right: 10px;
+	top: -22px;
+}
+
+.leak-select-btn {
+	width: 50%;
+	height: auto;
+	font-size: 0.7rem;
+	color: #FAFAFADE;
+	background-color: #021a71;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	transition: background-color 0.2s;
+}
+
+.leak-select-btn:hover {
+	height: 25px;
+	transform: translateY(-5px);
+}
+
+.select-email {
+	background-color: #0b31bd;
+}
+
+.select-password {
+	background-color: #0b31bd;
+}
+
+.leak-input {
+	width: 100%;
+	height: 60px;
+	font-size: 1.5rem;
+	transition: outline 0.3s, box-shadow 0.3s;
+	padding-right: 175px !important;
+}
+
+.leak-input::placeholder {
+	color: #8896b6;
+}
+
+.leak-btns-cont {
+	display: flex;
+}
+
+.leak-btn {
+	width: auto;
+}
+
+.leak-btn-password {
+	right: 60px;
+}
+
+.leak-btn img,
+.leak-btn-password img {
+	width: 36px;
+	height: 36px;
+}
+
+.leak-result {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 700px;
+	padding: 12px 20px;
+	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
+	background-color: transparent;
+	border-radius: 8px;
+}
+
+.leak-found {
+	outline: 2px #f73f29 solid;
+	box-shadow: #f73f29 0px 0px 5px, rgb(247, 63, 41) 0px 0px 20px 5px;
+}
+
+.leak-not-found {
+	outline: #58b44e;
+	box-shadow: #58b44e 0px 0px 5px, rgb(88, 180, 78) 0px 0px 20px 5px;
+}
+
+.leak-result-title {
+	margin-bottom: 5px;
+}
+
+.leak-result-subtitle {
+	margin-bottom: 10px;
+}
+
+.leak-result-desc {
+	text-align: start;
+	border-top: 2px solid transparent;
+	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
+	padding-top: 10px;
+}
+
+.leak-result-desc p {
+	margin-top: 10px;
+}
+
+.leak-result-desc ul {
+	padding: 0;
+}
+
+.leak-error-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
+	border-radius: 12px;
+	width: 100%;
+	height: 150px;
+	padding: 8px 12px;
+	font-size: 1.2rem;
+}
