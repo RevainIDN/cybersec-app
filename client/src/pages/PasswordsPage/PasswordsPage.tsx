@@ -24,11 +24,11 @@ export default function PasswordsPage() {
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}
 			>
-				<h1 className="passwords-title">{t('passwordPage.passwordCheck.title')}</h1>
-				<h2 className="passwords-subtitle">{t('passwordPage.passwordCheck.subtitle')}</h2>
+				<h1 className="page-title">{t('passwordPage.passwordCheck.title')}</h1>
+				<h2 className="page-subtitle">{t('passwordPage.passwordCheck.subtitle')}</h2>
 				<PasswordCheck />
-				<h1 className="passwords-title">{t('passwordPage.PasswordGenerator.title')}</h1>
-				<h2 className="passwords-subtitle">{t('passwordPage.PasswordGenerator.subtitle')}</h2>
+				<h1 className="page-title">{t('passwordPage.PasswordGenerator.title')}</h1>
+				<h2 className="page-subtitle">{t('passwordPage.PasswordGenerator.subtitle')}</h2>
 				<div className="password-generator-cont">
 					<div className="password-generator-wrapper">
 						<PasswordGenerator />

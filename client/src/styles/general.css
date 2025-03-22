@@ -84,7 +84,7 @@ button {
 	width: 150%;
 	height: 150%;
 	opacity: 0.6;
-	z-index: -1;
+	z-index: -10;
 }
 
 .section::before {
@@ -99,7 +99,8 @@ button {
 
 /* Общий стиль */
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
 	color: #e0e6f4;
 	background-color: rgba(0, 52, 238, 0.1);
 	letter-spacing: 2px;
@@ -123,4 +124,15 @@ input:focus {
 	border-radius: 16px;
 	color: #fff;
 	background-color: #0034EE;
+}
+
+.page-title {
+	margin-bottom: 10px;
+}
+
+.page-subtitle {
+	max-width: 950px;
+	font-size: 0.9rem;
+	font-weight: 200;
+	margin-bottom: 20px;
 }
