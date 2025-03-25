@@ -353,5 +353,100 @@
 			"resultTitle": "Short URL converted",
 			"resultAdvice": "Find out if this site is safe! Go to the 'Analysis' section to check."
 		}
+	},
+	"reportsPage": {
+		"globalBtn": "General Report",
+		"personalBtn": "Personal Report",
+		"source": "Source: ",
+		"details": "More details",
+		"globalReports": {
+			"titles": {
+				"typesCyberThreats": "Types of Cyber Threats (2023)",
+				"causesVulnerabilities": "Causes of Vulnerabilities (2023)",
+				"increaseAttacks": "Increase in Attacks (2019–2023)",
+				"geographyAttacks": "Geography of Attacks (2023)",
+				"attacksByIndustry": "Frequency of Attacks by Industry (2023)",
+				"costOfCybercrime": "Increase in Cost of Cybercrime (2019–2023)",
+				"firstStat": "$4.88 million",
+				"secondStat": "39 seconds",
+				"thirdStat": "50%"
+			},
+			"labels": {
+				"typesCyberThreats": {
+					"phishing": "Phishing",
+					"dataLeaks": "Data Leaks",
+					"ransomware": "Ransomware",
+					"other": "Other"
+				},
+				"causesVulnerabilities": {
+					"humanFactor": "Human Factor",
+					"outdatedSoftware": "Outdated Software",
+					"weakConfiguration": "Weak Configuration",
+					"lackOfEncryption": "Lack of Encryption"
+				},
+				"increaseAttacks": {
+					"2019": "2019",
+					"2020": "2020",
+					"2021": "2021",
+					"2022": "2022",
+					"2023": "2023"
+				},
+				"geographyAttacks": {
+					"usa": "USA",
+					"china": "China",
+					"russia": "Russia",
+					"europe": "Europe",
+					"other": "Other"
+				},
+				"attacksByIndustry": {
+					"finance": "Finance",
+					"healthcare": "Healthcare",
+					"technology": "Technology",
+					"publicSector": "Public Sector",
+					"retail": "Retail"
+				},
+				"costOfCybercrime": {
+					"2019": "2019",
+					"2020": "2020",
+					"2021": "2021",
+					"2022": "2022",
+					"2023": "2023"
+				}
+			},
+			"info": {
+				"typesCyberThreats": "Phishing remains one of the most common cyber threats, as attackers use fake emails, messages, and websites to trick users into revealing personal data, such as passwords or banking details. Data breaches occur when confidential information, such as customer personal data, becomes accessible due to weak server or software security. Ransomware blocks access to systems or files, demanding a ransom for their release, which is especially dangerous for businesses. The 'Other' category includes less common but still significant threats, such as DDoS attacks or exploiting software vulnerabilities.",
+				"causesVulnerabilities": "The human factor is the leading cause of vulnerabilities, including employee errors such as using weak passwords or ignoring security updates. Outdated software becomes a target due to known vulnerabilities that are no longer patched by developers, especially in older versions of operating systems or applications. Poor server or network configuration, such as default settings left unchanged, opens the door to attacks like SQL injections. Lack of data encryption in transit or at rest allows hackers to easily intercept or steal information, especially in public networks.",
+				"increaseAttacks": "The number of cyberattacks is steadily increasing each year, driven by society’s and businesses’ growing digital dependence. The COVID-19 pandemic in 2020 accelerated this process as many companies switched to remote work, and employees started using personal devices and unsecured networks. The rise in attack automation, such as bots used for password guessing or vulnerability scanning, also contributes to the increase in frequency. In 2023, experts noted that cybercriminals are increasingly targeting small and medium-sized businesses, as these organizations often lack sufficient resources for full protection.",
+				"geographyAttacks": "The United States leads in the number of cyberattacks due to its advanced IT infrastructure, numerous large companies, and high concentration of valuable data, such as financial information or intellectual property. China is often both a source and a target of attacks due to its rapid technological development and state-backed cyber operations. Russia is known for sophisticated attacks, including actions by state-linked hacker groups targeting political and economic goals. Europe suffers from various threats, including phishing and ransomware, due to strict data protection laws like GDPR, making breaches particularly costly. The 'Other' category includes countries with lower activity but still a significant contribution to global statistics.",
+				"attacksByIndustry": "The financial sector is the most frequently attacked due to its direct access to money and sensitive customer data, such as card numbers and bank accounts. Healthcare suffers from ransomware attacks since hospitals store critical patient data and cannot afford prolonged downtime. Tech companies are targeted for their intellectual property and large volumes of user data. The government sector attracts hackers, including state-backed groups, for espionage or destabilization. Retail is vulnerable due to weak online store security and a high number of transactions, making it an easy target for phishing and data theft.",
+				"costOfCybercrime": "The cost of cybercrime is growing exponentially, reaching trillions of dollars annually. In 2019, it was $3.5 trillion, rising to $6 trillion by 2023 due to the increasing number of attacks, their complexity, and the cost of recovery. The rise in ransomware attacks, where companies either pay a ransom or lose their data, significantly contributes to these figures. Fines for data breaches (such as GDPR penalties) and legal expenses also play a role. This trend shows that cybercrime is becoming one of the most expensive threats to the global economy, surpassing even natural disasters.",
+				"firstStat": "The average cost of a data breach continues to rise due to several factors: fines for violating data protection laws (such as GDPR), system recovery costs, loss of customers due to trust issues, and legal expenses. In 2024, small businesses were particularly vulnerable, as they often lack the funds for robust security systems or employee training. Additionally, the increase in ransomware attacks raises overall damages, as victims either pay a ransom or lose their data permanently. This figure highlights the importance of preventive protection.",
+				"secondStat": "The frequency of cyberattacks is staggering: every 39 seconds, a hacking attempt or attack occurs somewhere in the world. This is due to the automation of cybercrime—bots and scripts continuously scan the internet for vulnerable systems, weak passwords, or open ports. Such attacks can go unnoticed by users until serious damage occurs, such as data theft or malware infection. To protect against this, it is crucial to regularly check systems and use modern authentication methods, such as two-factor authentication (2FA).",
+				"thirdStat": "The human factor remains a key cause of cyber threats: employees accidentally click on phishing links, use weak or repeated passwords, or fail to update software, leaving systems vulnerable. Employee training and strict security policies can significantly reduce this risk, but many companies underestimate their importance. Often, attacks begin with simple mistakes, such as opening a malicious email attachment, which gives hackers access to internal networks. This statistic underscores the need for constant monitoring and improvement of user security habits."
+			},
+			"advice": {
+				"typesCyberThreats": "36% of attacks start with phishing.",
+				"causesVulnerabilities": "50% of vulnerabilities are related to human errors.",
+				"increaseAttacks": "The number of attacks increases every year.",
+				"geographyAttacks": "Threats are everywhere.",
+				"attacksByIndustry": "Finance and healthcare are the main targets.",
+				"costOfCybercrime": "Damages rose to $6 trillion in 2023.",
+				"firstStat": "Data breaches cost millions.",
+				"secondStat": "Attacks occur every 39 seconds.",
+				"thirdStat": "Half of vulnerabilities are caused by the human factor."
+			},
+			"linkText": {
+				"typesCyberThreats": "Check your passwords",
+				"causesVulnerabilities": "Check your passwords and systems",
+				"increaseAttacks": "Find out if your website is secure",
+				"geographyAttacks": "Detect vulnerabilities",
+				"attacksByIndustry": "Check your website for vulnerabilities",
+				"costOfCybercrime": "Protect your data",
+				"firstStat": "Secure your passwords",
+				"secondStat": "Check your website",
+				"thirdStat": "Find weak spots"
+			}
+		},
+		"personalReports": {}
 	}
 }
