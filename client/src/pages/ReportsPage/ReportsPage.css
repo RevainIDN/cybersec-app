@@ -1,0 +1,17 @@
+.report-selector {
+	display: flex;
+	margin-bottom: 30px;
+}
+
+.report-btn {
+	width: 200px;
+	height: 50px;
+	color: #FAFAFADE;
+	background-color: transparent;
+	border-bottom: 2px #021a71 solid;
+}
+
+.report-btn--active {
+	color: #c1c1ffde;
+	border-bottom: 2px #0034EE solid;
+}

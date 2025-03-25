@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import passwordsReducer from './passwordsSlice';
-import analysisReducer from './analysisSlice'
+import analysisReducer from './analysisSlice';
+import reportsReducer from './reportsSlice';
 
 const store = configureStore({
 	reducer: {
 		passwords: passwordsReducer,
 		analysis: analysisReducer,
+		reports: reportsReducer,
 	},
 });
 

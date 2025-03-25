@@ -1,0 +1,193 @@
+[
+	{
+		"type": "chart",
+		"chartType": "pie",
+		"title": "reportsPage.globalReports.titles.typesCyberThreats",
+		"labels": [
+			"reportsPage.globalReports.labels.typesCyberThreats.phishing",
+			"reportsPage.globalReports.labels.typesCyberThreats.dataLeaks",
+			"reportsPage.globalReports.labels.typesCyberThreats.ransomware",
+			"reportsPage.globalReports.labels.typesCyberThreats.other"
+		],
+		"data": [
+			36,
+			24,
+			18,
+			22
+		],
+		"colors": [
+			"#FF6384",
+			"#36A2EB",
+			"#FFCE56",
+			"#4BC0C0"
+		],
+		"info": "reportsPage.globalReports.info.typesCyberThreats",
+		"advice": "reportsPage.globalReports.advice.typesCyberThreats",
+		"linkText": "reportsPage.globalReports.linkText.typesCyberThreats",
+		"linkUrl": "/passwords",
+		"source": "https://www.verizon.com/business/resources/reports/dbir/2023/"
+	},
+	{
+		"type": "chart",
+		"chartType": "pie",
+		"title": "reportsPage.globalReports.titles.causesVulnerabilities",
+		"labels": [
+			"reportsPage.globalReports.labels.causesVulnerabilities.humanFactor",
+			"reportsPage.globalReports.labels.causesVulnerabilities.outdatedSoftware",
+			"reportsPage.globalReports.labels.causesVulnerabilities.weakConfiguration",
+			"reportsPage.globalReports.labels.causesVulnerabilities.lackOfEncryption"
+		],
+		"data": [
+			50,
+			25,
+			15,
+			10
+		],
+		"colors": [
+			"#FF6384",
+			"#36A2EB",
+			"#FFCE56",
+			"#4BC0C0"
+		],
+		"info": "reportsPage.globalReports.info.causesVulnerabilities",
+		"advice": "reportsPage.globalReports.advice.causesVulnerabilities",
+		"linkText": "reportsPage.globalReports.linkText.causesVulnerabilities",
+		"linkUrl": "/vulnerabilities",
+		"source": "https://www.verizon.com/business/resources/reports/dbir/2023/"
+	},
+	{
+		"type": "chart",
+		"chartType": "line",
+		"title": "reportsPage.globalReports.titles.increaseAttacks",
+		"labels": [
+			"reportsPage.globalReports.labels.increaseAttacks.2019",
+			"reportsPage.globalReports.labels.increaseAttacks.2020",
+			"reportsPage.globalReports.labels.increaseAttacks.2021",
+			"reportsPage.globalReports.labels.increaseAttacks.2022",
+			"reportsPage.globalReports.labels.increaseAttacks.2023"
+		],
+		"data": [
+			1400,
+			1500,
+			1600,
+			1636,
+			1876
+		],
+		"colors": [
+			"#36A2EB"
+		],
+		"info": "reportsPage.globalReports.info.increaseAttacks",
+		"advice": "reportsPage.globalReports.advice.increaseAttacks",
+		"linkText": "reportsPage.globalReports.linkText.increaseAttacks",
+		"linkUrl": "/analysis",
+		"source": "https://www.checkpoint.com/cyber-hub/cyber-security/cybersecurity-report-2023/"
+	},
+	{
+		"type": "chart",
+		"chartType": "bar",
+		"title": "reportsPage.globalReports.titles.geographyAttacks",
+		"labels": [
+			"reportsPage.globalReports.labels.geographyAttacks.usa",
+			"reportsPage.globalReports.labels.geographyAttacks.china",
+			"reportsPage.globalReports.labels.geographyAttacks.russia",
+			"reportsPage.globalReports.labels.geographyAttacks.europe",
+			"reportsPage.globalReports.labels.geographyAttacks.other"
+		],
+		"data": [
+			45,
+			15,
+			10,
+			25,
+			5
+		],
+		"colors": [
+			"#FF6384"
+		],
+		"info": "reportsPage.globalReports.info.geographyAttacks",
+		"advice": "reportsPage.globalReports.advice.geographyAttacks",
+		"linkText": "reportsPage.globalReports.linkText.geographyAttacks",
+		"linkUrl": "/vulnerabilities",
+		"source": "https://www.kaspersky.com/resource-center/threats/cybersecurity-report-2023"
+	},
+	{
+		"type": "chart",
+		"chartType": "bar",
+		"title": "reportsPage.globalReports.titles.attacksByIndustry",
+		"labels": [
+			"reportsPage.globalReports.labels.attacksByIndustry.finance",
+			"reportsPage.globalReports.labels.attacksByIndustry.healthcare",
+			"reportsPage.globalReports.labels.attacksByIndustry.technology",
+			"reportsPage.globalReports.labels.attacksByIndustry.publicSector",
+			"reportsPage.globalReports.labels.attacksByIndustry.retail"
+		],
+		"data": [
+			30,
+			25,
+			20,
+			15,
+			10
+		],
+		"colors": [
+			"#36A2EB"
+		],
+		"info": "reportsPage.globalReports.info.attacksByIndustry",
+		"advice": "reportsPage.globalReports.advice.attacksByIndustry",
+		"linkText": "reportsPage.globalReports.linkText.attacksByIndustry",
+		"linkUrl": "/analysis",
+		"source": "https://www.verizon.com/business/resources/reports/dbir/2023/"
+	},
+	{
+		"type": "chart",
+		"chartType": "line",
+		"title": "reportsPage.globalReports.titles.costOfCybercrime",
+		"labels": [
+			"reportsPage.globalReports.labels.costOfCybercrime.2019",
+			"reportsPage.globalReports.labels.costOfCybercrime.2020",
+			"reportsPage.globalReports.labels.costOfCybercrime.2021",
+			"reportsPage.globalReports.labels.costOfCybercrime.2022",
+			"reportsPage.globalReports.labels.costOfCybercrime.2023"
+		],
+		"data": [
+			3.5,
+			4.0,
+			4.5,
+			5.0,
+			6.0
+		],
+		"colors": [
+			"#FF6384"
+		],
+		"info": "reportsPage.globalReports.info.costOfCybercrime",
+		"advice": "reportsPage.globalReports.advice.costOfCybercrime",
+		"linkText": "reportsPage.globalReports.linkText.costOfCybercrime",
+		"linkUrl": "/passwords",
+		"source": "https://www.cybersecurityventures.com/cybercrime-damage-costs/"
+	},
+	{
+		"type": "stat",
+		"value": "reportsPage.globalReports.titles.firstStat",
+		"info": "reportsPage.globalReports.info.firstStat",
+		"advice": "reportsPage.globalReports.advice.firstStat",
+		"linkText": "reportsPage.globalReports.linkText.firstStat",
+		"linkUrl": "/passwords",
+		"source": "https://www.ibm.com/reports/data-breach"
+	},
+	{
+		"type": "stat",
+		"value": "reportsPage.globalReports.titles.secondStat",
+		"info": "reportsPage.globalReports.info.secondStat",
+		"advice": "reportsPage.globalReports.advice.secondStat",
+		"linkText": "reportsPage.globalReports.linkText.secondStat",
+		"linkUrl": "/analysis",
+		"source": "https://www.cybersecurityventures.com/cybercrime-damage-costs/"
+	},
+	{
+		"type": "stat",
+		"value": "reportsPage.globalReports.titles.thirdStat",
+		"info": "reportsPage.globalReports.info.thirdStat",
+		"advice": "reportsPage.globalReports.advice.thirdStat",
+		"linkText": "reportsPage.globalReports.linkText.thirdStat",
+		"linkUrl": "/vulnerabilities",
+		"source": "https://www.ibm.com/security/data-breach"
+	}
+]
