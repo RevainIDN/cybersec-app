@@ -17,11 +17,11 @@ export default function App() {
           element={<HomePage />}
         />
         <Route
-          path='/ip'
+          path='/analysis'
           element={<AnalysisPage />}
         />
         <Route
-          path='/leaks'
+          path='/vulnerabilities'
           element={<VulnerabilitiesPage />}
         />
         <Route

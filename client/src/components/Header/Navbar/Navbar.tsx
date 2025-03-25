@@ -1,21 +1,23 @@
 import './Navbar.css';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { setCurrentLink } from '../../../store/reportsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
 	{ label: "navbar.home", path: "/", key: "" },
-	{ label: "navbar.ip", path: "/ip", key: "ip" },
-	{ label: "navbar.leaks", path: "/leaks", key: "leaks" },
+	{ label: "navbar.ip", path: "/analysis", key: "ip" },
+	{ label: "navbar.leaks", path: "/vulnerabilities", key: "leaks" },
 	{ label: "navbar.passwords", path: "/passwords", key: "passwords" },
 	{ label: "navbar.reports", path: "/reports", key: "reports" },
 ];
 
 export default function Navbar() {
-	const location = useLocation();
+	const dispatch = useDispatch<AppDispatch>();
+	const { currentLink } = useSelector((state: RootState) => state.reports);
 	const { t } = useTranslation();
-	const [currentLink, setCurrentLink] = useState(location.pathname);
 
 	return (
 		<nav className="navbar">
@@ -24,7 +26,7 @@ export default function Navbar() {
 					key={key}
 					className="navbar-link"
 					to={path}
-					onClick={() => setCurrentLink(path)}
+					onClick={() => dispatch(setCurrentLink(path))}
 				>
 					{t(label)}
 					{currentLink === path && (
