@@ -18,6 +18,25 @@
 		"passwords": "Passwords",
 		"reports": "Reports"
 	},
+	"authorization": {
+		"signIn": "Sign In",
+		"signUp": "Sign Up",
+		"navbarLogin": "Login",
+		"login": {
+			"username": "Username",
+			"password": "Password",
+			"keepSignIn": "Keep me signed in",
+			"signIn": "Sign In"
+		},
+		"registration": {
+			"email": "Email",
+			"username": "Nickname",
+			"password": "Password",
+			"confirmPassword": "Confirm Password",
+			"signUp": "Sign Up",
+			"signUpSuccess": "Account registered!"
+		}
+	},
 	"homePage": {
 		"heroSection": {
 			"title": "Ensure Complete Network Security with SecureNet",

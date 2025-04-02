@@ -18,6 +18,25 @@
 		"passwords": "Пароли",
 		"reports": "Отчеты"
 	},
+	"authorization": {
+		"signIn": "Войти",
+		"signUp": "Зарегистрироваться",
+		"navbarLogin": "Войти",
+		"login": {
+			"username": "Имя пользователя",
+			"password": "Пароль",
+			"keepSignIn": "Оставаться в системе",
+			"signIn": "Войти"
+		},
+		"registration": {
+			"email": "Эл. почта",
+			"username": "Имя пользователя",
+			"password": "Пароль",
+			"confirmPassword": "Повторите пароль",
+			"signUp": "Зарегистрироваться",
+			"signUpSuccess": "Аккаунт зарегистрирован!"
+		}
+	},
 	"homePage": {
 		"heroSection": {
 			"title": "Обеспечьте Полную Безопасность Сети с SecureNet",
