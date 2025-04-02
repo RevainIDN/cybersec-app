@@ -10,7 +10,6 @@ import ResultsSwitchingButtons from './GeneralAnalysisComponents/ResultsSwitchin
 export default function AnalyzedData() {
 	// Глобальные состояния из Redux
 	const { isLoading, selectedOption, ipAnalysisResults, domainAnalysisResults, urlAnalysisResults, fileAnalysisResults } = useSelector((state: RootState) => state.analysis);
-	console.log(domainAnalysisResults)
 	// Локальное логическое состояние
 	const [selectedResultsOption, setSelectedOption] = useState<string | null>('detection');
 

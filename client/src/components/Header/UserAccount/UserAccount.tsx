@@ -1,25 +1,31 @@
 import './UserAccount.css'
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 import { setCurrentLink } from '../../../store/reportsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 
 export default function UserAccount() {
+	const { t } = useTranslation();
 	const dispatch = useDispatch<AppDispatch>();
 	const token = useSelector((state: RootState) => state.auth.token);
-	console.log(token);
 
 	return (
 		<>
-			{token !== null ? (
-				<div style={{ width: '20px', height: '20px', backgroundColor: 'blue' }}></div>
+			{token ? (
+				<Link
+					className='navbar-user-btn'
+					to={'/account'}
+				>
+					<img src="account/default_avatar.svg" alt="Avatar" />
+				</Link>
 			) : (
 				<Link
 					className='navbar-auth'
 					to={'/auth'}
 					onClick={() => dispatch(setCurrentLink('/auth'))}
 				>
-					Войти
+					{t('authorization.navbarLogin')}
 				</Link>
 			)}
 		</>

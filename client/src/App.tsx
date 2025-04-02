@@ -11,13 +11,13 @@ import VulnerabilitiesPage from './pages/VulnerabilitiesPage/VulnerabilitiesPage
 import PasswordsPage from './pages/PasswordsPage/PasswordsPage'
 import ReportsPage from './pages/ReportsPage/ReportsPage'
 import AuthorizationPage from './pages/AuthorizationPage/AuthorizationPage'
+import AccountPage from './pages/AccountPage/AccountPage'
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const token = useSelector((state: RootState) => { state.auth.token });
+  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
-    console.log(location);
     const savedToken = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (savedToken) {
       fetch('http://localhost:5000/auth/users', {
@@ -67,7 +67,15 @@ export default function App() {
         />
         <Route
           path='/auth'
-          element={<AuthorizationPage />}
+          element={token
+            ? <AccountPage />
+            : <AuthorizationPage />}
+        />
+        <Route
+          path='/account'
+          element={token
+            ? <AccountPage />
+            : <AuthorizationPage />}
         />
       </Routes>
     </>

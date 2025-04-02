@@ -1,8 +1,11 @@
 import '../Authorization.css'
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { fetchRegister } from '../../../services/Authorization/authorization'
 
 export default function RegisterForm() {
+	const { t } = useTranslation();
+
 	const [email, setEmail] = useState<string>('');
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -53,12 +56,10 @@ export default function RegisterForm() {
 			const data = await fetchRegister(email, username, password, passwordConfirm);
 			setServerMessage(data.message);
 			setServerStatus(data.status);
-			console.log(data)
 		} catch (error) {
 			console.error('Ошибка:', error);
 		}
 	};
-	console.log(serverStatus);
 
 	return (
 		<form
@@ -69,7 +70,7 @@ export default function RegisterForm() {
 		>
 			{serverMessage && serverStatus !== 201 && <span className="server-message">{serverMessage}</span>}
 			<label className='signup-label' htmlFor="email">
-				Email
+				{t('authorization.registration.email')}
 				<input
 					className={`input signup-input ${errors.email ? 'signup-input--error' : ''}`}
 					type="email"
@@ -79,7 +80,7 @@ export default function RegisterForm() {
 				{errors.email && <span className="signup-error">{errors.email}</span>}
 			</label>
 			<label className='signup-label' htmlFor="username">
-				Username
+				{t('authorization.registration.username')}
 				<input
 					className={`input signup-input ${errors.username ? 'signup-input--error' : ''}`}
 					type="text"
@@ -89,7 +90,7 @@ export default function RegisterForm() {
 				{errors.username && <span className="signup-error">{errors.username}</span>}
 			</label>
 			<label className='signup-label' htmlFor="password">
-				Password
+				{t('authorization.registration.password')}
 				<div className='password-wrapper'>
 					<input
 						className={`input signup-input ${errors.password ? 'signup-input--error' : ''}`}
@@ -104,7 +105,7 @@ export default function RegisterForm() {
 				{errors.password && <span className="signup-error">{errors.password}</span>}
 			</label>
 			<label className='signup-label' htmlFor="confirm-password">
-				Confirm password
+				{t('authorization.registration.confirmPassword')}
 				<div className='password-wrapper'>
 					<input
 						className={`input signup-input ${errors.passwordConfirm ? 'signup-input--error' : ''}`}
@@ -122,7 +123,9 @@ export default function RegisterForm() {
 				className={`button signup-btn ${serverStatus === 201 ? 'signup-btn-200' : ''}`}
 				type='submit'
 			>
-				{serverStatus === 201 ? 'Аккаунт зарегистрирован!' : 'Sign Up'}
+				{serverStatus === 201
+					? t('authorization.registration.signUpSuccess')
+					: t('authorization.registration.signUp')}
 			</button>
 		</form>
 	)

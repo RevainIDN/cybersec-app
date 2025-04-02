@@ -1,8 +1,11 @@
 import '../Authorization.css'
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { fetchLogin } from '../../../services/Authorization/authorization';
 
 export default function LoginForm() {
+	const { t } = useTranslation();
+
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [keepSignedIn, setKeepSignedIn] = useState<boolean>(false);
@@ -38,7 +41,7 @@ export default function LoginForm() {
 			onSubmit={handleSubmitLogin}
 		>
 			<label className='signin-label' htmlFor="username">
-				Username
+				{t('authorization.login.username')}
 				<input
 					className='input signin-input'
 					type="text"
@@ -49,7 +52,7 @@ export default function LoginForm() {
 
 			</label>
 			<label className='signin-label' htmlFor="password">
-				Password
+				{t('authorization.login.password')}
 				<div className='password-wrapper'>
 					<input
 						className='input signin-input'
@@ -58,7 +61,11 @@ export default function LoginForm() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<button className='input-btn auth-btn-password button' type='button' onClick={handleChangeInputType}>
+					<button
+						className='input-btn auth-btn-password button'
+						type='button'
+						onClick={handleChangeInputType}
+					>
 						<img src="icons/hide-password.svg" alt="Hide" />
 					</button>
 				</div>
@@ -66,12 +73,21 @@ export default function LoginForm() {
 			</label>
 			<div className='switch-cont'>
 				<label className='switch'>
-					<input className='switch-input' type="checkbox" onChange={handleCheckKeepSignedIn} />
+					<input
+						className='switch-input'
+						type="checkbox"
+						onChange={handleCheckKeepSignedIn}
+					/>
 					<span className='switch-slider'></span>
 				</label>
-				Keep me signed in
+				{t('authorization.login.keepSignIn')}
 			</div>
-			<button className='button signin-btn' type='submit'>Sign In</button>
+			<button
+				className='button signin-btn'
+				type='submit'
+			>
+				{t('authorization.login.signIn')}
+			</button>
 		</form>
 	)
 }
