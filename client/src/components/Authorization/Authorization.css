@@ -1,0 +1,119 @@
+.form-signin,
+.form-signup {
+	display: flex;
+	flex-direction: column;
+}
+
+.signin-label,
+.signup-label {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 10px;
+}
+
+.password-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.auth-btn-password {
+	width: 30px;
+	right: 5px;
+}
+
+.auth-btn-password img {
+	width: 22px;
+	height: 22px;
+}
+
+.signin-input,
+.signup-input {
+	width: 100%;
+	height: 30px;
+}
+
+.signin-input--error,
+.signup-input--error {
+	outline: 2px #d9534f solid !important;
+}
+
+.server-message,
+.signin-error,
+.signup-error {
+	color: #d9534f;
+	transition: background-color 0.3s;
+}
+
+.server-message {
+	margin-bottom: 10px;
+}
+
+.signup-btn-200,
+.signin-btn-200 {
+	background-color: #58b44e !important;
+}
+
+.switch-cont {
+	cursor: default;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.switch {
+	display: inline-block;
+	position: relative;
+	width: 50px;
+	height: 25px;
+}
+
+.switch-input {
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.switch-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	border-radius: 34px;
+	background-color: #aaa;
+	transition: 0.3s;
+}
+
+.switch-slider::before {
+	content: '';
+	position: absolute;
+	cursor: pointer;
+	top: 3px;
+	left: 3px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #f9f9f9;
+	transition: 0.3s;
+}
+
+.switch-input:checked+.switch-slider {
+	background-color: #4E80EE;
+}
+
+.switch-input:checked+.switch-slider::before {
+	transform: translateX(24px);
+}
+
+.signin-btn,
+.signup-btn {
+	height: 40px;
+	font-weight: 500;
+	color: #FAFAFADE;
+	background-color: #0034EE;
+	border-radius: 12px;
+	margin-top: 20px;
+}

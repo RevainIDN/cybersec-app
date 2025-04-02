@@ -10,3 +10,9 @@
 	cursor: pointer;
 	font-weight: 400;
 }
+
+.header-cont {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+}

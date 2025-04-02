@@ -1,0 +1,28 @@
+.auth {
+	width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 2px #021a71 solid;
+	border-radius: 12px;
+	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
+	margin-bottom: 20px;
+}
+
+.switch-auth {
+	display: flex;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.switch-auth-btn {
+	width: 100%;
+	height: 50px;
+	color: #FAFAFADE;
+	background-color: transparent;
+	border-bottom: 2px #021a71 solid;
+}
+
+.switch-auth-btn--active {
+	color: #c1c1ffde;
+	border-bottom: 2px #0034EE solid;
+}

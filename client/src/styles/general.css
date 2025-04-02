@@ -100,7 +100,8 @@ button {
 /* Общий стиль */
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
 	color: #e0e6f4;
 	background-color: rgba(0, 52, 238, 0.1);
 	letter-spacing: 2px;
@@ -109,6 +110,12 @@ input[type="password"] {
 	outline: 2px #021a71 solid;
 	padding: 0 20px;
 	transition: outline 0.3s;
+}
+
+input:-webkit-autofill {
+	background-color: transparent !important;
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-text-fill-color: #FAFAFADE;
 }
 
 input:focus {
