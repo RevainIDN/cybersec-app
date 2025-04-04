@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Pie, Line, Bar } from 'react-chartjs-2';
 import { ReportItemData } from '../../../../types/ReportsTypes/globalReportsTypes';
 import { Link } from 'react-router-dom';
-import { setCurrentLink } from '../../../../store/reportsSlice';
+import { setCurrentLink } from '../../../../store/generalSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../store';
 import { useTranslation } from 'react-i18next';

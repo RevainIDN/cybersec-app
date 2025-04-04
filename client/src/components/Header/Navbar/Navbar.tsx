@@ -1,7 +1,7 @@
 import './Navbar.css';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { setCurrentLink } from '../../../store/reportsSlice';
+import { setCurrentLink } from '../../../store/generalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ const navLinks = [
 
 export default function Navbar() {
 	const dispatch = useDispatch<AppDispatch>();
-	const { currentLink } = useSelector((state: RootState) => state.reports);
+	const { currentLink } = useSelector((state: RootState) => state.general);
 	const { t } = useTranslation();
 
 	return (
@@ -31,7 +31,7 @@ export default function Navbar() {
 					{t(label)}
 					{currentLink === path && (
 						<motion.div
-							className="navbar-active-bg"
+							className='navbar-active-bg'
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}

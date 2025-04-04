@@ -1,8 +1,8 @@
 import axios from "axios";
-import { IpVirusTotalResponse, DomainVirusTotalResponse, FileVirusTotalResponse } from "../../types/AnalysisTypes/analysisResultsTypes";
 import store from "../../store";
+import { IpVirusTotalResponse, DomainVirusTotalResponse, FileVirusTotalResponse } from "../../types/AnalysisTypes/analysisResultsTypes";
 
-// GET Запрос для IP-адресов
+// Запрос для анализа IP через сервер
 export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResponse> => {
 	const token = store.getState().auth.token;
 	try {
@@ -16,7 +16,7 @@ export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResp
 	}
 };
 
-// GET Запрос для доменов
+// Запрос для анализа домена через сервер
 export const fetchVirusTotalDomain = async (value: string): Promise<DomainVirusTotalResponse> => {
 	const token = store.getState().auth.token;
 	try {
@@ -30,7 +30,7 @@ export const fetchVirusTotalDomain = async (value: string): Promise<DomainVirusT
 	}
 };
 
-// POST запрос отправки URL для анализа
+// Запрос для анализа URL через сервер
 export async function fetchVirusTotalUrlScan(url: string) {
 	const token = store.getState().auth.token;
 	try {
@@ -41,17 +41,14 @@ export async function fetchVirusTotalUrlScan(url: string) {
 				headers: token ? { Authorization: `Bearer ${token}` } : {},
 			}
 		);
-		return response.data; // Теперь весь отчёт приходит сразу
+		return response.data;
 	} catch (error) {
 		console.error('Ошибка при запросе к VirusTotal для URL через сервер: ' + error);
 		throw error;
 	}
 }
 
-// GET Запрос для URL
-
-
-// POST запрос отправки файла для анализа через сервер
+// Запрос для загрузки файла на анализ через сервер
 export const fetchVirusTotalFileScan = async (file: File) => {
 	const token = store.getState().auth.token;
 	const formData = new FormData();
@@ -77,7 +74,7 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 	}
 };
 
-// GET Запрос для получения отчета о файле через сервер
+// Запрос для получения отчёта об анализе файла через сервер
 export const fetchVirusTotalFileReport = async (analysisId: string, retries = 5): Promise<FileVirusTotalResponse | null> => {
 	const token = store.getState().auth.token;
 
