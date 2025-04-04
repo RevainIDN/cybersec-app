@@ -2,77 +2,58 @@ import axios from "axios";
 import { IpVirusTotalResponse, DomainVirusTotalResponse, FileVirusTotalResponse } from "../../types/AnalysisTypes/analysisResultsTypes";
 import store from "../../store";
 
-const API_KEY_VIRUS_TOTAL = import.meta.env.VITE_VIRUSTOTAL_API_KEY;
-const getOptions = { method: "GET", headers: { "x-apikey": API_KEY_VIRUS_TOTAL } };
-const postUrlOptions = { headers: { "x-apikey": API_KEY_VIRUS_TOTAL, "Content-Type": "application/x-www-form-urlencoded" } };
-
 // GET Запрос для IP-адресов
 export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResponse> => {
+	const token = store.getState().auth.token;
 	try {
-		const response = await axios(`https://www.virustotal.com/api/v3/ip_addresses/${value}`, getOptions);
+		const response = await axios.get(`http://localhost:5000/api/virustotal/ip/${value}`, {
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
+		});
 		return response.data;
 	} catch (error) {
-		console.error('Ошибка при запросе к VirusTotal для IP: ' + error);
+		console.error('Ошибка при запросе к VirusTotal для IP через сервер: ' + error);
 		throw error;
 	}
-}
+};
 
 // GET Запрос для доменов
 export const fetchVirusTotalDomain = async (value: string): Promise<DomainVirusTotalResponse> => {
+	const token = store.getState().auth.token;
 	try {
-		const response = await axios(`https://www.virustotal.com/api/v3/domains/${value}`, getOptions);
+		const response = await axios.get(`http://localhost:5000/api/virustotal/domain/${value}`, {
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
+		});
 		return response.data;
 	} catch (error) {
-		console.error('Ошибка при запросе к VirusTotal для домена: ' + error);
+		console.error('Ошибка при запросе к VirusTotal для домена через сервер: ' + error);
 		throw error;
 	}
-}
+};
 
 // POST запрос отправки URL для анализа
 export async function fetchVirusTotalUrlScan(url: string) {
+	const token = store.getState().auth.token;
 	try {
 		const response = await axios.post(
-			"https://www.virustotal.com/api/v3/urls",
-			new URLSearchParams({ url }).toString(),
-			postUrlOptions
+			'http://localhost:5000/api/virustotal/url',
+			{ url },
+			{
+				headers: token ? { Authorization: `Bearer ${token}` } : {},
+			}
 		);
-		return response.data;
+		return response.data; // Теперь весь отчёт приходит сразу
 	} catch (error) {
-		console.error('Ошибка при запросе к VirusTotal для URL: ' + error);
+		console.error('Ошибка при запросе к VirusTotal для URL через сервер: ' + error);
 		throw error;
 	}
 }
 
 // GET Запрос для URL
-export async function fetchVirusTotalUrlReport(id: string) {
-	try {
-		const analysisResponse = await axios.get(
-			`https://www.virustotal.com/api/v3/analyses/${id}`,
-			getOptions
-		);
-		const analysisData = analysisResponse.data;
 
-		const urlId = analysisData.meta?.url_info?.id;
-		if (!urlId) {
-			console.warn("Не удалось получить URL ID для расширенного отчёта.");
-			return analysisData;
-		}
-
-		const urlResponse = await axios.get(
-			`https://www.virustotal.com/api/v3/urls/${urlId}`,
-			getOptions
-		);
-
-		return urlResponse.data;
-	} catch (error) {
-		console.error("Ошибка при запросе к VirusTotal для URL:", error);
-		throw error;
-	}
-}
 
 // POST запрос отправки файла для анализа через сервер
 export const fetchVirusTotalFileScan = async (file: File) => {
-	const token = store.getState().auth.token; // Получаем токен из Redux
+	const token = store.getState().auth.token;
 	const formData = new FormData();
 	formData.append("file", file, file.name);
 
@@ -80,7 +61,7 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 		const response = await fetch(`http://localhost:5000/api/virustotal/files`, {
 			method: "POST",
 			body: formData,
-			headers: token ? { Authorization: `Bearer ${token}` } : {}, // Добавляем токен, если он есть
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 
 		if (!response.ok) {
@@ -98,11 +79,11 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 
 // GET Запрос для получения отчета о файле через сервер
 export const fetchVirusTotalFileReport = async (analysisId: string, retries = 5): Promise<FileVirusTotalResponse | null> => {
-	const token = store.getState().auth.token; // Получаем токен из Redux
+	const token = store.getState().auth.token;
 
 	try {
 		const response = await axios.get(`http://localhost:5000/api/virustotal/files/${analysisId}`, {
-			headers: token ? { Authorization: `Bearer ${token}` } : {}, // Добавляем токен
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		console.log("Ответ от сервера:", response.data);
 

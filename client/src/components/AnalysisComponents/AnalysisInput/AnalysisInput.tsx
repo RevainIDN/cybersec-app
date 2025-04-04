@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { setIsLoading, setSelectedOption, setIpAnalysisResults, setDomainAnalysisResults, setUrlAnalysisResults, setFileAnalysisResults } from '../../../store/analysisSlice';
-import { fetchVirusTotalIp, fetchVirusTotalDomain, fetchVirusTotalUrlScan, fetchVirusTotalUrlReport, fetchVirusTotalFileScan, fetchVirusTotalFileReport } from '../../../services/AnalysisApi/virusTotalRequests';
+import { fetchVirusTotalIp, fetchVirusTotalDomain, fetchVirusTotalUrlScan, fetchVirusTotalFileScan, fetchVirusTotalFileReport } from '../../../services/AnalysisApi/virusTotalRequests';
 import { buttonsValues } from './analysisInputHelpers';
 
 export default function AnalysisInput() {
@@ -118,15 +118,9 @@ export default function AnalysisInput() {
 				const domainData = await fetchVirusTotalDomain(enteredValue);
 				dispatch(setDomainAnalysisResults(domainData));
 			} else if (selectedOption === 'url') {
-				const urlDataId = await fetchVirusTotalUrlScan(enteredValue);
-				const urlData = await fetchVirusTotalUrlReport(urlDataId.data.id);
-				dispatch(setUrlAnalysisResults(urlData))
-			} else if (selectedOption === 'file') {
-				if (!selectedFile) {
-					console.error("Файл не выбран!");
-					return;
-				}
-
+				const urlData = await fetchVirusTotalUrlScan(enteredValue);
+				dispatch(setUrlAnalysisResults(urlData));
+			} else if (selectedOption === 'file' && selectedFile) {
 				setIsFileUploading(true);
 				console.log("Отправка файла для анализа...");
 
@@ -135,15 +129,21 @@ export default function AnalysisInput() {
 					const analysisId = fileDataId?.data?.id;
 					if (!analysisId) {
 						console.error("Ошибка: не получен ID анализа файла");
+						setErrorMessage("Не удалось получить ID анализа файла");
 						return;
 					}
 
 					console.log("ID для запроса статуса:", analysisId);
 					const fileData = await fetchVirusTotalFileReport(analysisId);
-					console.log(fileData)
-					dispatch(setFileAnalysisResults(fileData));
+					console.log("Полученные данные файла:", fileData);
+					if (fileData) {
+						dispatch(setFileAnalysisResults(fileData));
+					} else {
+						setErrorMessage("Анализ файла не завершён или данные недоступны");
+					}
 				} catch (error) {
-					console.error("Error parsing file:", error);
+					console.error("Ошибка при обработке файла:", error);
+					setErrorMessage("Ошибка при анализе файла");
 				} finally {
 					setIsFileUploading(false);
 				}

@@ -8,8 +8,8 @@ export default function ProgressCircle({ totalChecks, infectedCount }: ProgressC
 	const circumference = 2 * Math.PI * radius;
 
 	// Рассчитываем прогресс
-	const progress = (infectedCount / totalChecks) * 100;
-	const offset = circumference - (progress / 100) * circumference;
+	const progress = totalChecks > 0 ? (infectedCount / totalChecks) * 100 : 0;
+	const offset = isNaN(progress) ? circumference : circumference - (progress / 100) * circumference;
 
 	return (
 		<div className="progress-circle">

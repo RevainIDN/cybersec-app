@@ -5,7 +5,7 @@ const FormData = require('form-data');
 const router = express.Router();
 const fs = require('fs');
 const { VT_API_KEY } = require('../../config/config');
-const { getVirusTotalFileReport } = require('../../controllers/virusTotal/virusTotalController');
+const { getVirusTotalFileReport, getVirusTotalIpReport, getVirusTotalDomainReport, getVirusTotalUrlReport } = require('../../controllers/virusTotal/virusTotalController');
 const authMiddleware = require('../../middlewares/authorization/authMiddleware')
 
 const upload = multer({ dest: 'uploads/' });
@@ -31,7 +31,6 @@ router.post('/files', authMiddleware, upload.single('file'), async (req, res) =>
                 },
             }
         );
-
         console.log('Ответ от VirusTotal:', virusTotalResponse.data);
         res.json(virusTotalResponse.data);
     } catch (error) {
@@ -45,5 +44,8 @@ router.post('/files', authMiddleware, upload.single('file'), async (req, res) =>
 });
 
 router.get('/files/:fileId', authMiddleware, getVirusTotalFileReport);
+router.get('/ip/:ip', authMiddleware, getVirusTotalIpReport);
+router.get('/domain/:domain', authMiddleware, getVirusTotalDomainReport);
+router.post('/url', authMiddleware, getVirusTotalUrlReport);
 
 module.exports = router;
