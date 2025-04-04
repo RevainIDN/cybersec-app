@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const UserActivity = require('../../models/UserActivity');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { SECRET_AUTH_KEY } = require('../../config/config')
@@ -55,6 +56,16 @@ class authController {
 			return res.json(users);
 		} catch (error) {
 			return res.status(500).json({ message: 'Ошибка при получении пользователей', error: error.message });
+		}
+	}
+
+	async getUserActivity(req, res) {
+		try {
+			const userId = req.user.userId;
+			const activities = await UserActivity.find({ userId }).sort({ createdAt: -1 });
+			return res.json(activities);
+		} catch (error) {
+			return res.status(500).json({ message: 'Ошибка при получении активности', error: error.message });
 		}
 	}
 }

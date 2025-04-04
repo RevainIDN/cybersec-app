@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IpVirusTotalResponse, DomainVirusTotalResponse, FileVirusTotalResponse } from "../../types/AnalysisTypes/analysisResultsTypes";
+import store from "../../store";
 
 const API_KEY_VIRUS_TOTAL = import.meta.env.VITE_VIRUSTOTAL_API_KEY;
 const getOptions = { method: "GET", headers: { "x-apikey": API_KEY_VIRUS_TOTAL } };
@@ -71,6 +72,7 @@ export async function fetchVirusTotalUrlReport(id: string) {
 
 // POST запрос отправки файла для анализа через сервер
 export const fetchVirusTotalFileScan = async (file: File) => {
+	const token = store.getState().auth.token; // Получаем токен из Redux
 	const formData = new FormData();
 	formData.append("file", file, file.name);
 
@@ -78,6 +80,7 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 		const response = await fetch(`http://localhost:5000/api/virustotal/files`, {
 			method: "POST",
 			body: formData,
+			headers: token ? { Authorization: `Bearer ${token}` } : {}, // Добавляем токен, если он есть
 		});
 
 		if (!response.ok) {
@@ -95,8 +98,12 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 
 // GET Запрос для получения отчета о файле через сервер
 export const fetchVirusTotalFileReport = async (analysisId: string, retries = 5): Promise<FileVirusTotalResponse | null> => {
+	const token = store.getState().auth.token; // Получаем токен из Redux
+
 	try {
-		const response = await axios.get(`http://localhost:5000/api/virustotal/files/${analysisId}`);
+		const response = await axios.get(`http://localhost:5000/api/virustotal/files/${analysisId}`, {
+			headers: token ? { Authorization: `Bearer ${token}` } : {}, // Добавляем токен
+		});
 		console.log("Ответ от сервера:", response.data);
 
 		const fileData = response.data.data;

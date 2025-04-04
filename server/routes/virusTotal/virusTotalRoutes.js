@@ -6,13 +6,11 @@ const router = express.Router();
 const fs = require('fs');
 const { VT_API_KEY } = require('../../config/config');
 const { getVirusTotalFileReport } = require('../../controllers/virusTotal/virusTotalController');
+const authMiddleware = require('../../middlewares/authorization/authMiddleware')
 
-// Настройка multer для загрузки файла
 const upload = multer({ dest: 'uploads/' });
 
-const VIRUSTOTAL_API_KEY = { VT_API_KEY };
-
-router.post('/files', upload.single('file'), async (req, res) => {
+router.post('/files', authMiddleware, upload.single('file'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'Файл не был загружен' });
     }
@@ -28,26 +26,24 @@ router.post('/files', upload.single('file'), async (req, res) => {
             formData,
             {
                 headers: {
-                    'x-apikey': VIRUSTOTAL_API_KEY.VT_API_KEY,
+                    'x-apikey': VT_API_KEY,
                     ...formData.getHeaders(),
                 },
             }
         );
 
         console.log('Ответ от VirusTotal:', virusTotalResponse.data);
-        console.log(virusTotalResponse.data);
         res.json(virusTotalResponse.data);
     } catch (error) {
         console.error('Ошибка при отправке в VirusTotal:', error.response?.data || error.message);
         res.status(500).json({ error: 'Ошибка при отправке в VirusTotal' });
     } finally {
-        // Удаляем файл после обработки
         fs.unlink(req.file.path, (err) => {
             if (err) console.error('Ошибка при удалении файла:', err);
         });
     }
 });
 
-router.get('/files/:fileId', getVirusTotalFileReport);
+router.get('/files/:fileId', authMiddleware, getVirusTotalFileReport);
 
 module.exports = router;

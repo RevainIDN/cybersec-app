@@ -34,3 +34,24 @@ export const fetchLogin = async (username: string, password: string, keepSignedI
 		throw error;
 	}
 }
+
+export const fetchUserActivity = async (): Promise<any[]> => {
+	const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+	try {
+		const response = await fetch('http://localhost:5000/auth/activity', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		if (!response.ok) {
+			throw new Error(`Ошибка получения активности: ${response.status}`);
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Ошибка при получении активности: ' + error);
+		throw error;
+	}
+};

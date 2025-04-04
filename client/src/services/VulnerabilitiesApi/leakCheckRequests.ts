@@ -1,10 +1,13 @@
 import axios, { AxiosError } from "axios";
 import { LeakCheckSuccessResponse, LeakCheckFalseResponse, PwnedPasswordsResponse } from "../../types/VulnerabilitiesTypes/vulnerabilitiesTypes";
+import store from "../../store";
 
 export const fetchLeakCheckEmail = async (value: string): Promise<LeakCheckSuccessResponse | LeakCheckFalseResponse> => {
+	const token = store.getState().auth.token;
 	try {
 		const response = await axios.get('http://localhost:5000/api/leakcheck/check', {
 			params: { value },
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		console.log(response.data);
 		return response.data;
@@ -16,9 +19,11 @@ export const fetchLeakCheckEmail = async (value: string): Promise<LeakCheckSucce
 };
 
 export const fetchPwnedPassword = async (password: string): Promise<PwnedPasswordsResponse> => {
+	const token = store.getState().auth.token;
 	try {
 		const response = await axios.get('http://localhost:5000/api/pwned/check', {
 			params: { password },
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		console.log(response.data);
 		return response.data;
@@ -30,14 +35,16 @@ export const fetchPwnedPassword = async (password: string): Promise<PwnedPasswor
 };
 
 export const fetchExpandShortUrl = async (shortUrl: string): Promise<string> => {
+	const token = store.getState().auth.token;
 	const formattedUrl = shortUrl.startsWith('http://') || shortUrl.startsWith('https://')
 		? shortUrl
 		: `https://${shortUrl}`;
 	try {
 		const response = await axios.get('http://localhost:5000/api/expand/expand', {
-			params: { shortUrl: formattedUrl },
+			params: { url: formattedUrl },
+			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
-		return response.data.expandedUrl;
+		return response.data.longUrl;
 	} catch (error) {
 		const axiosError = error as AxiosError;
 		console.error('Ошибка при расширении URL: ', axiosError.response?.data || axiosError.message);

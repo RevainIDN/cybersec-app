@@ -1,7 +1,10 @@
 const { fetchPwnedPasswords } = require('../../services/leakCheck/pwnedPasswordsService');
+const UserActivity = require('../../models/UserActivity');
 
 const getPwnedPasswordsReport = async (req, res) => {
 	const { password } = req.query;
+	const userId = req.user?.userId;
+
 	console.log('Получен пароль для проверки:', password);
 
 	if (!password) {
@@ -10,6 +13,18 @@ const getPwnedPasswordsReport = async (req, res) => {
 
 	try {
 		const pwnedReport = await fetchPwnedPasswords(password);
+		const result = pwnedReport.found ? 'Слито' : 'Безопасно';
+
+		if (userId) {
+			const activity = new UserActivity({
+				userId,
+				type: 'password_leak_check',
+				input: 'Пароль проверен',
+				result,
+			});
+			await activity.save();
+		}
+
 		if (pwnedReport.found) {
 			return res.status(200).json({
 				message: `Пароль найден в ${pwnedReport.count} утечках.`,
