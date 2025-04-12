@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
 	token: string | undefined,
+	isLoading: boolean,
 }
 
 const initialState: AuthState = {
 	token: undefined,
+	isLoading: true,
 }
 
 const authSlice = createSlice({
@@ -14,9 +16,11 @@ const authSlice = createSlice({
 	reducers: {
 		setToken: (state, action: PayloadAction<string | undefined>) => {
 			state.token = action.payload;
+			state.isLoading = false;
 		},
 		clearToken: (state) => {
 			state.token = undefined;
+			state.isLoading = false;
 		}
 	}
 })

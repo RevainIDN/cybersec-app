@@ -1,57 +1,82 @@
-import { LoginResponse, RegisterResponse } from '../../types/AuthTypes/authTypes'
+import axios from 'axios';
+import { LoginResponse, RegisterResponse } from '../../types/AuthTypes/authTypes';
 
-export const fetchRegister = async (email: string, username: string, password: string, passwordConfirm: string): Promise<RegisterResponse> => {
+const API_URL = 'http://localhost:5000/auth';
+
+// Запрос для регистрации пользователя
+export const fetchRegister = async (
+	email: string,
+	username: string,
+	password: string,
+	passwordConfirm: string
+): Promise<RegisterResponse> => {
 	try {
-		const response = await fetch('http://localhost:5000/auth/registration', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email, username, password, passwordConfirm }),
+		const response = await axios.post(`${API_URL}/registration`, {
+			email,
+			username,
+			password,
+			passwordConfirm,
 		});
-		const data = await response.json();
-		return { ...data, status: response.status };
+		return response.data;
 	} catch (error) {
-		console.error('Ошибка при регистрации: ' + error);
+		console.error('Ошибка при регистрации: ', error);
 		throw error;
 	}
-}
+};
 
-export const fetchLogin = async (username: string, password: string, keepSignedIn: boolean): Promise<LoginResponse> => {
+// Запрос для авторизации пользователя
+export const fetchLogin = async (
+	username: string,
+	password: string,
+	keepSignedIn: boolean
+): Promise<LoginResponse> => {
 	try {
-		const response = await fetch('http://localhost:5000/auth/login', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ username, password }),
+		const response = await axios.post(`${API_URL}/login`, {
+			username,
+			password,
 		});
-		const data = await response.json();
-		if (data.token && keepSignedIn) {
-			localStorage.setItem('token', data.token);
-		} else if (data.token && !keepSignedIn) {
-			sessionStorage.setItem('token', data.token);
-		};
-		return { ...data, status: response.status };
+		const { token, userId } = response.data;
+
+		if (keepSignedIn) {
+			localStorage.setItem('token', token);
+		} else {
+			sessionStorage.setItem('token', token);
+		}
+
+		return { token, userId };
 	} catch (error) {
-		console.error('Ошибка при авторизации: ' + error);
+		console.error('Ошибка при авторизации: ', error);
 		throw error;
 	}
-}
+};
 
+// Запрос для получения активности пользователя
 export const fetchUserActivity = async (): Promise<any[]> => {
 	const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 	try {
-		const response = await fetch('http://localhost:5000/auth/activity', {
-			method: 'GET',
+		const response = await axios.get(`${API_URL}/activity`, {
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		if (!response.ok) {
-			throw new Error(`Ошибка получения активности: ${response.status}`);
-		}
-		const data = await response.json();
-		return data;
+		return response.data;
 	} catch (error) {
-		console.error('Ошибка при получении активности: ' + error);
+		console.error('Ошибка при получении активности: ', error);
+		throw error;
+	}
+};
+
+// Запрос для удаления всех активностей пользователя
+export const deleteAllUserActivities = async (): Promise<void> => {
+	const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+	try {
+		await axios.delete(`${API_URL}/activity`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	} catch (error) {
+		console.error('Ошибка при удалении активностей: ', error);
 		throw error;
 	}
 };

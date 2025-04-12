@@ -16,6 +16,7 @@ import AccountPage from './pages/AccountPage/AccountPage'
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((state: RootState) => state.auth.token);
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token') || sessionStorage.getItem('token');
@@ -38,8 +39,14 @@ export default function App() {
           sessionStorage.removeItem('token');
           dispatch(clearToken());
         });
+    } else {
+      dispatch(clearToken());
     }
   }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Загрузка...</div>;
+  }
 
   return (
     <>
