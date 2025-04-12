@@ -467,5 +467,31 @@
 			}
 		},
 		"personalReports": {}
+	},
+	"accountPage": {
+		"activity": {
+			"null": "Все типы",
+			"email_leak_check": "Слитые эл.почты",
+			"password_leak_check": "Слитые пароли",
+			"url_expansion": "Короткие URL",
+			"ip_analysis": "Анализ IP",
+			"domain_analysis": "Анализ доменов",
+			"url_analysis": "Анализ URL",
+			"file_analysis": "Анализ файлов",
+			"timeNew": "Время(Новые)",
+			"timeOld": "Время(Старые)",
+			"clear": "Очистить",
+			"type": "Тип:",
+			"date": "Дата:",
+			"input": "Ввод:",
+			"result": "Результат:",
+			"noActivities": "Нет активности для отображения",
+			"results": {
+				"Чисто": "Чисто",
+				"Подозрительный": "Подозрительный",
+				"Безопасно": "Безопасно",
+				"Слито": "Слито"
+			}
+		}
 	}
 }

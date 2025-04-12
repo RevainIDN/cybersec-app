@@ -467,5 +467,31 @@
 			}
 		},
 		"personalReports": {}
+	},
+	"accountPage": {
+		"activity": {
+			"null": "Всі типи",
+			"email_leak_check": "Злиті ел.пошти",
+			"password_leak_check": "Злиті паролі",
+			"url_expansion": "Короткі URL",
+			"ip_analysis": "Аналіз IP",
+			"domain_analysis": "Аналіз доменів",
+			"url_analysis": "Аналіз URL",
+			"file_analysis": "Аналіз файлів",
+			"timeNew": "Час(Нові)",
+			"timeOld": "Час(Старі)",
+			"clear": "Очистити",
+			"type": "Тип:",
+			"date": "Дата:",
+			"input": "Введення:",
+			"result": "Результат:",
+			"noActivities": "Немає активності для відображення",
+			"results": {
+				"Чисто": "Чисто",
+				"Подозрительный": "Підозрілий",
+				"Безопасно": "Безпечно",
+				"Слито": "Злито"
+			}
+		}
 	}
 }
