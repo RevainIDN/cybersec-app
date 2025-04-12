@@ -29,7 +29,7 @@ export default function PasswordsPage() {
 				<PasswordCheck />
 				<h1 className="page-title">{t('passwordPage.PasswordGenerator.title')}</h1>
 				<h2 className="page-subtitle">{t('passwordPage.PasswordGenerator.subtitle')}</h2>
-				<div className="password-generator-cont">
+				<div className="password-generator-cont section">
 					<div className="password-generator-wrapper">
 						<PasswordGenerator />
 						<PasswordListGenerator />

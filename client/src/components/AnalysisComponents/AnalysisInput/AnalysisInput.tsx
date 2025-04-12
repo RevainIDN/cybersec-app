@@ -121,6 +121,7 @@ export default function AnalysisInput() {
 				const urlData = await fetchVirusTotalUrlScan(enteredValue);
 				dispatch(setUrlAnalysisResults(urlData));
 			} else if (selectedOption === 'file' && selectedFile) {
+				setSelectedFile(null)
 				setIsFileUploading(true);
 				console.log("Отправка файла для анализа...");
 
