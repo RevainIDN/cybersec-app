@@ -4,7 +4,6 @@ export interface RegisterResponse {
 }
 
 export interface LoginResponse {
-	message: string;
+	userId: string;
 	token: string;
-	status: number;
 }

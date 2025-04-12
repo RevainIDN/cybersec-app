@@ -5,8 +5,7 @@ module.exports = function (req, res, next) {
 	const token = req.headers.authorization?.split(' ')[1]; // Bearer <token>
 
 	if (!token) {
-		req.user = null;
-		return next();
+		return res.status(401).json({ message: 'Токен отсутствует' });
 	}
 
 	try {
@@ -14,7 +13,6 @@ module.exports = function (req, res, next) {
 		req.user = decoded;
 		next();
 	} catch (error) {
-		req.user = null;
-		next();
+		return res.status(401).json({ message: 'Неверный или истёкший токен' });
 	}
 };

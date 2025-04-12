@@ -1,5 +1,6 @@
 .account-page {
 	display: flex;
+	gap: 20px;
 	width: 1000px;
 	padding: 0 24px;
 	margin: 0 auto;
@@ -30,7 +31,15 @@
 }
 
 .account-option-btn {
+	width: 100%;
 	cursor: pointer;
+	padding: 8px;
+}
+
+.account-option-btn--active {
+	border-bottom: 2px solid #007bff;
+	color: #007bff;
+	padding-top: -1px;
 }
 
 .account-content {

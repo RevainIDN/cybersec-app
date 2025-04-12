@@ -1,0 +1,113 @@
+.activities {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.activities-options {
+	display: flex;
+	justify-content: space-between;
+}
+
+.activities-filters {
+	display: flex;
+}
+
+.activities-filter-time,
+.activities-filter-type-button {
+	width: 200px;
+	height: 50px;
+	color: #FAFAFADE;
+	background-color: transparent;
+	border-bottom: 2px #021a71 solid;
+	cursor: pointer;
+}
+
+.activities-filter-time:hover,
+.activities-filter-type-button:hover {
+	color: #c1c1ffde;
+	border-bottom: 2px #0034EE solid;
+}
+
+.activities-filter-type {
+	position: relative;
+}
+
+.activities-filter-type-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: #001048;
+	border: 1px solid #00145c;
+	border-radius: 4px;
+	list-style: none;
+	padding: 5px 0;
+	margin: 5px 0 0;
+	width: 100%;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+}
+
+.activities-clear {
+	width: 100px;
+	height: 50px;
+	color: #FAFAFADE;
+	background-color: transparent;
+	border-bottom: 2px #021a71 solid;
+	cursor: pointer;
+}
+
+.activities-clear:hover {
+	color: #c1c1ffde;
+	border-bottom: 2px #0034EE solid;
+}
+
+.activities-filter-type-item {
+	padding: 8px 12px;
+	cursor: pointer;
+}
+
+.activities-filter-type-item:hover {
+	background-color: #020f3c;
+}
+
+.activities-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: 350px;
+	padding-right: 5px;
+	overflow: auto;
+}
+
+.activity-item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
+	padding: 10px;
+	border-radius: 12px;
+}
+
+.activity-item--clear {
+	background: linear-gradient(to bottom right, #001048 35%, #1a8d31 125%);
+}
+
+.activity-item--suspicious {
+	background: linear-gradient(to bottom right, #001048 35%, #ba1428 125%);
+}
+
+.activity-item-info {
+	display: flex;
+	gap: 20px;
+	font-size: 0.75rem;
+	border-bottom: 1px solid #021a71;
+	padding-bottom: 6px;
+	margin-bottom: 6px;
+}
+
+.activity-item-result {
+	display: flex;
+	gap: 6px;
+	flex-direction: column;
+}

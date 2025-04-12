@@ -1,5 +1,6 @@
 const { fetchPwnedPasswords } = require('../../services/leakCheck/pwnedPasswordsService');
 const UserActivity = require('../../models/UserActivity');
+const maskPassword = require('../../utils/maskPassword');
 
 const getPwnedPasswordsReport = async (req, res) => {
 	const { password } = req.query;
@@ -16,10 +17,11 @@ const getPwnedPasswordsReport = async (req, res) => {
 		const result = pwnedReport.found ? 'Слито' : 'Безопасно';
 
 		if (userId) {
+			const maskedPassword = maskPassword(password);
 			const activity = new UserActivity({
 				userId,
 				type: 'password_leak_check',
-				input: 'Пароль проверен',
+				input: maskedPassword,
 				result,
 			});
 			await activity.save();
