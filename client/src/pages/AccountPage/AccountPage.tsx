@@ -3,24 +3,26 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Activities from '../../components/UserAreaComponents/Activities/Activities';
+import AutoCheck from '../../components/UserAreaComponents/AutoCheck/AutoCheck';
 import Logout from '../../components/UserAreaComponents/Logout/Logout';
 
 const accountNavOptions = [
-	{ key: "1", name: "Активность", label: "activities" },
-	{ key: "2", name: "Авто проверка", label: "auto-check" },
-	{ key: "3", name: "Менеджер паролей", label: "password-manager" },
-	{ key: "4", name: "Настройки", label: "settings" },
-	{ key: "5", name: "Выйти", label: "logout" },
+	{ key: "1", name: "activity", label: "activities" },
+	{ key: "2", name: "autoCheck", label: "auto-check" },
+	{ key: "3", name: "passwordManager", label: "password-manager" },
+	{ key: "4", name: "settings", label: "settings" },
+	{ key: "5", name: "logout", label: "logout" },
 ];
 
-// Компоненты-заглушки (замени их на реальные позже)
-const AutoCheck = () => <h2>Авто проверка (в разработке)</h2>;
+// Компоненты-заглушки
 const PasswordManager = () => <h2>Менеджер паролей (в разработке)</h2>;
 const Settings = () => <h2>Настройки (в разработке)</h2>;
 
 export default function AccountPage() {
+	const { t } = useTranslation();
 	const token = useSelector((state: RootState) => state.auth.token);
 	const [selectedOption, setSelectedOption] = useState<string>('activities');
 	const [username, setUsername] = useState<string>('Some user');
@@ -73,7 +75,7 @@ export default function AccountPage() {
 								className={`account-option-btn ${selectedOption === option.label ? 'account-option-btn--active' : ''}`}
 								onClick={() => setSelectedOption(option.label)}
 							>
-								{option.name}
+								{t(`accountPage.tabs.${option.name}`)}
 							</li>
 						))}
 					</ul>

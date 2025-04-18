@@ -115,9 +115,9 @@ export default function Activities() {
 					filteredAndSortedActivities.map((activity) => (
 						<motion.li
 							key={activity._id}
-							className={`activity-item ${activity.result === 'Слито' || activity.result === 'Подозрительный'
-								? 'activity-item--suspicious'
-								: 'activity-item--clear'}`}
+							className={`activity-item ${activity.result === 'leaked' || activity.result === 'suspicious'
+								? 'bg-item--suspicious'
+								: 'bg-item--clear'}`}
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3 }}

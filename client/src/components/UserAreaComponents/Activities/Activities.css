@@ -89,14 +89,6 @@
 	border-radius: 12px;
 }
 
-.activity-item--clear {
-	background: linear-gradient(to bottom right, #001048 35%, #1a8d31 125%);
-}
-
-.activity-item--suspicious {
-	background: linear-gradient(to bottom right, #001048 35%, #ba1428 125%);
-}
-
 .activity-item-info {
 	display: flex;
 	gap: 20px;
