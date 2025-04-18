@@ -143,3 +143,55 @@ input:focus {
 	font-weight: 200;
 	margin-bottom: 20px;
 }
+
+/* Задний фон проверок в профиле пользователя */
+
+.bg-item--clear {
+	background: linear-gradient(to bottom right, #001048 35%, #1a8d31 125%) !important;
+}
+
+.bg-item--suspicious {
+	background: linear-gradient(to bottom right, #001048 35%, #ba1428 125%) !important;
+}
+
+/* Кастомная радио кнопка */
+
+.radio {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	z-index: -10;
+}
+
+.custom-radio {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	background-color: transparent;
+	border-radius: 4px;
+	border: 2px #0034EE solid;
+	margin-right: 6px;
+}
+
+.custom-radio::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-color: #0034EE;
+	border-radius: 2px;
+	-webkit-transform: translate(-50%, -50%) scale(0);
+	transform: translate(-50%, -50%) scale(0);
+	-webkit-transition: 1 ease-in;
+	transition: 0.1s ease-in;
+}
+
+.radio:checked+.custom-radio::before {
+	-webkit-transform: translate(-50%, -50%) scale(1);
+	transform: translate(-50%, -50%) scale(1);
+}
