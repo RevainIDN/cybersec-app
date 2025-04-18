@@ -6,7 +6,7 @@ const router = express.Router();
 const fs = require('fs');
 const { VT_API_KEY } = require('../../config/config');
 const { getVirusTotalFileReport, getVirusTotalIpReport, getVirusTotalDomainReport, getVirusTotalUrlReport } = require('../../controllers/virusTotal/virusTotalController');
-const authMiddleware = require('../../middlewares/authorization/authMiddleware')
+const authMiddleware = require('../../middlewares/authorization/authMiddleware');
 
 const upload = multer({ dest: 'uploads/' });
 

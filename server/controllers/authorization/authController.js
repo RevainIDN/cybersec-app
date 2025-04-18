@@ -1,10 +1,20 @@
+const mongoose = require('mongoose');
 const User = require('../../models/User');
 const UserActivity = require('../../models/UserActivity');
+const AutoCheck = require('../../models/AutoCheck');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
 const { SECRET_AUTH_KEY } = require('../../config/config');
+
+const { getLeakCheckReportInternal } = require('../../controllers/leakCheck/leakCheckController');
+const { getPwnedPasswordsReportInternal } = require('../../controllers/leakCheck/pwnedPasswordsController');
+const {
+	getVirusTotalIpReportInternal,
+	getVirusTotalUrlReportInternal,
+	getVirusTotalDomainReportInternal,
+} = require('../../controllers/virusTotal/virusTotalController');
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -72,24 +82,38 @@ class authController {
 
 	async getUser(req, res) {
 		try {
-			const userId = req.user.userId;
-			const user = await User.findById(userId).select('username');
+			const userId = req.user?.userId;
+			console.log('getUser: userId из req.user:', userId);
+			if (!userId) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			if (!mongoose.isValidObjectId(userId)) {
+				console.error('getUser: Неверный формат userId:', userId);
+				return res.status(400).json({ message: 'Неверный формат идентификатора пользователя' });
+			}
+			const user = await User.findById(userId);
 			if (!user) {
+				console.error('getUser: Пользователь не найден:', userId);
 				return res.status(404).json({ message: 'Пользователь не найден' });
 			}
-			return res.json(user);
+			return res.json({ username: user.username });
 		} catch (error) {
-			return res.status(500).json({ message: 'Ошибка при получении данных пользователя', error: error.message });
+			console.error('getUser: Ошибка сервера:', error.message);
+			return res.status(500).json({ message: 'Ошибка сервера' });
 		}
 	}
 
 	async getUserActivity(req, res) {
 		try {
-			const userId = req.user.userId;
-			const activities = await UserActivity.find({ userId }).sort({ createdAt: -1 });
+			const userId = req.user?.userId;
+			if (!userId) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const activities = await UserActivity.find({ userId });
 			return res.json(activities);
 		} catch (error) {
-			return res.status(500).json({ message: 'Ошибка при получении активности', error: error.message });
+			console.error('Ошибка при получении активностей:', error.message);
+			return res.status(500).json({ message: 'Ошибка сервера' });
 		}
 	}
 
@@ -101,6 +125,156 @@ class authController {
 		} catch (error) {
 			console.error('Ошибка при удалении активностей:', error);
 			return res.status(500).json({ message: 'Ошибка сервера при удалении активностей' });
+		}
+	}
+
+	async createAutoCheck(req, res) {
+		try {
+			if (!req.user) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const { type, subType, input, checkOnLogin } = req.body;
+			const userId = req.user.userId;
+
+			if (!type || !subType || !input) {
+				return res.status(400).json({ message: 'Все поля обязательны' });
+			}
+			if (!['analysis', 'leak'].includes(type)) {
+				return res.status(400).json({ message: 'Неверный тип проверки' });
+			}
+			if (!['ip', 'url', 'domain', 'file', 'email', 'password'].includes(subType)) {
+				return res.status(400).json({ message: 'Неверный подтип проверки' });
+			}
+
+			const autoCheck = new AutoCheck({ userId, type, subType, input, checkOnLogin });
+			await autoCheck.save();
+			return res.status(201).json({ message: 'Автопроверка создана', autoCheck });
+		} catch (error) {
+			console.error('Ошибка при создании автопроверки:', error);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+		}
+	}
+
+	async getAutoChecks(req, res) {
+		try {
+			if (!req.user) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const userId = req.user.userId;
+			const autoChecks = await AutoCheck.find({ userId });
+			return res.json(autoChecks);
+		} catch (error) {
+			console.error('Ошибка при получении автопроверок:', error);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+		}
+	}
+
+	async runAutoChecks(req, res) {
+		try {
+			if (!req.user) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const userId = req.user.userId;
+			const autoChecks = await AutoCheck.find({ userId, checkOnLogin: true });
+			const results = await Promise.all(
+				autoChecks.map(async (check) => {
+					let result;
+					try {
+						if (check.type === 'leak' && check.subType === 'email') {
+							const leakReport = await getLeakCheckReportInternal(check.input, true);
+							result = leakReport.success && leakReport.found > 0 ? 'leaked' : 'safe';
+						} else if (check.type === 'leak' && check.subType === 'password') {
+							const pwnedReport = await getPwnedPasswordsReportInternal(check.input, true);
+							result = pwnedReport.found ? 'leaked' : 'safe';
+						} else if (check.type === 'analysis' && check.subType === 'ip') {
+							const ipReport = await getVirusTotalIpReportInternal(check.input, userId, true);
+							result = ipReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+						} else if (check.type === 'analysis' && check.subType === 'url') {
+							const urlReport = await getVirusTotalUrlReportInternal(check.input, userId, true);
+							result = urlReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+						} else if (check.type === 'analysis' && check.subType === 'domain') {
+							const domainReport = await getVirusTotalDomainReportInternal(check.input, userId, true);
+							result = domainReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+						} else {
+							result = 'notImplemented';
+						}
+					} catch (error) {
+						console.error(`Ошибка проверки ${check.subType}:`, error);
+						result = 'error';
+					}
+					check.lastResult = result;
+					check.lastChecked = new Date();
+					await check.save();
+					return check;
+				})
+			);
+			return res.json(results);
+		} catch (error) {
+			console.error('Ошибка при выполнении автопроверок:', error);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+		}
+	}
+
+	async runSingleAutoCheck(req, res) {
+		try {
+			if (!req.user) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const { id } = req.params;
+			const userId = req.user.userId;
+			const check = await AutoCheck.findOne({ _id: id, userId });
+			if (!check) {
+				return res.status(404).json({ message: 'Автопроверка не найдена' });
+			}
+			let result;
+			try {
+				if (check.type === 'leak' && check.subType === 'email') {
+					const leakReport = await getLeakCheckReportInternal(check.input, true);
+					result = leakReport.success && leakReport.found > 0 ? 'leaked' : 'safe';
+				} else if (check.type === 'leak' && check.subType === 'password') {
+					const pwnedReport = await getPwnedPasswordsReportInternal(check.input, true);
+					result = pwnedReport.found ? 'leaked' : 'safe';
+				} else if (check.type === 'analysis' && check.subType === 'ip') {
+					const ipReport = await getVirusTotalIpReportInternal(check.input, userId, true);
+					result = ipReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+				} else if (check.type === 'analysis' && check.subType === 'url') {
+					const urlReport = await getVirusTotalUrlReportInternal(check.input, userId, true);
+					result = urlReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+				} else if (check.type === 'analysis' && check.subType === 'domain') {
+					const domainReport = await getVirusTotalDomainReportInternal(check.input, userId, true);
+					result = domainReport.data.attributes.last_analysis_stats.malicious > 0 ? 'suspicious' : 'clean';
+				} else {
+					result = 'notImplemented';
+				}
+			} catch (error) {
+				console.error(`Ошибка проверки ${check.subType}:`, error);
+				result = 'error';
+			}
+			check.lastResult = result;
+			check.lastChecked = new Date();
+			await check.save();
+			return res.json(check);
+		} catch (error) {
+			console.error('Ошибка при выполнении проверки:', error);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+		}
+	}
+
+	async deleteAutoCheck(req, res) {
+		try {
+			if (!req.user) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			const { id } = req.params;
+			const userId = req.user.userId;
+			const check = await AutoCheck.findOneAndDelete({ _id: id, userId });
+			if (!check) {
+				return res.status(404).json({ message: 'Автопроверка не найдена' });
+			}
+			return res.status(200).json({ message: 'Автопроверка удалена' });
+		} catch (error) {
+			console.error('Ошибка при удалении автопроверки:', error);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
 		}
 	}
 }

@@ -3,22 +3,19 @@ const { fetchVirusTotalFileReport } = require('../../services/virusTotal/virusTo
 const UserActivity = require('../../models/UserActivity');
 const { VT_API_KEY } = require('../../config/config');
 
-const getVirusTotalFileReport = async (req, res) => {
-    const { fileId } = req.params;
-    const userId = req.user?.userId;
-
+const getVirusTotalFileReport = async (fileId, userId, isAutoCheck = false) => {
     console.log('Получен fileId:', fileId);
 
     try {
         const fileReport = await fetchVirusTotalFileReport(fileId);
         if (!fileReport) {
-            return res.status(404).json({ message: 'Файл не найден или анализ не завершён.' });
+            throw new Error('Файл не найден или анализ не завершён.');
         }
 
         const analysisStats = fileReport.data.attributes.last_analysis_stats;
-        const result = analysisStats.malicious > 0 ? 'Подозрительный' : 'Чисто';
+        const result = analysisStats.malicious > 0 ? 'suspicious' : 'clean';
 
-        if (userId) {
+        if (userId && !isAutoCheck) {
             const activity = new UserActivity({
                 userId,
                 type: 'file_analysis',
@@ -28,17 +25,14 @@ const getVirusTotalFileReport = async (req, res) => {
             await activity.save();
         }
 
-        return res.status(200).json(fileReport);
+        return fileReport;
     } catch (error) {
         console.error('Ошибка при обработке запроса:', error);
-        return res.status(500).json({ message: 'Ошибка сервера при запросе к VirusTotal.' });
+        throw error;
     }
 };
 
-const getVirusTotalIpReport = async (req, res) => {
-    const { ip } = req.params;
-    const userId = req.user?.userId;
-
+const getVirusTotalIpReport = async (ip, userId, isAutoCheck = false) => {
     console.log('Получен IP:', ip);
 
     try {
@@ -47,9 +41,9 @@ const getVirusTotalIpReport = async (req, res) => {
         });
         const ipReport = response.data;
         const analysisStats = ipReport.data.attributes.last_analysis_stats;
-        const result = analysisStats.malicious > 0 ? 'Подозрительный' : 'Чисто';
+        const result = analysisStats.malicious > 0 ? 'suspicious' : 'clean';
 
-        if (userId) {
+        if (userId && !isAutoCheck) {
             const activity = new UserActivity({
                 userId,
                 type: 'ip_analysis',
@@ -59,17 +53,14 @@ const getVirusTotalIpReport = async (req, res) => {
             await activity.save();
         }
 
-        return res.status(200).json(ipReport);
+        return ipReport;
     } catch (error) {
         console.error('Ошибка при запросе IP:', error);
-        return res.status(500).json({ message: 'Ошибка сервера при запросе IP к VirusTotal.' });
+        throw error;
     }
 };
 
-const getVirusTotalDomainReport = async (req, res) => {
-    const { domain } = req.params;
-    const userId = req.user?.userId;
-
+const getVirusTotalDomainReport = async (domain, userId, isAutoCheck = false) => {
     console.log('Получен домен:', domain);
 
     try {
@@ -78,9 +69,9 @@ const getVirusTotalDomainReport = async (req, res) => {
         });
         const domainReport = response.data;
         const analysisStats = domainReport.data.attributes.last_analysis_stats;
-        const result = analysisStats.malicious > 0 ? 'Подозрительный' : 'Чисто';
+        const result = analysisStats.malicious > 0 ? 'suspicious' : 'clean';
 
-        if (userId) {
+        if (userId && !isAutoCheck) {
             const activity = new UserActivity({
                 userId,
                 type: 'domain_analysis',
@@ -90,25 +81,21 @@ const getVirusTotalDomainReport = async (req, res) => {
             await activity.save();
         }
 
-        return res.status(200).json(domainReport);
+        return domainReport;
     } catch (error) {
         console.error('Ошибка при запросе домена:', error);
-        return res.status(500).json({ message: 'Ошибка сервера при запросе домена к VirusTotal.' });
+        throw error;
     }
 };
 
-const getVirusTotalUrlReport = async (req, res) => {
-    const { url } = req.body; // Используем тело запроса для URL
-    const userId = req.user?.userId;
-
+const getVirusTotalUrlReport = async (url, userId, isAutoCheck = false) => {
     console.log('Получен URL:', url);
 
     if (!url) {
-        return res.status(400).json({ message: 'Не указан URL для анализа.' });
+        throw new Error('Не указан URL для анализа.');
     }
 
     try {
-        // Шаг 1: Отправляем URL на анализ
         const scanResponse = await axios.post(
             'https://www.virustotal.com/api/v3/urls',
             new URLSearchParams({ url }).toString(),
@@ -121,15 +108,13 @@ const getVirusTotalUrlReport = async (req, res) => {
         );
         const analysisId = scanResponse.data.data.id;
 
-        // Шаг 2: Получаем отчёт
-        const analysisResponse = await axios.get(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
+        let analysisResponse = await axios.get(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
             headers: { 'x-apikey': VT_API_KEY },
         });
 
-        // Ждём завершения анализа (примитивный polling)
         let urlReport = analysisResponse.data;
         if (urlReport.data.attributes.status !== 'completed') {
-            await new Promise(resolve => setTimeout(resolve, 5000)); // Ждём 5 секунд
+            await new Promise(resolve => setTimeout(resolve, 5000));
             const retryResponse = await axios.get(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
                 headers: { 'x-apikey': VT_API_KEY },
             });
@@ -138,7 +123,7 @@ const getVirusTotalUrlReport = async (req, res) => {
 
         const urlId = urlReport.meta?.url_info?.id;
         if (!urlId) {
-            return res.status(500).json({ message: 'Не удалось получить ID URL для отчёта.' });
+            throw new Error('Не удалось получить ID URL для отчёта.');
         }
 
         const finalResponse = await axios.get(`https://www.virustotal.com/api/v3/urls/${urlId}`, {
@@ -146,9 +131,9 @@ const getVirusTotalUrlReport = async (req, res) => {
         });
         const finalReport = finalResponse.data;
         const analysisStats = finalReport.data.attributes.last_analysis_stats;
-        const result = analysisStats.malicious > 0 ? 'Подозрительный' : 'Чисто';
+        const result = analysisStats.malicious > 0 ? 'suspicious' : 'clean';
 
-        if (userId) {
+        if (userId && !isAutoCheck) {
             const activity = new UserActivity({
                 userId,
                 type: 'url_analysis',
@@ -158,11 +143,57 @@ const getVirusTotalUrlReport = async (req, res) => {
             await activity.save();
         }
 
-        return res.status(200).json(finalReport);
+        return finalReport;
     } catch (error) {
         console.error('Ошибка при запросе URL:', error);
-        return res.status(500).json({ message: 'Ошибка сервера при запросе URL к VirusTotal.' });
+        throw error;
     }
 };
 
-module.exports = { getVirusTotalFileReport, getVirusTotalIpReport, getVirusTotalDomainReport, getVirusTotalUrlReport };
+// HTTP-обработчики для маршрутов
+const getVirusTotalFileReportHandler = async (req, res) => {
+    try {
+        const fileReport = await getVirusTotalFileReport(req.params.fileId, req.user?.userId);
+        return res.status(200).json(fileReport);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+const getVirusTotalIpReportHandler = async (req, res) => {
+    try {
+        const ipReport = await getVirusTotalIpReport(req.params.ip, req.user?.userId);
+        return res.status(200).json(ipReport);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+const getVirusTotalDomainReportHandler = async (req, res) => {
+    try {
+        const domainReport = await getVirusTotalDomainReport(req.params.domain, req.user?.userId);
+        return res.status(200).json(domainReport);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+const getVirusTotalUrlReportHandler = async (req, res) => {
+    try {
+        const urlReport = await getVirusTotalUrlReport(req.body.url, req.user?.userId);
+        return res.status(200).json(urlReport);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = {
+    getVirusTotalFileReport: getVirusTotalFileReportHandler,
+    getVirusTotalIpReport: getVirusTotalIpReportHandler,
+    getVirusTotalDomainReport: getVirusTotalDomainReportHandler,
+    getVirusTotalUrlReport: getVirusTotalUrlReportHandler,
+    getVirusTotalFileReportInternal: getVirusTotalFileReport,
+    getVirusTotalIpReportInternal: getVirusTotalIpReport,
+    getVirusTotalDomainReportInternal: getVirusTotalDomainReport,
+    getVirusTotalUrlReportInternal: getVirusTotalUrlReport,
+};
