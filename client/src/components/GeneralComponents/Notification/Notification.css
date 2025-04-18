@@ -1,0 +1,39 @@
+.notification {
+	position: fixed;
+	top: 80px;
+	right: 20px;
+	background-color: #021a71;
+	color: #FAFAFADE;
+	font-size: 0.9rem;
+	padding: 15px 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	animation: slideIn 0.3s ease-out, slideOut 0.3s ease-in 4.7s forwards;
+	max-width: 300px;
+	word-wrap: break-word;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOut {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+}
