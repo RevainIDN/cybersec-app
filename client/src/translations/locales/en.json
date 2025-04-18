@@ -469,6 +469,13 @@
 		"personalReports": {}
 	},
 	"accountPage": {
+		"tabs": {
+			"activity": "Activity",
+			"autoCheck": "Auto-check",
+			"passwordManager": "Password Manager",
+			"settings": "Settings",
+			"logout": "Logout"
+		},
 		"activity": {
 			"null": "All types",
 			"email_leak_check": "Leaked emails",
@@ -487,10 +494,82 @@
 			"result": "Result:",
 			"noActivities": "No activities to display",
 			"results": {
-				"Чисто": "Clear",
-				"Подозрительный": "Suspicious",
-				"Безопасно": "Safe",
-				"Слито": "Leaked"
+				"clean": "Clear",
+				"suspicious": "Suspicious",
+				"safe": "Safe",
+				"leaked": "Leaked"
+			}
+		},
+		"autoCheck": {
+			"tabButton1": "Create",
+			"tabButton2": "View All",
+			"title1": "Select the type of check:",
+			"title2": "Select the object of check:",
+			"title3": "Enter the data for check:",
+			"create": "Create",
+			"viewAll": "View all",
+			"analysis": "Analysis",
+			"leak": "Check for leaks",
+			"selectType": "Check type",
+			"enterData": "Enter data",
+			"checkOnLogin": "Check on login",
+			"noChecks": "No autochecks",
+			"type": "Type",
+			"subType": "Subtype",
+			"input": "Data",
+			"result": "Result",
+			"lastChecked": "Last check",
+			"runNow": "Check now",
+			"delete": "Delete",
+			"notChecked": "Not checked",
+			"remainingChecks": "Remaining number of auto-checks: ",
+			"subTypes": {
+				"ip": "IP",
+				"url": "URL",
+				"domain": "Domain",
+				"file": "File",
+				"email": "Email",
+				"password": "Password"
+			},
+			"placeholders": {
+				"ip": "Enter IP (e.g. 192.168.1.1)",
+				"url": "Enter URL (e.g. https://example.com)",
+				"domain": "Enter domain (e.g. example.com)",
+				"file": "Enter file path",
+				"email": "Enter email (e.g. user@example.com)",
+				"password": "Enter password"
+			},
+			"results": {
+				"clean": "Clear",
+				"safe": "Safe",
+				"leaked": "Leaked",
+				"suspicious": "Suspicious",
+				"error": "Processing error",
+				"notImplemented": "Not implemented"
+			},
+			"errors": {
+				"fillFields": "Fill in all fields",
+				"createFailed": "Failed to create autocheck",
+				"deleteFailed": "Failed to delete autocheck",
+				"fetchFailed": "Failed to load autochecks",
+				"runFailed": "Failed to run check",
+				"selectSubType": "Select check object",
+				"invalidIp": "Invalid IP address",
+				"invalidUrl": "Invalid URL",
+				"urlTooLong": "URL is too long (max 2048 characters)",
+				"invalidDomain": "Invalid domain",
+				"domainTooLong": "Domain is too long (max 255 characters)",
+				"invalidEmail": "Invalid email",
+				"emailTooLong": "Email is too long (max 254 characters)",
+				"passwordTooShort": "Password is too short (min. 6 characters)",
+				"passwordTooLong": "Password is too long (max. 128 characters)",
+				"invalidSubType": "Invalid check type",
+				"maxLimitReached": "Limit of autochecks reached (5)"
+			},
+			"success": {
+				"created": "Autocheck successfully created",
+				"deleted": "Autocheck deleted",
+				"run": "Check completed"
 			}
 		}
 	}
