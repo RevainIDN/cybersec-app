@@ -71,6 +71,31 @@ class authController {
 		}
 	}
 
+	async verifyPassword(req, res) {
+		try {
+			const userId = req.user?.userId;
+			const { password } = req.body;
+			if (!userId) {
+				return res.status(401).json({ message: 'Пользователь не авторизован' });
+			}
+			if (!password) {
+				return res.status(400).json({ message: 'Пароль не указан' });
+			}
+			const user = await User.findById(userId);
+			if (!user) {
+				return res.status(404).json({ message: 'Пользователь не найден' });
+			}
+			const isValidPassword = await bcrypt.compare(password, user.password);
+			if (!isValidPassword) {
+				return res.status(400).json({ message: 'Неверный пароль' });
+			}
+			return res.status(200).json({ message: 'Пароль верный' });
+		} catch (error) {
+			console.error('Ошибка при проверке пароля:', error.message);
+			return res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+		}
+	}
+
 	async getUsers(req, res) {
 		try {
 			const users = await User.find().select('-password');

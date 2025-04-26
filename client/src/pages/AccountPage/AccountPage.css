@@ -42,6 +42,32 @@
 	padding-top: -1px;
 }
 
+.account-option-logout {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.account-option-logout div {
+	width: 100%;
+	display: flex;
+}
+
+.account-option-logout div button {
+	width: 50%;
+	background-color: transparent;
+	color: #FAFAFADE;
+}
+
+.account-option-logout div button:hover {
+	background-color: #007bff;
+	border-radius: 2px;
+}
+
+.account-option-logout--active {
+	background-color: #0b54a269;
+}
+
 .account-content {
 	width: 80%;
 }

@@ -17,4 +17,6 @@ router.post('/autochecks/run', authMiddleware, authController.runAutoChecks);
 router.post('/autochecks/run/:id', authMiddleware, authController.runSingleAutoCheck);
 router.delete('/autocheck/:id', authMiddleware, authController.deleteAutoCheck);
 
+router.post('/verify-password', authMiddleware, authController.verifyPassword);
+
 module.exports = router;
