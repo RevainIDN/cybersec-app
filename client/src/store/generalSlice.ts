@@ -5,11 +5,13 @@ const location = window.location.pathname;
 interface GeneralState {
 	copiedPasswordIndex: number | null,
 	currentLink: string,
+	notification: Record<string, string> | null
 }
 
 const initialState: GeneralState = {
 	copiedPasswordIndex: null,
 	currentLink: location,
+	notification: null,
 }
 
 const generalSlice = createSlice({
@@ -22,8 +24,11 @@ const generalSlice = createSlice({
 		setCurrentLink: (state, action: PayloadAction<string>) => {
 			state.currentLink = action.payload;
 		},
+		showNotification: (state, action: PayloadAction<Record<string, string> | null>) => {
+			state.notification = action.payload;
+		}
 	}
 })
 
-export const { setCopiedPasswordIndex, setCurrentLink } = generalSlice.actions;
+export const { setCopiedPasswordIndex, setCurrentLink, showNotification } = generalSlice.actions;
 export default generalSlice.reducer;
