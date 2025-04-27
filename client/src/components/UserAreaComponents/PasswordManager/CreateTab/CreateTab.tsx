@@ -42,10 +42,10 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 
 	// Сохранение пароля
 	const handleSave = async () => {
-		if (!login || !password) {
+		if (!login || !password || !site) {
 			dispatch(
 				showNotification({
-					message: t('accountPage.passwordManager.fillRequiredFields'),
+					message: t('accountPage.passwordManager.fillAllFields'),
 					type: 'error',
 				})
 			);

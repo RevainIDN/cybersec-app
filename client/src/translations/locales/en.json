@@ -474,7 +474,9 @@
 			"autoCheck": "Auto-check",
 			"passwordManager": "Password Manager",
 			"settings": "Settings",
-			"logout": "Logout"
+			"logout": "Logout",
+			"logoutYes": "Yes",
+			"logoutNo": "No"
 		},
 		"activity": {
 			"null": "All types",
@@ -571,6 +573,48 @@
 				"deleted": "Autocheck deleted",
 				"run": "Check completed"
 			}
+		},
+		"passwordManager": {
+			"tabButton1": "Add password",
+			"tabButton2": "All passwords",
+			"strength": "Strength: ",
+			"strenghtLevel": {
+				"weak": "Weak",
+				"medium": "Medium",
+				"strong": "Strong"
+			},
+			"createTab": {
+				"siteTitle": "Enter site URL:",
+				"loginTitle": "Enter login:",
+				"passwordTitle": "Enter password:",
+				"sitePlaceholder": "For example, example.com",
+				"loginPlaceholder": "For example, user@example.com",
+				"passwordPlaceholder": "Enter password",
+				"generate": "Generate",
+				"save": "Save"
+			},
+			"allTab": {
+				"searchPlaceholder": "Search by site or login",
+				"copy": "Copy",
+				"delete": "Delete",
+				"date": "Date:",
+				"site": "Site: ",
+				"login": "Logins: ",
+				"password": "Password: "
+			},
+			"fillAllFields": "Fill in all fields",
+			"invalidPassword": "Invalid password",
+			"passwordSaved": "Password saved",
+			"passwordCopied": "Password copied",
+			"passwordDeleted": "Password deleted",
+			"errorFetch": "Error loading passwords",
+			"errorSave": "Error saving password",
+			"errorCopy": "Error copying password",
+			"errorDelete": "Error deleting password",
+			"errorDecrypt": "Error decrypting password",
+			"enterPassword": "Enter password",
+			"enterPasswordPlaceholder": "Your login password",
+			"enterPasswordPrompt": "Enter your login password"
 		}
 	}
 }

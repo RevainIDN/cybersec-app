@@ -474,7 +474,9 @@
 			"autoCheck": "Авто-перевірка",
 			"passwordManager": "Менеджер паролів",
 			"settings": "Налаштування",
-			"logout": "Вийти"
+			"logout": "Вийти",
+			"logoutYes": "Так",
+			"logoutNo": "Ні"
 		},
 		"activity": {
 			"null": "Всі типи",
@@ -571,6 +573,48 @@
 				"deleted": "Автоперевірка видалена",
 				"run": "Перевірка виконана"
 			}
+		},
+		"passwordManager": {
+			"tabButton1": "Додати пароль",
+			"tabButton2": "Всі паролі",
+			"strength": "Надійність: ",
+			"strenghtLevel": {
+				"weak": "Слабкий",
+				"medium": "Середній",
+				"strong": "Сильний"
+			},
+			"createTab": {
+				"siteTitle": "Введіть URL сайту:",
+				"loginTitle": "Введіть логін:",
+				"passwordTitle": "Введіть пароль:",
+				"sitePlaceholder": "Наприклад, example.com",
+				"loginPlaceholder": "Наприклад, user@example.com",
+				"passwordPlaceholder": "Введіть пароль",
+				"generate": "Сгенерувати",
+				"save": "Зберегти"
+			},
+			"allTab": {
+				"searchPlaceholder": "Пошук сайту або логіну",
+				"copy": "Копіювати",
+				"delete": "Видалити",
+				"date": "Дата:",
+				"site": "Сайт: ",
+				"login": "Логи: ",
+				"password": "Пароль:"
+			},
+			"fillAllFields": "Заповніть всі поля",
+			"invalidPassword": "Неправильний пароль",
+			"passwordSaved": "Пароль збережений",
+			"passwordCopied": "Пароль скопійований",
+			"passwordDeleted": "Пароль вилучений",
+			"errorFetch": "Помилка завантаження паролів",
+			"errorSave": "Помилка збереження пароля",
+			"errorCopy": "Помилка копіювання пароля",
+			"errorDelete": "Помилка видалення пароля",
+			"errorDecrypt": "Помилка розшифрування пароля",
+			"enterPassword": "Введіть пароль",
+			"enterPasswordPlaceholder": "Ваш пароль авторизації",
+			"enterPasswordPrompt": "Введіть пароль авторизації"
 		}
 	}
 }

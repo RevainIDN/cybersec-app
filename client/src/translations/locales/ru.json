@@ -474,7 +474,9 @@
 			"autoCheck": "Авто-проверка",
 			"passwordManager": "Менеджер паролей",
 			"settings": "Настройки",
-			"logout": "Выйти"
+			"logout": "Выйти",
+			"logoutYes": "Да",
+			"logoutNo": "Нет"
 		},
 		"activity": {
 			"null": "Все типы",
@@ -571,6 +573,48 @@
 				"deleted": "Автопроверка удалена",
 				"run": "Проверка выполнена"
 			}
+		},
+		"passwordManager": {
+			"tabButton1": "Добавить пароль",
+			"tabButton2": "Все пароли",
+			"strength": "Надёжность: ",
+			"strenghtLevel": {
+				"weak": "Слабый",
+				"medium": "Средний",
+				"strong": "Сильный"
+			},
+			"createTab": {
+				"siteTitle": "Введите URL сайта:",
+				"loginTitle": "Введите логин:",
+				"passwordTitle": "Введите пароль:",
+				"sitePlaceholder": "Например, example.com",
+				"loginPlaceholder": "Например, user@example.com",
+				"passwordPlaceholder": "Введите пароль",
+				"generate": "Сгенерировать",
+				"save": "Сохранить"
+			},
+			"allTab": {
+				"searchPlaceholder": "Поиск по сайту или логину",
+				"copy": "Копировать",
+				"delete": "Удалить",
+				"date": "Дата:",
+				"site": "Сайт: ",
+				"login": "Логи: ",
+				"password": "Пароль: "
+			},
+			"fillAllFields": "Заполните все поля",
+			"invalidPassword": "Неверный пароль",
+			"passwordSaved": "Пароль сохранён",
+			"passwordCopied": "Пароль скопирован",
+			"passwordDeleted": "Пароль удалён",
+			"errorFetch": "Ошибка загрузки паролей",
+			"errorSave": "Ошибка сохранения пароля",
+			"errorCopy": "Ошибка копирования пароля",
+			"errorDelete": "Ошибка удаления пароля",
+			"errorDecrypt": "Ошибка расшифровки пароля",
+			"enterPassword": "Введите пароль",
+			"enterPasswordPlaceholder": "Ваш пароль авторизации",
+			"enterPasswordPrompt": "Введите ваш пароль авторизации"
 		}
 	}
 }
