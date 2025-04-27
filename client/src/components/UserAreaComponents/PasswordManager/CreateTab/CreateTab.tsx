@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../store';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { AES } from 'crypto-js'
 import { showNotification } from '../../../../store/generalSlice';
 import { Password } from '../../../../types/AccountTypes/passwordManagerTypes';
+import { usePasswordEncryption } from '../../../../hooks/usePasswordEncryption';
 import axios from 'axios';
 import zxcvbn from 'zxcvbn';
 import Notification from '../../../GeneralComponents/Notification/Notification';
@@ -23,6 +23,7 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 	const notification = useSelector((state: RootState) => state.general.notification)
 
 	const { t } = useTranslation();
+	const { encryptData } = usePasswordEncryption();
 	const [site, setSite] = useState<string>('');
 	const [login, setLogin] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -39,20 +40,15 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 		}
 	}, [password]);
 
-	// Сброс состояния оповищения
-	useEffect(() => {
-		if (notification) {
-			const timer = setTimeout(() => {
-				dispatch(showNotification(null))
-			}, 5000);
-			return () => clearTimeout(timer);
-		}
-	}, [notification]);
-
 	// Сохранение пароля
 	const handleSave = async () => {
 		if (!login || !password) {
-			dispatch(showNotification({ message: t('accountPage.passwordManager.fillRequiredFields'), type: 'error' }));
+			dispatch(
+				showNotification({
+					message: t('accountPage.passwordManager.fillRequiredFields'),
+					type: 'error',
+				})
+			);
 			return;
 		}
 
@@ -79,7 +75,12 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 			setPassword('');
 			setPasswordStrength('');
 			setRemaining(remaining - 1);
-			dispatch(showNotification({ message: t('accountPage.passwordManager.passwordSaved'), type: 'success' }));
+			dispatch(
+				showNotification({
+					message: t('accountPage.passwordManager.passwordSaved'),
+					type: 'success',
+				})
+			);
 		} catch (error: any) {
 			dispatch(
 				showNotification({
@@ -88,14 +89,6 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 				})
 			);
 		}
-	};
-
-	// Шифрование пароля
-	const encryptData = (data: string) => {
-		if (!token) {
-			return '';
-		}
-		return AES.encrypt(data, token).toString();
 	};
 
 	return (
@@ -152,7 +145,7 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 				{t('accountPage.passwordManager.createTab.save')}
 			</button>
 
-			{notification && <Notification message={notification.message} />}
+			{notification && <Notification message={notification.message} time={3000} />}
 		</motion.div>
 	)
 }

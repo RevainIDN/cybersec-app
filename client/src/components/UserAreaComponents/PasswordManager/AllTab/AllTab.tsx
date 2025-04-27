@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { showNotification } from '../../../../store/generalSlice';
 import { Password } from '../../../../types/AccountTypes/passwordManagerTypes';
-import { AES, enc } from 'crypto-js'
+import { usePasswordEncryption } from '../../../../hooks/usePasswordEncryption';
 import axios from 'axios';
 import Notification from '../../../GeneralComponents/Notification/Notification';
 
@@ -22,7 +22,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 	const dispatch = useDispatch<AppDispatch>();
 	const token = useSelector((state: RootState) => state.auth.token);
 	const notification = useSelector((state: RootState) => state.general.notification)
-
+	const { decryptData } = usePasswordEncryption();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 
@@ -38,12 +38,17 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 			const response = await axios.get('http://localhost:5000/api/passwords', {
 				headers: { Authorization: `Bearer ${token}` },
 			});
-			const decryptedPasswords = response.data.passwords.map((p: Password) => ({
-				...p,
-				site: decryptData(p.site),
-				login: decryptData(p.login),
-				encryptedPassword: p.encryptedPassword,
-			}));
+			const decryptedPasswords = response.data.passwords.map((p: Password) => {
+				const site = decryptData(p.site);
+				const login = decryptData(p.login);
+				console.log('Decrypted:', { site, login, encryptedPassword: p.encryptedPassword });
+				return {
+					...p,
+					site: site || '',
+					login: login || '',
+					encryptedPassword: p.encryptedPassword,
+				};
+			});
 			setPasswords(decryptedPasswords);
 			setRemaining(response.data.remaining);
 		} catch (error: any) {
@@ -56,26 +61,26 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 		}
 	};
 
-	// Расшифровка пароля
-	const decryptData = (data: string) => {
-		if (!token) return 'Ошибка расшифровки';
-		try {
-			return AES.decrypt(data, token).toString(enc.Utf8);
-		} catch (error) {
-			return 'Ошибка расшифровки';
-		}
-	};
-
 	// Копирование пароля
 	const handleCopy = async (encryptedPassword: string) => {
 		try {
 			const decryptedPassword = decryptData(encryptedPassword);
-			if (decryptedPassword === 'Ошибка расшифровки') {
-				dispatch(showNotification({ message: t('accountPage.passwordManager.errorDecrypt'), type: 'error' }));
+			if (!decryptedPassword) {
+				dispatch(
+					showNotification({
+						message: t('accountPage.passwordManager.errorDecrypt'),
+						type: 'error',
+					})
+				);
 				return;
 			}
 			await navigator.clipboard.writeText(decryptedPassword);
-			dispatch(showNotification({ message: t('accountPage.passwordManager.passwordCopied'), type: 'success' }));
+			dispatch(
+				showNotification({
+					message: t('accountPage.passwordManager.passwordCopied'),
+					type: 'success',
+				})
+			);
 		} catch (error: any) {
 			dispatch(
 				showNotification({
@@ -94,7 +99,12 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 			});
 			setPasswords(passwords.filter((p) => p._id !== id));
 			setRemaining(remaining + 1);
-			dispatch(showNotification({ message: t('accountPage.passwordManager.passwordDeleted'), type: 'success' }));
+			dispatch(
+				showNotification({
+					message: t('accountPage.passwordManager.passwordDeleted'),
+					type: 'success',
+				})
+			);
 		} catch (error: any) {
 			dispatch(
 				showNotification({
@@ -114,7 +124,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 					p.login.toLowerCase().includes(search.toLowerCase())
 			),
 		[passwords, search]
-	)
+	);
 
 	return (
 		<motion.div
@@ -190,7 +200,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 					</div>
 				))}
 			</div>
-			{notification && <Notification message={notification.message} />}
+			{notification && <Notification message={notification.message} time={3000} />}
 		</motion.div>
 	)
 }
