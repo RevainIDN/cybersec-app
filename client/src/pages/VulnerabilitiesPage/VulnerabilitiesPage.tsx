@@ -1,4 +1,6 @@
 import './VulnerabilitiesPage.css'
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import LeakChecker from '../../components/VulnerabilitiesComponents/LeakChecker/LeakChecker';
@@ -6,6 +8,11 @@ import ShortLinkDecoder from '../../components/VulnerabilitiesComponents/ShortLi
 
 export default function VulnerabilitiesPage() {
 	const { t } = useTranslation();
+
+	const { pathname } = useLocation();
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	return (
 		<div className='section'>

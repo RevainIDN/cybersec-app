@@ -1,4 +1,6 @@
 import './AnalysisPage.css'
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -8,6 +10,11 @@ import Loading from '../../components/GeneralComponents/Loading/Loading';
 
 export default function AnalysisPage() {
 	const { isLoading } = useSelector((state: RootState) => state.analysis);
+
+	const { pathname } = useLocation();
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	return (
 		<div className='section'>

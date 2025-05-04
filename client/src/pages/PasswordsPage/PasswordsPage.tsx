@@ -1,4 +1,6 @@
 import './PasswordsPage.css';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -15,6 +17,11 @@ export default function PasswordsPage() {
 		triggerOnce: true,
 		threshold: 0.1,
 	});
+
+	const { pathname } = useLocation();
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	return (
 		<div className='section'>

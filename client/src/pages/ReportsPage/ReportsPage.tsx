@@ -1,5 +1,6 @@
 import './ReportsPage.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import GlobalReports from '../../components/ReportsComponents/GlobalReports/GlobalReports';
@@ -9,6 +10,11 @@ export default function ReportsPage() {
 	const { t } = useTranslation();
 
 	const [selectedReport, setSelectedReport] = useState<'global' | 'personal'>('global');
+
+	const { pathname } = useLocation();
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	return (
 		<div className='section'>
