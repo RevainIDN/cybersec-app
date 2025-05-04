@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from '../../../store';
 import { Link } from 'react-router-dom';
 
 const navLinks = [
-	{ label: "navbar.home", path: "/", key: "" },
+	{ label: "navbar.home", path: "/", key: "home" },
 	{ label: "navbar.ip", path: "/analysis", key: "ip" },
 	{ label: "navbar.leaks", path: "/vulnerabilities", key: "leaks" },
 	{ label: "navbar.passwords", path: "/passwords", key: "passwords" },

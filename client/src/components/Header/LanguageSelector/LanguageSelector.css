@@ -4,6 +4,8 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	background-color: transparent;
+	color: #FAFAFADE;
 }
 
 .lang-list {
