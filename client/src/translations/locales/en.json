@@ -616,5 +616,9 @@
 			"enterPasswordPlaceholder": "Your login password",
 			"enterPasswordPrompt": "Enter your login password"
 		}
+	},
+	"assistant": {
+		"placeholder": "Enter a message...",
+		"title": "SecureNET Chatbot. Ask a question!"
 	}
 }

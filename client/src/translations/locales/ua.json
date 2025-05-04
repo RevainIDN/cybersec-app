@@ -616,5 +616,9 @@
 			"enterPasswordPlaceholder": "Ваш пароль авторизації",
 			"enterPasswordPrompt": "Введіть пароль авторизації"
 		}
+	},
+	"assistant": {
+		"placeholder": "Введіть повідомлення...",
+		"title": "SecureNET Чат-бот. Задайте питання!"
 	}
 }

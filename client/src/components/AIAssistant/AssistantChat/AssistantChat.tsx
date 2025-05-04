@@ -1,5 +1,6 @@
 import './AssistantChat.css'
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../../store'
 import { setIsOpenChatAssistant } from '../../../store/assistantSlice';
@@ -10,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LoadingDots from '../../GeneralComponents/LoadingDots/LoadingDots';
 
 export default function AssistantChat() {
+	const { t } = useTranslation();
 	const dispatch = useDispatch<AppDispatch>();
 	const isOpen = useSelector((state: RootState) => state.assistant.isOpenChatAssistant);
 	const [userMessage, setUserMessage] = useState<string>('');
@@ -95,7 +97,7 @@ export default function AssistantChat() {
 						onClick={handleClose}>
 						<img src="cross.svg" alt="close" />
 					</button>
-					<h1 className='assistant-chat-title'>SecureNET Чат-бот. Задайте вопрос!</h1>
+					<h1 className='assistant-chat-title'>{t('assistant.title')}</h1>
 					<ul className='assistant-chat-output'>
 						{allMessages.map((msg => (
 							<motion.li
@@ -127,7 +129,7 @@ export default function AssistantChat() {
 							value={userMessage}
 							onChange={(e) => setUserMessage(e.target.value)}
 							onKeyDown={handleKeyPress}
-							placeholder="Введите сообщение..."
+							placeholder={t('assistant.placeholder')}
 							rows={1}
 						/>
 						<button
