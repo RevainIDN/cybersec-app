@@ -6,11 +6,11 @@ import ThreatCaseSection from '../../components/Landing/LandingComponents/Threat
 
 export default function HomePage() {
 	return (
-		<>
+		<main>
 			<HeroSection />
 			<ServicesSection />
 			<ProtectionToolsSection />
 			<ThreatCaseSection />
-		</>
+		</main>
 	)
 }

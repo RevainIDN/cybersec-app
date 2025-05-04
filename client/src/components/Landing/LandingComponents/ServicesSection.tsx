@@ -52,7 +52,7 @@ export default function ServicesSection() {
 	const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
 	return (
-		<div className='services-cont section'>
+		<section className='services-cont section'>
 			<motion.div
 				ref={ref}
 				className='services-info'
@@ -79,8 +79,8 @@ export default function ServicesSection() {
 				animate={{ opacity: 1, scale: 1 }}
 				transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
 			>
-				<img className='services-img' src="landing_2.svg" alt="Landing Image" />
+				<img className='services-img' src="landing_2.svg" alt="Landing Image" loading='lazy' />
 			</motion.div>
-		</div>
+		</section>
 	);
 }
