@@ -12,11 +12,16 @@ import PasswordsPage from './pages/PasswordsPage/PasswordsPage'
 import ReportsPage from './pages/ReportsPage/ReportsPage'
 import AuthorizationPage from './pages/AuthorizationPage/AuthorizationPage'
 import AccountPage from './pages/AccountPage/AccountPage'
+import AssistantButton from './components/AIAssistant/AssistantButton/AssistantButton'
+import AssistantChat from './components/AIAssistant/AssistantChat/AssistantChat'
+import Overlay from './components/GeneralComponents/Overlay/Overlay'
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((state: RootState) => state.auth.token);
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const overlay = useSelector((state: RootState) => state.general.overlay);
+  const isOpenChatAssistant = useSelector((state: RootState) => state.assistant.isOpenChatAssistant);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token') || sessionStorage.getItem('token');
@@ -85,6 +90,10 @@ export default function App() {
             : <AuthorizationPage />}
         />
       </Routes>
+      {isOpenChatAssistant
+        ? <AssistantChat />
+        : <AssistantButton />}
+      {overlay && <Overlay />}
     </>
   )
 }

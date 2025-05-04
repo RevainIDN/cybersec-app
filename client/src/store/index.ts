@@ -3,6 +3,7 @@ import generalReducer from './generalSlice';
 import passwordsReducer from './passwordsSlice';
 import analysisReducer from './analysisSlice';
 import authReducer from './authSlice';
+import assistantReducer from './assistantSlice';
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
 		passwords: passwordsReducer,
 		analysis: analysisReducer,
 		auth: authReducer,
+		assistant: assistantReducer,
 	},
 });
 
