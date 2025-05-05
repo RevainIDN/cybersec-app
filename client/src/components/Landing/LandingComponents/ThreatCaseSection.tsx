@@ -18,9 +18,16 @@ export default function ThreatCaseSection() {
 			<div className='threat-info'>
 				<h1 className='threat-title title'>{t('homePage.threatCaseSection.title')}</h1>
 				<h2 className='threat-subtitle subtitle'>{t('homePage.threatCaseSection.subtitle')}</h2>
-				<p className='threat-case'><strong>{t('homePage.threatCaseSection.strongCase')}</strong>{t('homePage.threatCaseSection.case')}</p>
-				<p className='threat-solution'><strong>{t('homePage.threatCaseSection.strongSolution')}</strong>{t('homePage.threatCaseSection.solution')}</p>
-				<p className='threat-result'><strong>{t('homePage.threatCaseSection.strongResult')}</strong>{t('homePage.threatCaseSection.result')}</p>
+				<div className='threat-example'>
+					<p className='threat-case'><strong>{t('homePage.threatCaseSection.strongCase')}</strong>{t('homePage.threatCaseSection.case1')}</p>
+					<p className='threat-solution'><strong>{t('homePage.threatCaseSection.strongSolution')}</strong>{t('homePage.threatCaseSection.solution1')}</p>
+					<p className='threat-result'><strong>{t('homePage.threatCaseSection.strongResult')}</strong>{t('homePage.threatCaseSection.result1')}</p>
+				</div>
+				<div className='threat-example'>
+					<p className='threat-case'><strong>{t('homePage.threatCaseSection.strongCase')}</strong>{t('homePage.threatCaseSection.case2')}</p>
+					<p className='threat-solution'><strong>{t('homePage.threatCaseSection.strongSolution')}</strong>{t('homePage.threatCaseSection.solution2')}</p>
+					<p className='threat-result'><strong>{t('homePage.threatCaseSection.strongResult')}</strong>{t('homePage.threatCaseSection.result2')}</p>
+				</div>
 			</div>
 			<div className='threat-image-cont'>
 				<img className='threat-image' src="landing_4.svg" alt="Landing Image" loading='lazy' />

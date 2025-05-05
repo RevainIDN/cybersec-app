@@ -48,11 +48,11 @@
 			"subtitle": "Our tools help you prevent threats, protect sensitive data, and strengthen your network security",
 			"blocks": {
 				"checkIp": {
-					"title": "IP Address Check",
-					"description": "Analyze IP addresses and detect threats. Quickly block malicious sources."
+					"title": "Threat Analysis",
+					"description": "Check IP addresses, URLs, domains and files for threats. Quickly identify and block malicious sources."
 				},
 				"dataLeaks": {
-					"title": "Data Leak Detection",
+					"title": "Leak Detection",
 					"description": "Check if your data has been leaked. We analyze leak databases to protect your information."
 				},
 				"passwords": {
@@ -60,8 +60,8 @@
 					"description": "Check the strength of your passwords and get recommendations for improving them."
 				},
 				"reports": {
-					"title": "Report Generation",
-					"description": "Receive detailed security reports and insights into current threats to your network."
+					"title": "Analytical reports",
+					"description": "Study current trends, statistics and features of cybersecurity with our static reports."
 				}
 			}
 		},
@@ -70,9 +70,9 @@
 			"subtitle": "Four key tools that provide complete security for your network, helping you prevent attacks, protect sensitive information, and respond quickly to threats. SecureNet offers solutions that can instantly identify potential risks and alert you to potential incidents, ensuring protection at every stage.",
 			"cards": {
 				"card1": {
-					"title": "IP Address Check",
-					"description": "Thousands of new threats emerge online every second. Our IP analysis tool allows you to instantly check if a given IP address is a source of malicious activity. We use threat databases and cyber intelligence to keep your network safe.",
-					"button": "Check IP"
+					"title": "Threat Analysis",
+					"description": "Thousands of new threats appear on the Internet every second. Our analysis tool allows you to instantly check IP addresses, URLs, domains and files for malicious activity, using threat databases and cyber intelligence to protect your network.",
+					"button": "Check Threats"
 				},
 				"card2": {
 					"title": "Data Leak Detection",
@@ -85,9 +85,9 @@
 					"button": "Check Password"
 				},
 				"card4": {
-					"title": "Security Reports",
-					"description": "Security requires monitoring. Our tool automatically analyzes your network and generates detailed reports on potential threats. Use these insights to protect your business or personal accounts.",
-					"button": "View Report"
+					"title": "Analytical Reports",
+					"description": "Stay up to date with cyber threats with our static reports. Analyze trends, statistics, and key aspects of cybersecurity to protect your business or personal data.",
+					"button": "Explore Reports"
 				}
 			}
 		},
@@ -97,9 +97,12 @@
 			"strongCase": "Case: ",
 			"strongSolution": "Solution: ",
 			"strongResult": "Result: ",
-			"case": "Many users reuse the same password across different websites. After a popular service was hacked, cybercriminals gained access to millions of credentials and started using them to break into other accounts.",
-			"solution": "Users who checked their passwords with our service discovered that their credentials had been compromised. This allowed them to change their passwords in time and secure their accounts.",
-			"result": "Thousands of users avoided account theft and financial losses."
+			"case1": "Many users reuse the same password across different websites. After a popular service was hacked, cybercriminals gained access to millions of credentials and started using them to break into other accounts.",
+			"solution1": "Users who checked their passwords with our service discovered that their credentials had been compromised. This allowed them to change their passwords in time and secure their accounts.",
+			"result1": "Thousands of users avoided account theft and financial losses.",
+			"case2": "A phishing attack via a malicious URL resulted in the compromise of the company's employees' data. The hackers distributed links disguised as legitimate resources.",
+			"solution2": "Using the URL analysis tool in SecureNet, the company checked suspicious links and identified a phishing site, blocking access to it.",
+			"result2": "The company prevented the leak of confidential data and strengthened employee training in recognizing phishing."
 		}
 	},
 	"passwordPage": {

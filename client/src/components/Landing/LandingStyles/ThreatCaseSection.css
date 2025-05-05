@@ -10,10 +10,23 @@
 	margin-bottom: 20px;
 }
 
+.threat-subtitle {
+	margin-bottom: 10px !important;
+}
+
 .threat-title {
 	font-size: 2rem;
 	margin-bottom: 24px;
 	width: 80%;
+}
+
+.threat-example {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+	border-top: 2px solid transparent;
+	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
+	padding-top: 10px;
 }
 
 .threat-subtitle,
@@ -21,9 +34,10 @@
 .threat-solution,
 .threat-result {
 	width: 95%;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	font-size: 0.9rem;
 	font-weight: 300;
+	line-height: 1.4;
 }
 
 .threat-image-cont {
