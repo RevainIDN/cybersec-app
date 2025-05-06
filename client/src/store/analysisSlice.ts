@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IpVirusTotalResponse, DomainVirusTotalResponse, UrlVirusTotalResponse, FileVirusTotalResponse } from "../types/AnalysisTypes/analysisResultsTypes";
+import { IpVirusTotalResponse } from "../types/AnalysisTypes/ipResultsTypes";
+import { DomainVirusTotalResponse } from "../types/AnalysisTypes/domainResultsTypes";
+import { UrlVirusTotalResponse } from "../types/AnalysisTypes/urlResultsTypes";
+import { FileVirusTotalResponse } from "../types/AnalysisTypes/fileResultsTypes";
 
 interface AnalysisState {
 	isLoading: boolean,

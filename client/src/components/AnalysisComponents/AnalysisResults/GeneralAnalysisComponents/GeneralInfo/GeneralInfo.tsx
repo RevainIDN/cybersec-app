@@ -6,7 +6,7 @@ import { formatBytes } from '../../../../../utils/formatBytes';
 import { TFunction } from 'i18next';
 import { selectAnalysisInfo } from './generalInfoSelector';
 import ProgressCircle from '../ProgressCircle/ProgressCircle';
-import { GeneralVirusTotalResponse } from '../../../../../types/AnalysisTypes/analysisResultsTypes';
+import { GeneralVirusTotalResponse } from '../../../../../types/AnalysisTypes/analysisResultsCommonTypes';
 
 // Константы для классов
 const CLASS_NAMES = {

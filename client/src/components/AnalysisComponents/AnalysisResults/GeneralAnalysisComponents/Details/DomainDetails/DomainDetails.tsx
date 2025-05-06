@@ -1,4 +1,4 @@
-import { DomainVirusTotalResponse, DNSRecord } from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
+import { DomainVirusTotalResponse, DNSRecord } from "../../../../../../types/AnalysisTypes/domainResultsTypes";
 import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
 import { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";

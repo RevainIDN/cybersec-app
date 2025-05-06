@@ -1,4 +1,4 @@
-import { IpVirusTotalResponse } from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
+import { IpVirusTotalResponse } from "../../../../../../types/AnalysisTypes/ipResultsTypes";
 import { useTranslation } from "react-i18next";
 
 interface IpDetailsProps {

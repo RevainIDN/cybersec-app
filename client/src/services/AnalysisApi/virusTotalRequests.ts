@@ -1,6 +1,8 @@
 import axios from "axios";
 import store from "../../store";
-import { IpVirusTotalResponse, DomainVirusTotalResponse, FileVirusTotalResponse } from "../../types/AnalysisTypes/analysisResultsTypes";
+import { IpVirusTotalResponse } from "../../types/AnalysisTypes/ipResultsTypes";
+import { DomainVirusTotalResponse } from "../../types/AnalysisTypes/domainResultsTypes";
+import { FileVirusTotalResponse } from "../../types/AnalysisTypes/fileResultsTypes";
 
 // Запрос для анализа IP через сервер
 export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResponse> => {

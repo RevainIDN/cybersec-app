@@ -9,7 +9,7 @@ import {
 	PESection,
 	BundleInfo,
 	PEOverlay,
-} from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
+} from "../../../../../../types/AnalysisTypes/fileResultsTypes";
 import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
 import { formatBytes } from "../../../../../../utils/formatBytes";
 import { useTranslation } from "react-i18next";

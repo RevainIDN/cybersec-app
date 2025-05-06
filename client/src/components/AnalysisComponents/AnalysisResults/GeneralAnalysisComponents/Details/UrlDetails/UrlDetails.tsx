@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { UrlVirusTotalResponse } from "../../../../../../types/AnalysisTypes/analysisResultsTypes";
+import { UrlVirusTotalResponse } from "../../../../../../types/AnalysisTypes/urlResultsTypes";
 import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
 import { formatBytes } from "../../../../../../utils/formatBytes";
 import { useTranslation } from "react-i18next";
