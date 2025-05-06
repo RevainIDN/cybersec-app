@@ -201,7 +201,8 @@
 			"domainErrorMessage": "Введіть правильний домен (наприклад, example.com)",
 			"urlErrorMessage": "Введіть правильну URL-адресу (наприклад, https://example.com)",
 			"fileErrorMessage": "Будь ласка, виберіть файл для аналізу",
-			"fileSizeErrorMessage": "Файл перевищує максимальні 32 МБ"
+			"fileSizeErrorMessage": "Файл перевищує максимальні 32 МБ",
+			"fileOk": "Файл проаналізован"
 		},
 		"analyzedData": {
 			"resultsSwitchingButtons": {
@@ -222,6 +223,16 @@
 				"creationDate": "Дата створення: ",
 				"status": "Статус: ",
 				"noData": "Немає даних"
+			},
+			"detection": {
+				"malware": "Шкідливий",
+				"suspicious": "Підозрілий",
+				"clean": "Загроз не виявлено",
+				"unrated": "Немає даних",
+				"undetected": "Загроз не виявлено",
+				"typeUnsupported": "Тип не підтримується",
+				"timeout": "Час очікування вичерпано",
+				"failure": "Помилка"
 			},
 			"details": {
 				"ip": {

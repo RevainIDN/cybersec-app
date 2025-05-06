@@ -201,7 +201,8 @@
 			"domainErrorMessage": "Please enter a valid domain (e.g. example.com)",
 			"urlErrorMessage": "Please enter a valid URL (e.g. https://example.com)",
 			"fileErrorMessage": "Please select a file to analyze",
-			"fileSizeErrorMessage": "The file exceeds the maximum size of 32 MB"
+			"fileSizeErrorMessage": "The file exceeds the maximum size of 32 MB",
+			"fileOk": "File analyzed"
 		},
 		"analyzedData": {
 			"resultsSwitchingButtons": {
@@ -222,6 +223,16 @@
 				"creationDate": "Date of creation: ",
 				"status": "Status: ",
 				"noData": "No data"
+			},
+			"detection": {
+				"malware": "Malicious",
+				"suspicious": "Suspicious",
+				"clean": "No threats found",
+				"unrated": "No data",
+				"undetected": "No threats found",
+				"typeUnsupported": "Unsupported type",
+				"timeout": "Timeout",
+				"failure": "Error"
 			},
 			"details": {
 				"ip": {
