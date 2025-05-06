@@ -1,24 +1,22 @@
 import './AnalysisInput.css'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
-import { setIsLoading, setSelectedOption, setIpAnalysisResults, setDomainAnalysisResults, setUrlAnalysisResults, setFileAnalysisResults } from '../../../store/analysisSlice';
-import { fetchVirusTotalIp, fetchVirusTotalDomain, fetchVirusTotalUrlScan, fetchVirusTotalFileScan, fetchVirusTotalFileReport } from '../../../services/AnalysisApi/virusTotalRequests';
+import { setSelectedOption } from '../../../store/analysisSlice';
 import { buttonsValues } from './analysisInputHelpers';
+import { useAnalysisInput } from '../../../hooks/Analysis/useAnalysisInput';
+import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function AnalysisInput() {
 	const { t } = useTranslation();
-
 	const dispatch = useDispatch<AppDispatch>();
-	// Глобальное состояние
-	const { selectedOption } = useSelector((state: RootState) => state.analysis)
 
-	// Локальное логическое состояние
-	const [enteredValue, setEnteredValue] = useState<string>('');
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
-	const [isFileUploading, setIsFileUploading] = useState<boolean>(false);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	// Глобальные состояния
+	const { selectedOption } = useSelector((state: RootState) => state.analysis)
+	const { notification } = useSelector((state: RootState) => state.general)
+
+	// Использование кастомного хука для управления вводом и анализом
+	const { enteredValue, setEnteredValue, selectedFile, setSelectedFile, isFileUploading, handleAnalysis } = useAnalysisInput();
 
 	// Обработчик переключения типа анализируемых данных
 	const handleClickOption = (e: React.MouseEvent<HTMLElement>) => {
@@ -26,133 +24,25 @@ export default function AnalysisInput() {
 		dispatch(setSelectedOption(value));
 		setEnteredValue('');
 		setSelectedFile(null);
-		setErrorMessage(null);
 	}
 
 	// Обрааботчик ввода данных и их сохранение
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setEnteredValue(value);
-		setErrorMessage(null);
 	}
 
 	// ООбработчик загрузки файла
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setSelectedFile(e.target.files[0]);
-			setErrorMessage(null);
 		}
 	};
 
 	// Обработчик отправки запроса на сервер при нажатие "Enter"
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
-			handleClick();
-		}
-	};
-
-	// Функции валидации
-	const isValidIp = (value: string): boolean => {
-		const ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-		return ipRegex.test(value);
-	};
-
-	const isValidDomain = (value: string): boolean => {
-		const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
-		return domainRegex.test(value);
-	};
-
-	const isValidUrl = (value: string): boolean => {
-		const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z0-9-]{2,}(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*)?$/i;
-		return urlRegex.test(value);
-	};
-
-	const isValidFile = (file: File | null): { isValid: boolean; message?: string } => {
-		const MAX_FILE_SIZE = 32 * 1024 * 1024;
-
-		if (!file) {
-			return { isValid: false, message: t('analysisPage.analysisInput.fileErrorMessage') };
-		}
-		if (file.size > MAX_FILE_SIZE) {
-			return { isValid: false, message: t('analysisPage.analysisInput.fileSizeErrorMessage') };
-		}
-		return { isValid: true };
-	};
-
-	// Обработчик отправки запроса на сервер
-	const handleClick = async () => {
-		if (!enteredValue && selectedOption !== 'file') {
-			setErrorMessage(t('analysisPage.analysisInput.generalErrorMessage'));
-			return;
-		}
-
-		// Валидация ввода
-		if (selectedOption === 'ip' && !isValidIp(enteredValue)) {
-			setErrorMessage(t('analysisPage.analysisInput.ipErrorMessage'));
-			return;
-		}
-		if (selectedOption === 'domain' && !isValidDomain(enteredValue)) {
-			setErrorMessage(t('analysisPage.analysisInput.domainErrorMessage'));
-			return;
-		}
-		if (selectedOption === 'url' && !isValidUrl(enteredValue)) {
-			setErrorMessage(t('analysisPage.analysisInput.urlErrorMessage'));
-			return;
-		}
-		if (selectedOption === 'file') {
-			const fileValidation = isValidFile(selectedFile);
-			if (!fileValidation.isValid) {
-				setErrorMessage(fileValidation.message || null);
-				return;
-			}
-		}
-
-		dispatch(setIsLoading(true));
-		setErrorMessage(null)
-
-		try {
-			if (selectedOption === 'ip') {
-				const ipData = await fetchVirusTotalIp(enteredValue);
-				dispatch(setIpAnalysisResults(ipData));
-			} else if (selectedOption === 'domain') {
-				const domainData = await fetchVirusTotalDomain(enteredValue);
-				dispatch(setDomainAnalysisResults(domainData));
-			} else if (selectedOption === 'url') {
-				const urlData = await fetchVirusTotalUrlScan(enteredValue);
-				dispatch(setUrlAnalysisResults(urlData));
-			} else if (selectedOption === 'file' && selectedFile) {
-				setSelectedFile(null)
-				setIsFileUploading(true);
-				console.log("Отправка файла для анализа...");
-
-				try {
-					const fileDataId = await fetchVirusTotalFileScan(selectedFile);
-					const analysisId = fileDataId?.data?.id;
-					if (!analysisId) {
-						console.error("Ошибка: не получен ID анализа файла");
-						setErrorMessage("Не удалось получить ID анализа файла");
-						return;
-					}
-
-					console.log("ID для запроса статуса:", analysisId);
-					const fileData = await fetchVirusTotalFileReport(analysisId);
-					console.log("Полученные данные файла:", fileData);
-					if (fileData) {
-						dispatch(setFileAnalysisResults(fileData));
-					} else {
-						setErrorMessage("Анализ файла не завершён или данные недоступны");
-					}
-				} catch (error) {
-					console.error("Ошибка при обработке файла:", error);
-					setErrorMessage("Ошибка при анализе файла");
-				} finally {
-					setIsFileUploading(false);
-				}
-			}
-		} catch (error) {
-			console.error("Error while querying VirusTotal:", error);
-		} finally {
-			dispatch(setIsLoading(false));
+			handleAnalysis();
 		}
 	};
 
@@ -200,7 +90,7 @@ export default function AnalysisInput() {
 						</div>}
 					<button
 						className='file-upload-btn'
-						onClick={handleClick}
+						onClick={handleAnalysis}
 						disabled={!selectedFile || isFileUploading}
 					>
 						{isFileUploading
@@ -220,13 +110,13 @@ export default function AnalysisInput() {
 					/>
 					<button
 						className='input-btn button'
-						onClick={handleClick}
+						onClick={handleAnalysis}
 					>
 						{t('analysisPage.analysisInput.inputButton')}
 					</button>
 				</div>
 			)}
-			{errorMessage && <p className="error-message">{errorMessage}</p>}
+			{notification && <Notification message={notification.message} time={3000} />}
 		</div>
 	)
 }

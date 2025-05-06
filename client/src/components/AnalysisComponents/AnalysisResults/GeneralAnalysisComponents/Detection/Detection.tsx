@@ -1,9 +1,12 @@
 import './Detection.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../store';
+import { useTranslation } from 'react-i18next';
 
 // Подкомпонент для отображения результата анализа от одного движка
 const DetectionItem = ({ engine, result, category, isFile }: { engine: string; result: string; category?: string; isFile: boolean }) => {
+	const { t } = useTranslation();
+
 	// Объекты с иконками для разных типов результатов
 	const resultIcons: Record<string, string> = {
 		malware: 'exclamation-warning.svg',
@@ -17,19 +20,34 @@ const DetectionItem = ({ engine, result, category, isFile }: { engine: string; r
 		'type-unsupported': 'unsupported.svg',
 	};
 
+	// Объект с переводами результатов
+	const resultTranslations: Record<string, string> = {
+		malware: t('analysisPage.analyzedData.detection.malware'),
+		suspicious: t('analysisPage.analyzedData.detection.suspicious'),
+		clean: t('analysisPage.analyzedData.detection.clean'),
+		unrated: t('analysisPage.analyzedData.detection.unrated'),
+		undetected: t('analysisPage.analyzedData.detection.undetected'),
+		'type-unsupported': t('analysisPage.analyzedData.detection.typeUnsupported'),
+		timeout: t('analysisPage.analyzedData.detection.timeout'),
+		failure: t('analysisPage.analyzedData.detection.failure'),
+	};
+
 	// Логика определения результата и стилей
-	const unratedCategories = ['unrated', 'type-unsupported', 'timeout', 'failure'];
 	const displayResult = isFile ? category : result;
+	const translatedResult = resultTranslations[displayResult || ''] || displayResult;
+
+	const unratedCategories = ['unrated', 'type-unsupported', 'timeout', 'failure'];
+	const spanClass = unratedCategories.includes(displayResult || '') ? 'result-unrated' : '';
+
 	const iconSrc = isFile
 		? resultFileIcons[category || ''] || 'question-mark.svg'
 		: resultIcons[result] || 'question-mark.svg';
-	const spanClass = unratedCategories.includes(displayResult || '') ? 'result-unrated' : '';
 
 	return (
 		<li className="category-detection">
 			<strong>{engine}</strong>
 			<img className="result-icon" src={iconSrc} alt={displayResult} />
-			<span className={spanClass}>{displayResult}</span>
+			<span className={spanClass}>{translatedResult}</span>
 		</li>
 	);
 };

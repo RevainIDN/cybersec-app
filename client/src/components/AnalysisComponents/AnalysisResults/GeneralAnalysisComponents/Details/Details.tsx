@@ -31,7 +31,9 @@ export default function Details() {
 	}
 
 	// Рендер при отсутствие данных
-	if (!data || !data.data.attributes) { return <p className='analysis-no-data'>No data</p> }
+	if (!selectedOption) {
+		return <p className='analysis-no-data'>No data</p>;
+	}
 
 	return (
 		<ul className='details'>

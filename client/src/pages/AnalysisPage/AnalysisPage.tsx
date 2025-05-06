@@ -17,7 +17,7 @@ export default function AnalysisPage() {
 	}, [pathname]);
 
 	return (
-		<div className='section'>
+		<section className='section'>
 			<motion.div
 				className="analysis-page"
 				initial={{ opacity: 0 }}
@@ -28,6 +28,6 @@ export default function AnalysisPage() {
 				{isLoading && <Loading />}
 				<AnalyzedData />
 			</motion.div>
-		</div>
+		</section>
 	)
 }

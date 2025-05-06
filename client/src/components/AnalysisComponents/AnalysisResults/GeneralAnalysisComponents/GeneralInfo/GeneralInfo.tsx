@@ -6,6 +6,7 @@ import { formatBytes } from '../../../../../utils/formatBytes';
 import { TFunction } from 'i18next';
 import { selectAnalysisInfo } from './generalInfoSelector';
 import ProgressCircle from '../ProgressCircle/ProgressCircle';
+import { GeneralVirusTotalResponse } from '../../../../../types/AnalysisTypes/analysisResultsTypes';
 
 // Константы для классов
 const CLASS_NAMES = {
@@ -27,7 +28,7 @@ const IpDetails = ({ id }: { id: string }) => (
 	<h2 className={CLASS_NAMES.DYNAMIC_ITEM}>{id}</h2>
 );
 
-const DomainDetails = ({ id, attributes, t }: { id: string, attributes: any, t: TFunction }) => (
+const DomainDetails = ({ id, attributes, t }: { id: string, attributes: GeneralVirusTotalResponse, t: TFunction }) => (
 	<>
 		<h2 className={CLASS_NAMES.DYNAMIC_ITEM}>{id}</h2>
 		{attributes.registrar && (
@@ -43,7 +44,7 @@ const DomainDetails = ({ id, attributes, t }: { id: string, attributes: any, t: 
 	</>
 );
 
-const UrlDetails = ({ attributes, t }: { attributes: any, t: TFunction }) => (
+const UrlDetails = ({ attributes, t }: { attributes: GeneralVirusTotalResponse, t: TFunction }) => (
 	<>
 		<h2 className={CLASS_NAMES.DYNAMIC_ITEM}>{attributes.url}</h2>
 		{attributes.last_http_response_code && (
@@ -54,7 +55,7 @@ const UrlDetails = ({ attributes, t }: { attributes: any, t: TFunction }) => (
 	</>
 );
 
-const FileDetails = ({ id, attributes }: { id: string, attributes: any }) => (
+const FileDetails = ({ id, attributes }: { id: string, attributes: GeneralVirusTotalResponse }) => (
 	<>
 		<h2 className={CLASS_NAMES.DYNAMIC_ITEM}>{id}</h2>
 		{attributes.meaningful_name && (

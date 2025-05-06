@@ -12,7 +12,7 @@ export default function IpDetails({ ipAnalysisResults }: IpDetailsProps) {
 	const { attributes } = ipAnalysisResults?.data || {};
 
 	// Если нет данных о IP, отображаем сообщение "Данные не обнаружены"
-	if (!ipAnalysisResults || !ipAnalysisResults.data || !ipAnalysisResults.data.attributes) {
+	if (!ipAnalysisResults) {
 		return <p className="analysis-no-data">No data</p>;
 	}
 
