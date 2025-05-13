@@ -192,6 +192,8 @@
 		}
 	},
 	"analysisPage": {
+		"title": "Check the security of your resources!",
+		"subtitle": "Find out if your resources are hiding threats. Enter an IP address, URL, domain or upload a file - and get a detailed analysis for viruses, phishing and other risks.",
 		"analysisInput": {
 			"inputButton": "Analysis",
 			"isFileUploading": "Send file",
@@ -362,6 +364,10 @@
 					"description": "Your email is not currently found in any known leaks. This is a good sign, but security is still important."
 				}
 			},
+			"errors": {
+				"inputError": "Please enter a valid",
+				"checkError": "Error checking data"
+			},
 			"passwordResult": {
 				"leak": {
 					"title": "Your data was found in leaks!",
@@ -384,7 +390,11 @@
 			"title": "Deploying Short Links",
 			"text": "Enter a shortened URL (like bit.ly) to see where it leads. Short links can hide phishing or malicious sites. Find out the full address and protect yourself from hidden threats.",
 			"resultTitle": "Short URL converted",
-			"resultAdvice": "Find out if this site is safe! Go to the 'Analysis' section to check."
+			"resultAdvice": "Find out if this site is safe! Go to the 'Analysis' section to check.",
+			"errors": {
+				"inputError": "Please enter a valid short URL (e.g. bit.ly/xxx)",
+				"checkError": "Error expanding URL"
+			}
 		}
 	},
 	"reportsPage": {
