@@ -9,7 +9,6 @@ export const fetchLeakCheckEmail = async (value: string): Promise<LeakCheckSucce
 			params: { value },
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
-		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		const axiosError = error as AxiosError;
@@ -25,7 +24,6 @@ export const fetchPwnedPassword = async (password: string): Promise<PwnedPasswor
 			params: { password },
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
-		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		const axiosError = error as AxiosError;

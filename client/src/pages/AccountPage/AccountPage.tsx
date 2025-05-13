@@ -13,12 +13,8 @@ import PasswordManager from '../../components/UserAreaComponents/PasswordManager
 const accountNavOptions = [
 	{ key: "1", name: "activity", label: "activities" },
 	{ key: "2", name: "autoCheck", label: "auto-check" },
-	{ key: "3", name: "passwordManager", label: "password-manager" },
-	{ key: "4", name: "settings", label: "settings" },
+	{ key: "3", name: "passwordManager", label: "password-manager" }
 ];
-
-// Компоненты-заглушки
-const Settings = () => <h2>Настройки (в разработке)</h2>;
 
 export default function AccountPage() {
 	const { t } = useTranslation();
@@ -34,7 +30,7 @@ export default function AccountPage() {
 	const [selectedOption, setSelectedOption] = useState<string>('activities');
 	const [username, setUsername] = useState<string>('Some user');
 	const [isLogout, setIsLogout] = useState<boolean>(false);
-	console.log(isLogout);
+
 	useEffect(() => {
 		const fetchUserData = async () => {
 			if (!token) return;
@@ -59,8 +55,6 @@ export default function AccountPage() {
 				return <AutoCheck />;
 			case 'password-manager':
 				return <PasswordManager />;
-			case 'settings':
-				return <Settings />;
 			case 'logout':
 				return null;
 		}

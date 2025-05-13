@@ -1,21 +1,29 @@
 import './LeakChecker.css'
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { showNotification } from '../../../store/generalSlice';
 import { useTranslation } from 'react-i18next';
 import { fetchLeakCheckEmail, fetchPwnedPassword } from '../../../services/VulnerabilitiesApi/leakCheckRequests';
 import { LeakCheckSuccessResponse, LeakCheckFalseResponse, PwnedPasswordsResponse } from '../../../types/VulnerabilitiesTypes/vulnerabilitiesTypes';
+import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function LeakChecker() {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch<AppDispatch>();
+	const { notification } = useSelector((state: RootState) => state.general)
+
 	const [selectPwnedBtn, setSelectPwnedBtn] = useState<'email' | 'password'>('email');
 	const [typePasswordInput, setTypePasswordInput] = useState<boolean>(false);
 	const [enteredValue, setEnteredValue] = useState<string>('');
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+	// Данные утечек для email и пароля
 	const [emailLeakData, setEmailLeakData] = useState<LeakCheckSuccessResponse | LeakCheckFalseResponse | null>(null);
 	const [passwordLeakData, setPasswordLeakData] = useState<PwnedPasswordsResponse | null>(null);
 
+	// Обработчики событий
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setEnteredValue(value);
@@ -27,10 +35,12 @@ export default function LeakChecker() {
 		}
 	};
 
+	// Переключение видимости пароля
 	const handleChangeInputType = () => {
 		setTypePasswordInput(prev => !prev)
 	}
 
+	// Выбор типа проверки (email или пароль)
 	const handleSelectPwndBtn = (btn: 'email' | 'password') => {
 		setSelectPwnedBtn(btn);
 		setTypePasswordInput(false);
@@ -42,6 +52,7 @@ export default function LeakChecker() {
 		}
 	}
 
+	// Валидация ввода
 	const validateInput = (value: string, type: 'email' | 'password' | 'url'): boolean => {
 		if (type === 'email') {
 			const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -53,11 +64,14 @@ export default function LeakChecker() {
 		return false;
 	};
 
+	// Запрос на проверку утечек
 	const checkLeack = async () => {
-		setErrorMessage(null);
 		const type = selectPwnedBtn === 'email' ? 'email' : 'password';
 		if (!validateInput(enteredValue, type)) {
-			setErrorMessage(`Пожалуйста, введите корректный ${type === 'email' ? 'email' : 'пароль'}.`);
+			dispatch(showNotification({
+				message: `${t('vulnerabilitiesPage.leakChecker.errors.inputError')} ${type === 'email' ? 'email' : 'пароль'}.`,
+				type: 'error'
+			}))
 			return;
 		}
 		try {
@@ -70,11 +84,15 @@ export default function LeakChecker() {
 				setPasswordLeakData(responseData as PwnedPasswordsResponse);
 			}
 		} catch (error) {
-			setErrorMessage('Ошибка при проверке данных.');
+			dispatch(showNotification({
+				message: t('vulnerabilitiesPage.leakChecker.errors.checkError'),
+				type: 'error'
+			}))
 			console.error('Ошибка:', error);
 		}
 	};
 
+	// Проверка успешности ответа для email
 	const isLeakCheckSuccess = (data: LeakCheckSuccessResponse | LeakCheckFalseResponse | null): data is LeakCheckSuccessResponse => {
 		return data !== null && 'success' in data && data.success;
 	};
@@ -124,7 +142,7 @@ export default function LeakChecker() {
 				</div>
 			</div>
 			{/* Рендер результата для email */}
-			{emailLeakData && selectPwnedBtn === 'email' && errorMessage === null && (
+			{emailLeakData && selectPwnedBtn === 'email' && (
 				<motion.div
 					className={`leak-result ${isLeakCheckSuccess(emailLeakData) && emailLeakData.found > 0 ? 'leak-found' : 'leak-not-found'}`}
 					initial={{ opacity: 0, y: -20 }}
@@ -172,7 +190,7 @@ export default function LeakChecker() {
 			)}
 
 			{/* Рендер результата для пароля */}
-			{passwordLeakData && selectPwnedBtn === 'password' && errorMessage === null && (
+			{passwordLeakData && selectPwnedBtn === 'password' && (
 				<motion.div
 					className={`leak-result ${passwordLeakData.data.found ? 'leak-found' : 'leak-not-found'}`}
 					initial={{ opacity: 0, y: -20 }}
@@ -218,9 +236,7 @@ export default function LeakChecker() {
 					)}
 				</motion.div>
 			)}
-			{errorMessage && (
-				<p className="leak-error-message">{errorMessage}</p>
-			)}
+			{notification && <Notification message={notification.message} time={5000} />}
 		</div>
 	)
 }

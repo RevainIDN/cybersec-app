@@ -1,28 +1,37 @@
 import './ShortLinkDecoder.css'
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { showNotification } from '../../../store/generalSlice';
 import { useTranslation } from 'react-i18next';
 import { fetchExpandShortUrl } from '../../../services/VulnerabilitiesApi/leakCheckRequests';
 import { copyToClipboard } from '../../../utils/copyToClipboard';
+import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function ShortLinkDecoder() {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch<AppDispatch>();
+	const { notification } = useSelector((state: RootState) => state.general)
+
 	const [enteredValue, setEnteredValue] = useState<string>('');
 	const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
 	const [isCopiedLink, setIsCopiedLink] = useState<boolean>(false);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+	// Обработка ввода
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setEnteredValue(value);
 	}
 
+	// Обработка нажатия Enter
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			expandUrlHandler();
 		}
 	};
 
+	// Копирование расширенного URL
 	const handleCopyLink = () => {
 		if (expandedUrl) {
 			copyToClipboard(expandedUrl, () => setIsCopiedLink(true));
@@ -30,25 +39,32 @@ export default function ShortLinkDecoder() {
 		}
 	};
 
+	// Валидация URL
 	const validateInput = (value: string, type: 'email' | 'password' | 'url'): boolean => {
 		if (type === 'url') {
-			const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
+			const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/.*)?$/;
 			return urlRegex.test(value.trim());
 		}
 		return false;
 	};
 
+	// Запрос на расширение URL
 	const expandUrlHandler = async () => {
-		setErrorMessage(null);
 		if (!validateInput(enteredValue, 'url')) {
-			setErrorMessage('Пожалуйста, введите корректный короткий URL (например, bit.ly/xxx).');
+			dispatch(showNotification({
+				message: t('vulnerabilitiesPage.shortLinkDecoder.errors.inputError'),
+				type: 'error'
+			}))
 			return;
 		}
 		try {
 			const result = await fetchExpandShortUrl(enteredValue);
 			setExpandedUrl(result);
 		} catch (error) {
-			setErrorMessage('Ошибка при расширении URL.');
+			dispatch(showNotification({
+				message: t('vulnerabilitiesPage.shortLinkDecoder.errors.checkError'),
+				type: 'error'
+			}))
 			console.error('Ошибка:', error);
 		}
 	};
@@ -81,7 +97,7 @@ export default function ShortLinkDecoder() {
 					</button>
 				</div>
 			</div>
-			{expandedUrl && errorMessage === null && (
+			{expandedUrl && (
 				<div className="leak-result">
 					<div className='leak-result-url'>
 						<p>{t('vulnerabilitiesPage.shortLinkDecoder.resultTitle')}</p>
@@ -95,9 +111,7 @@ export default function ShortLinkDecoder() {
 					<p className='leak-result-url'>{t('vulnerabilitiesPage.shortLinkDecoder.resultAdvice')}</p>
 				</div>
 			)}
-			{errorMessage && (
-				<p className="leak-error-message">{errorMessage}</p>
-			)}
+			{notification && <Notification message={notification.message} time={5000} />}
 		</div>
 	)
 }

@@ -24,7 +24,7 @@ export default function PasswordListGenerator() {
 			<h1 className='password-generator-title'>{t('passwordPage.PasswordGenerator.otherPasswords')}</h1>
 			<ul className='passwords-list'>
 				{listGeneratedPasswords.length < 1 &&
-					<h1 className='password-indication'>{t('passwordPage.PasswordGenerator.indication')}</h1>
+					<p className='password-indication'>{t('passwordPage.PasswordGenerator.indication')}</p>
 				}
 				{listGeneratedPasswords?.map((password, index) => (
 					<li key={index} className='password-item' onClick={() => handleCopy(password, index)}>

@@ -23,6 +23,13 @@ export default function PasswordsPage() {
 		window.scrollTo(0, 0);
 	}, [pathname]);
 
+	const qaItems = [
+		{ question: 'question1', answer: 'answer1' },
+		{ question: 'question2', answer: 'answer2' },
+		{ question: 'question3', answer: 'answer3' },
+		{ question: 'question4', answer: 'answer4' },
+	];
+
 	return (
 		<div className='section'>
 			<motion.div
@@ -48,22 +55,13 @@ export default function PasswordsPage() {
 						animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
 						transition={{ duration: 0.5 }}
 					>
-						<QADropDownList
-							question={t('passwordPage.PasswordGenerator.qaDropDown.question1')}
-							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer1')}
-						/>
-						<QADropDownList
-							question={t('passwordPage.PasswordGenerator.qaDropDown.question2')}
-							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer2')}
-						/>
-						<QADropDownList
-							question={t('passwordPage.PasswordGenerator.qaDropDown.question3')}
-							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer3')}
-						/>
-						<QADropDownList
-							question={t('passwordPage.PasswordGenerator.qaDropDown.question4')}
-							answer={t('passwordPage.PasswordGenerator.qaDropDown.answer4')}
-						/>
+						{qaItems.map((item, index) => (
+							<QADropDownList
+								key={index}
+								question={t(`passwordPage.PasswordGenerator.qaDropDown.${item.question}`)}
+								answer={t(`passwordPage.PasswordGenerator.qaDropDown.${item.answer}`)}
+							/>
+						))}
 					</motion.ul>
 				</div>
 			</motion.div>

@@ -166,15 +166,3 @@
 .leak-result-desc ul {
 	padding: 0;
 }
-
-.leak-error-message {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
-	border-radius: 12px;
-	width: 100%;
-	height: 150px;
-	padding: 8px 12px;
-	font-size: 1.2rem;
-}

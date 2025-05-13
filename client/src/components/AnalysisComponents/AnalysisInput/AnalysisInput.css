@@ -3,6 +3,9 @@
 	flex-direction: column;
 	align-items: center;
 	margin-bottom: 20px;
+	border-top: 2px solid transparent;
+	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
+	padding-top: 20px;
 }
 
 .analysis-btns {
