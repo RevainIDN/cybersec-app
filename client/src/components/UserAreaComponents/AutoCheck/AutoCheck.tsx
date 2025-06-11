@@ -289,11 +289,11 @@ export default function AutoCheck() {
 					</button>
 
 					{showNotification && (
-						<Notification message={'Достигнут лимит авто-проверок'} />
+						<Notification message={'Достигнут лимит авто-проверок'} time={3000} />
 					)}
 
 					{isAutoCheckCreated && (
-						<Notification message='Авто-проверка создана' />
+						<Notification message='Авто-проверка создана' time={3000} />
 					)}
 				</motion.div>
 			)}

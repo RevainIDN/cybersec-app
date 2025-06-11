@@ -11,6 +11,7 @@ import Loading from '../../components/GeneralComponents/Loading/Loading';
 
 export default function AnalysisPage() {
 	const { t } = useTranslation();
+	const { selectedOption } = useSelector((state: RootState) => state.analysis)
 	const { isLoading } = useSelector((state: RootState) => state.analysis);
 
 	const { pathname } = useLocation();
@@ -31,7 +32,7 @@ export default function AnalysisPage() {
 					<h2 className="page-subtitle">{t('analysisPage.subtitle')}</h2>
 				</div>
 				<AnalysisInput />
-				{isLoading && <Loading />}
+				{isLoading && selectedOption !== 'file' && <Loading />}
 				<AnalyzedData />
 			</motion.div>
 		</section>
