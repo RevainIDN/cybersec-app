@@ -109,7 +109,7 @@
 		"passwordCheck": {
 			"title": "How strong is your password?",
 			"subtitle": "Your password is the first line of defense for your data. Make sure it is complex enough and has not been leaked. Enter your password below and we will assess its security.",
-			"button": "Clear",
+			"improve": "Improve",
 			"passwordStrength": {
 				"0": "very weak",
 				"1": "weak",
