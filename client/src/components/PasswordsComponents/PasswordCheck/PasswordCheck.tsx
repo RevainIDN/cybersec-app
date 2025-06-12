@@ -4,6 +4,7 @@ import zxcvbn, { ZXCVBNResult } from 'zxcvbn';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { passwordStrengthStyles, getTranslatedCrackTime } from './passwordStrengthHelpers';
+import { usePasswordImprovement } from '../../../hooks/usePasswordImprovement';
 
 export default function PasswordCheck() {
 	const { t } = useTranslation();
@@ -12,6 +13,16 @@ export default function PasswordCheck() {
 	const [userPassword, setUserPassword] = useState<string>('');
 	// Локальное ui состояние
 	const [checkedPassword, setCheckedPassword] = useState<ZXCVBNResult | null>(null);
+	// Використання хука для покращення пароля
+	const { handleImprove } = usePasswordImprovement(userPassword);
+
+	const handleClickImprove = () => {
+		const newImprovedPassword = handleImprove();
+		if (newImprovedPassword) {
+			setUserPassword(newImprovedPassword);
+			setCheckedPassword(zxcvbn(newImprovedPassword));
+		}
+	};
 
 	// Обработчик ввода пароля
 	const handleInputUserPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +48,17 @@ export default function PasswordCheck() {
 					value={userPassword}
 					onChange={handleInputUserPassword}
 				/>
-				<button className='input-btn button' onClick={() => setUserPassword('')}>{t('passwordPage.passwordCheck.button')}</button>
+				<button
+					className='input-btn button password-check-upgrade-btn'
+					disabled={!userPassword}
+					onClick={handleClickImprove}>
+					{t('passwordPage.passwordCheck.improve')}
+				</button>
+				<button
+					className='input-btn button password-check-clear-btn'
+					onClick={() => setUserPassword('')}>
+					<img src='trash.svg' alt='clear' />
+				</button>
 			</div>
 
 			{/* Основной контейнер информации */}
