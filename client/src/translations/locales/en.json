@@ -244,7 +244,11 @@
 					"asl": "Autonomous System Label:",
 					"rir": "Regional Internet Registry:",
 					"country": "Country:",
-					"continent": "Continent:"
+					"continent": "Continent:",
+					"description": {
+						"properties": "Basic information about the IP address, including network, owner, and country.",
+						"whois": "Information about the IP address owner, organization, and technical contacts."
+					}
 				},
 				"domain": {
 					"categories": "Categories",
@@ -258,7 +262,14 @@
 					"tableHeaderDns3": "Value",
 					"httpsCert": "Last HTTPS Certificate",
 					"tableHeaderHttps1": "Record type",
-					"tableHeaderHttps2": "Value"
+					"tableHeaderHttps2": "Value",
+					"description": {
+						"categories": "Shows what groups or types of services the domain belongs to",
+						"popularity": "Indicates how popular the domain is based on rating and load time from different sources",
+						"dns": "Shows technical data about the domain, such as server addresses and security settings",
+						"httpsCert": "Security information about the connection, protecting data on the site",
+						"whois": "Data about the domain owner, creation date and contact information"
+					}
 				},
 				"url": {
 					"categories": "Categories",
@@ -274,7 +285,13 @@
 					"headers": "Headers",
 					"html": "HTML Info",
 					"title": "Title",
-					"meta": "Meta Tags"
+					"meta": "Meta Tags",
+					"description": {
+						"categories": "Specifies the types of URL content (e.g. education or search engines)",
+						"history": "Shows when the URL first appeared, was last updated, and was last analyzed",
+						"http": "Information about how the site responds to requests, including size and security",
+						"html": "Data about the page content, such as the title and meta description"
+					}
 				},
 				"file": {
 					"properties": "Basic properties",
@@ -330,7 +347,15 @@
 					"earliestModification": "Earliest Content Modification",
 					"latestModification": "Latest Content Modification",
 					"filesByType": "Contained Files By Type",
-					"filesByExtension": "Contained Files By Extension"
+					"filesByExtension": "Contained Files By Extension",
+					"description": {
+						"properties": "Basic information about the file, such as size, type, and unique identifiers",
+						"history": "The dates of the first and last analysis of the file, as well as its creation.",
+						"names": "A list of all the names this file is known by",
+						"signatureInfo": "Data about the digital signature of the file, confirming its authenticity",
+						"portableExecutableInfo": "Details about the structure of the executable, including imports and resources",
+						"bundleInfo": "Data about the contents of the archive or package, including the number of files and their types"
+					}
 				}
 			}
 		}
