@@ -1,5 +1,6 @@
 import { IpVirusTotalResponse } from "../../../../../../types/AnalysisTypes/ipResultsTypes";
 import { useTranslation } from "react-i18next";
+import TooltipButton from "../../../../../GeneralComponents/TooltipButton/TooltipButton";
 
 interface IpDetailsProps {
 	ipAnalysisResults: IpVirusTotalResponse | null;
@@ -20,7 +21,10 @@ export default function IpDetails({ ipAnalysisResults }: IpDetailsProps) {
 		<>
 			{/* Основная информация */}
 			<li className='details-item ip-details'>
-				<h1>{t('analysisPage.analyzedData.details.ip.properties')}</h1>
+				<h1 className="details-tooltip">
+					{t('analysisPage.analyzedData.details.ip.properties')}
+					<TooltipButton tooltipText={t('analysisPage.analyzedData.details.ip.description.properties')} />
+				</h1>
 				<span><strong>{t('analysisPage.analyzedData.details.ip.network')}</strong> {ipAnalysisResults.data.attributes.network}</span>
 				<span><strong>{t('analysisPage.analyzedData.details.ip.asn')}</strong> {ipAnalysisResults.data.attributes.asn}</span>
 				<span><strong>{t('analysisPage.analyzedData.details.ip.asl')}</strong> {ipAnalysisResults.data.attributes.as_owner}</span>
@@ -32,7 +36,7 @@ export default function IpDetails({ ipAnalysisResults }: IpDetailsProps) {
 			{/* WHOIS информация */}
 			{attributes?.whois && attributes.whois.trim().length > 0 && (
 				<li className="details-item">
-					<h1>WHOIS</h1>
+					<h1 className="details-tooltip">WHOIS <TooltipButton tooltipText={t('analysisPage.analyzedData.details.ip.description.whois')} /></h1>
 					<ul className="details-cont">
 						{attributes.whois.split("\n").map((line, index) => (
 							<li key={index}><span>{line}</span></li>

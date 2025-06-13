@@ -10,6 +10,12 @@
 	margin-bottom: 20px;
 }
 
+.details-tooltip {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
 .ip-details {
 	display: flex;
 	flex-direction: column;
@@ -20,7 +26,6 @@
 	font-size: 1.25rem;
 	padding: 3px 0;
 	border-bottom: 2px #021a71 solid;
-	margin-bottom: 10px;
 }
 
 .details-cont {

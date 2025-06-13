@@ -3,10 +3,12 @@ import { UrlVirusTotalResponse } from "../../../../../../types/AnalysisTypes/url
 import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
 import { formatBytes } from "../../../../../../utils/formatBytes";
 import { useTranslation } from "react-i18next";
+import TooltipButton from "../../../../../GeneralComponents/TooltipButton/TooltipButton";
 
 // Константы для классов
 const CLASS_NAMES = {
 	CONTAINER: "details-cont",
+	TOOLTIP: "details-tooltip",
 	ITEM: "details-item",
 	DESC: "details-desc",
 	INFO: "details-info",
@@ -35,7 +37,10 @@ const renderDetail = (label: string, value?: string | number) => (
 const CategoriesSection = ({ categories, t }: { categories: Record<string, string>, t: TFunction }) => (
 	categories && Object.keys(categories).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t('analysisPage.analyzedData.details.url.categories')}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t('analysisPage.analyzedData.details.url.categories')}
+				<TooltipButton tooltipText="" />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				{Object.entries(categories).map(([key, value]) => (
 					<li className={CLASS_NAMES.PROPERTY} key={key}>
@@ -50,7 +55,10 @@ const CategoriesSection = ({ categories, t }: { categories: Record<string, strin
 const HistorySection = ({ attributes, t }: { attributes: UrlVirusTotalResponse['data']['attributes'], t: TFunction }) => (
 	attributes?.first_submission_date && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t('analysisPage.analyzedData.details.url.history')}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t('analysisPage.analyzedData.details.url.history')}
+				<TooltipButton tooltipText="" />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				{renderDetail(t('analysisPage.analyzedData.details.url.firstSubmition'), convertTimestamp(attributes.first_submission_date))}
 				{renderDetail(t('analysisPage.analyzedData.details.url.lastSubmission'), convertTimestamp(attributes.last_submission_date))}
@@ -63,7 +71,10 @@ const HistorySection = ({ attributes, t }: { attributes: UrlVirusTotalResponse['
 const HttpResponseSection = ({ attributes, t }: { attributes: UrlVirusTotalResponse['data']['attributes'], t: TFunction }) => (
 	attributes?.last_http_response_headers && Object.keys(attributes.last_http_response_headers).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t('analysisPage.analyzedData.details.url.http')}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t('analysisPage.analyzedData.details.url.http')}
+				<TooltipButton tooltipText="" />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				{renderDetail(t('analysisPage.analyzedData.details.url.url'), attributes.url)}
 				{renderDetail(t('analysisPage.analyzedData.details.url.status'), attributes.last_http_response_code)}
@@ -83,7 +94,10 @@ const HttpResponseSection = ({ attributes, t }: { attributes: UrlVirusTotalRespo
 const HtmlInfoSection = ({ attributes, t }: { attributes: UrlVirusTotalResponse['data']['attributes'], t: TFunction }) => (
 	attributes?.html_meta && Object.keys(attributes.html_meta).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t('analysisPage.analyzedData.details.url.html')}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t('analysisPage.analyzedData.details.url.html')}
+				<TooltipButton tooltipText="" />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				{renderDetail(t('analysisPage.analyzedData.details.url.title'), attributes.title)}
 				<li className={CLASS_NAMES.TITLE}>{t('analysisPage.analyzedData.details.url.meta')}</li>

@@ -14,10 +14,12 @@ import { convertTimestamp } from "../../../../../../utils/convertTimestamp";
 import { formatBytes } from "../../../../../../utils/formatBytes";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
+import TooltipButton from "../../../../../GeneralComponents/TooltipButton/TooltipButton";
 
 // Константы для классов
 const CLASS_NAMES = {
 	CONTAINER: "details-cont",
+	TOOLTIP: "details-tooltip",
 	ITEM: "details-item",
 	DESC: "details-desc",
 	TITLE: "details-desc-title",
@@ -142,7 +144,10 @@ const MainProperties = ({
 	t: TFunction;
 }) => (
 	<li className={CLASS_NAMES.ITEM}>
-		<h1>{t("analysisPage.analyzedData.details.file.properties")}</h1>
+		<h1 className={CLASS_NAMES.TOOLTIP}>
+			{t("analysisPage.analyzedData.details.file.properties")}
+			<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.properties")} />
+		</h1>
 		<ul className={CLASS_NAMES.CONTAINER}>
 			{renderDetail("MD5", attributes?.md5)}
 			{renderDetail("SHA-1", attributes?.sha1)}
@@ -182,7 +187,10 @@ const HistorySection = ({
 }) => (
 	attributes?.first_submission_date && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t("analysisPage.analyzedData.details.file.history")}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t("analysisPage.analyzedData.details.file.history")}
+				<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.history")} />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				{renderDetail(
 					t("analysisPage.analyzedData.details.file.creationTime"),
@@ -216,7 +224,10 @@ const NamesSection = ({
 	t: TFunction;
 }) => (
 	<li className={CLASS_NAMES.ITEM}>
-		<h1>{t("analysisPage.analyzedData.details.file.names")}</h1>
+		<h1 className={CLASS_NAMES.TOOLTIP}>
+			{t("analysisPage.analyzedData.details.file.names")}
+			<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.names")} />
+		</h1>
 		<ul className={CLASS_NAMES.CONTAINER}>
 			{names.map((name) => (
 				<li key={name} className={CLASS_NAMES.DESC}>{name}</li>
@@ -234,7 +245,10 @@ const SignatureSection = ({
 }) => (
 	signatureInfo && Object.keys(signatureInfo).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t("analysisPage.analyzedData.details.file.signatureInfo")}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t("analysisPage.analyzedData.details.file.signatureInfo")}
+				<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.signatureInfo")} />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				<li className={CLASS_NAMES.DESC}>
 					<strong>{t("analysisPage.analyzedData.details.file.verification")}</strong>
@@ -313,7 +327,10 @@ const PeInfoSection = ({
 }) => (
 	peInfo && Object.keys(peInfo).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t("analysisPage.analyzedData.details.file.portableExecutableInfo")}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t("analysisPage.analyzedData.details.file.portableExecutableInfo")}
+				<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.portableExecutableInfo")} />
+			</h1>
 			{peInfo.compiler_product_versions && (
 				<KeyValueList
 					title={t("analysisPage.analyzedData.details.file.compilerProducts")}
@@ -415,7 +432,10 @@ const BundleInfoSection = ({
 }) => (
 	bundleInfo && Object.keys(bundleInfo).length > 0 && (
 		<li className={CLASS_NAMES.ITEM}>
-			<h1>{t("analysisPage.analyzedData.details.file.bundleInfo")}</h1>
+			<h1 className={CLASS_NAMES.TOOLTIP}>
+				{t("analysisPage.analyzedData.details.file.bundleInfo")}
+				<TooltipButton tooltipText={t("analysisPage.analyzedData.details.file.description.bundleInfo")} />
+			</h1>
 			<ul className={CLASS_NAMES.CONTAINER}>
 				<li className={CLASS_NAMES.TITLE}>
 					{t("analysisPage.analyzedData.details.file.contentsMetadata")}
