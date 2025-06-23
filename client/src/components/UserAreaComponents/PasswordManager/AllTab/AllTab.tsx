@@ -41,7 +41,6 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 			const decryptedPasswords = response.data.passwords.map((p: Password) => {
 				const site = decryptData(p.site);
 				const login = decryptData(p.login);
-				console.log('Decrypted:', { site, login, encryptedPassword: p.encryptedPassword });
 				return {
 					...p,
 					site: site || '',
@@ -176,7 +175,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 							<div className='pass-manager-login'><strong>{t('accountPage.passwordManager.allTab.login')}</strong> {p.login}</div>
 							<div className='pass-manager-password'>
 								<p>
-									<strong>{t('accountPage.passwordManager.allTab.password')}</strong>
+									<strong>{t('accountPage.passwordManager.allTab.password')} </strong>
 									{!showPassword
 										? decryptData(p.encryptedPassword).replace(/./g, "*")
 										: decryptData(p.encryptedPassword)}

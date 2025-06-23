@@ -3,7 +3,6 @@
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	margin: 0 0 20px 0;
-	min-height: 100vh;
 }
 
 .threat-info {
@@ -43,4 +42,18 @@
 .threat-image-cont {
 	display: flex;
 	justify-content: center;
+}
+
+@media (max-width: 1200px) {
+	.threat-cont {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.threat-image-cont {
+		display: none;
+	}
+
+	.threat-title {
+		width: 100%;
+	}
 }

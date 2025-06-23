@@ -13,7 +13,7 @@ export default function HeroSection() {
 	const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
 	return (
-		<section className='section'>
+		<section className='hero-cont section'>
 			<motion.div
 				ref={ref}
 				className='hero-cont'

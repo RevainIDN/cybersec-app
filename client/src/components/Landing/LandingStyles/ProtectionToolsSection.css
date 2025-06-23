@@ -3,7 +3,6 @@
 	display: flex;
 	flex-direction: column;
 	margin: 100px 0 330px 0;
-	min-height: 100vh;
 }
 
 .about-intro {
@@ -61,4 +60,31 @@
 	color: #FAFAFA;
 	background-color: #0034EE;
 	border-radius: 12px;
+}
+
+@media (max-width: 1200px) {
+	.about-intro {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.about-cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.about-img {
+		width: 50%;
+
+	}
+
+	.about-title-cont {
+		width: 100%;
+		text-align: center;
+	}
+}
+
+@media (max-width: 600px) {
+	.about-cards {
+		grid-template-columns: repeat(1, 1fr);
+	}
 }

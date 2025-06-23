@@ -76,6 +76,10 @@ button {
 }
 
 /* Задний фон лендинг-компонентов */
+.section {
+	min-height: 100vh;
+}
+
 .section::before,
 .section::after {
 	content: "";
@@ -194,4 +198,24 @@ input:focus {
 .radio:checked+.custom-radio::before {
 	-webkit-transform: translate(-50%, -50%) scale(1);
 	transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 680px) {
+	.title {
+		font-size: 1.5rem !important;
+	}
+
+	.subtitle {
+		font-size: 0.9rem !important;
+	}
+
+	.section {
+		background-color: none;
+		min-height: 0px;
+	}
+
+	.section::before,
+	.section::after {
+		display: none;
+	}
 }

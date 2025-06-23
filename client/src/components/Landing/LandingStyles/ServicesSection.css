@@ -3,14 +3,13 @@
 	display: flex;
 	gap: 30px;
 	width: 100%;
-	min-height: 100vh;
 }
 
 .services-info {
 	width: 50%;
 }
 
-.servicer-img-cont {
+.service-img-cont {
 	display: flex;
 	justify-content: center;
 	align-items: start;
@@ -59,4 +58,24 @@
 .block-subtitle {
 	font-size: 0.9rem;
 	font-weight: 200;
+}
+
+@media (max-width: 1200px) {
+	.services-blocks {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.services-info {
+		width: 100%;
+		order: 2;
+	}
+
+	.service-img-cont {
+		display: none;
+	}
+
+	.services-title,
+	.services-subtitle {
+		text-align: center;
+	}
 }

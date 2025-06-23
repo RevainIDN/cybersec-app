@@ -14,3 +14,12 @@
 .assistant-btn:hover {
 	opacity: 1;
 }
+
+@media (max-width: 720px) {
+	.assistant-btn {
+		right: 10px;
+		bottom: 15px;
+		width: 70px;
+		height: 70px;
+	}
+}

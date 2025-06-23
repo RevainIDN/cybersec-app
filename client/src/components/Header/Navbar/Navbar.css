@@ -27,3 +27,19 @@
 	border-radius: 48px;
 	z-index: -1;
 }
+
+@media (max-width: 1280px) {
+	.navbar {
+		gap: 0;
+	}
+
+	.navbar-link {
+		padding: 15px 18px;
+	}
+}
+
+@media (max-width: 1040px) {
+	.navbar {
+		display: none;
+	}
+}

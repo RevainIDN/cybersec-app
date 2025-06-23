@@ -1,16 +1,19 @@
 import './AutoCheck.css'
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../../store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { AutoCheckItem, AutoCheckSubType, AutoCheckType } from '../../../types/AccountTypes/autoCheckTypes';
 import { fetchAutoChecks, runAutoChecks, createAutoCheck, runSingleAutoCheck, deleteAutoCheck } from '../../../services/Authorization/autoCheck';
+import { showNotification } from '../../../store/generalSlice';
 import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function AutoCheck() {
+	const dispatch = useDispatch<AppDispatch>();
 	const { t } = useTranslation();
 	const token = useSelector((state: RootState) => state.auth.token);
+	const notification = useSelector((state: RootState) => state.general.notification)
 	const MAX_AUTO_CHECK_LIMIT = 5;
 
 	const [selectedTab, setSelectedTab] = useState<'create' | 'all'>('create');
@@ -20,10 +23,6 @@ export default function AutoCheck() {
 	const [inputData, setInputData] = useState<string>('');
 	const [checkOnLogin, setCheckOnLogin] = useState<boolean>(true);
 	const [autoChecks, setAutoChecks] = useState<AutoCheckItem[]>([]);
-	const [error, setError] = useState<string>('');
-
-	const [showNotification, setShowNotification] = useState<boolean>(false);
-	const [isAutoCheckCreated, setIsAutoCheckCreated] = useState<boolean>(false);
 
 	const analysisOptions: AutoCheckSubType[] = ['ip', 'url', 'domain'];
 	const leakOptions: AutoCheckSubType[] = ['email', 'password'];
@@ -72,10 +71,12 @@ export default function AutoCheck() {
 			try {
 				const data = await fetchAutoChecks(token);
 				setAutoChecks(data);
-				setError('');
 			} catch (err) {
 				console.error('Ошибка получения автопроверок:', err);
-				setError(t('autoCheck.errors.fetchFailed'));
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.errors.fetchFailed'),
+					type: 'error',
+				}))
 			}
 		};
 
@@ -87,7 +88,10 @@ export default function AutoCheck() {
 				);
 			} catch (err) {
 				console.error('Ошибка запуска автопроверок:', err);
-				setError(t('autoCheck.errors.runFailed'));
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.errors.runFailed'),
+					type: 'error',
+				}))
 			}
 		};
 
@@ -95,29 +99,24 @@ export default function AutoCheck() {
 		runLoginChecks();
 	}, [token, t]);
 
-	useEffect(() => {
-		if (showNotification || isAutoCheckCreated) {
-			const timer = setTimeout(() => {
-				setShowNotification(false);
-				setIsAutoCheckCreated(false);
-			}, 5000);
-			return () => clearTimeout(timer);
-		}
-	}, [showNotification, isAutoCheckCreated]);
-
 	// Создание новой автопроверки
 	const handleCreate = () => {
 		if (MAX_AUTO_CHECK_LIMIT - autoChecks.length === 0) {
-			setShowNotification(true);
+			dispatch(showNotification({
+				message: t('accountPage.autoCheck.errors.maxLimitReached'),
+				type: 'error',
+			}));
 			return;
 		}
 
 		const validationError = validateInput(subType, inputData);
 		if (validationError) {
-			setError(validationError);
+			dispatch(showNotification({
+				message: validationError,
+				type: 'success',
+			}))
 			return;
 		}
-		setError('');
 
 		createAutoCheck(token!, {
 			type: checkType,
@@ -131,13 +130,18 @@ export default function AutoCheck() {
 				setSubType('');
 				setCheckType('analysis');
 				setCheckOnLogin(true);
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.success.created'),
+					type: 'success',
+				}))
 			})
 			.catch(err => {
 				console.error('Ошибка создания автопроверки:', err);
-				setError(err.response?.data?.message || t('autoCheck.errors.createFailed'));
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.errors.createFailed'),
+					type: 'error',
+				}))
 			});
-
-		setIsAutoCheckCreated(true);
 	};
 
 	const toggleTypeCheck = () => {
@@ -152,8 +156,16 @@ export default function AutoCheck() {
 			})
 			.catch(err => {
 				console.error('Ошибка удаления автопроверки:', err);
-				setError(err.response?.data?.message || t('autoCheck.errors.deleteFailed'));
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.errors.deleteFailed'),
+					type: 'error',
+				}))
 			});
+
+		dispatch(showNotification({
+			message: t('accountPage.autoCheck.success.deleted'),
+			type: 'success',
+		}))
 	};
 
 	// Ручной запуск проверки
@@ -164,8 +176,16 @@ export default function AutoCheck() {
 			})
 			.catch(err => {
 				console.error('Ошибка выполнения проверки:', err);
-				setError(err.response?.data?.message || t('autoCheck.errors.runFailed'));
+				dispatch(showNotification({
+					message: t('accountPage.autoCheck.errors.runFailed'),
+					type: 'error',
+				}))
 			});
+
+		dispatch(showNotification({
+			message: t('accountPage.autoCheck.success.run'),
+			type: 'success',
+		}))
 	};
 
 	const remainingChecks = MAX_AUTO_CHECK_LIMIT - autoChecks.length;
@@ -194,8 +214,6 @@ export default function AutoCheck() {
 					animate={{ opacity: 1 }}
 					transition={{ duration: 0.3 }}
 				>
-					{error && <span className="auto-check-error">{error}</span>}
-
 					<div className="auto-check-radios">
 						<h1 className='auto-check-title'>{t(`accountPage.autoCheck.title1`)}</h1>
 						<div className='auto-check-radios-wrapper'>
@@ -287,14 +305,6 @@ export default function AutoCheck() {
 					<button className="auto-check-btn auto-check-create-btn" onClick={handleCreate}>
 						{t('accountPage.autoCheck.create')}
 					</button>
-
-					{showNotification && (
-						<Notification message={'Достигнут лимит авто-проверок'} time={3000} />
-					)}
-
-					{isAutoCheckCreated && (
-						<Notification message='Авто-проверка создана' time={3000} />
-					)}
 				</motion.div>
 			)}
 			{selectedTab === 'all' && (
@@ -368,6 +378,7 @@ export default function AutoCheck() {
 					)}
 				</motion.div>
 			)}
+			{notification && <Notification message={notification.message} time={2000} />}
 		</div>
 	)
 }

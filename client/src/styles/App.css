@@ -7,3 +7,15 @@
 body {
   overflow-x: hidden;
 }
+
+@media (max-width: 720px) {
+  #root {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 680px) {
+  #root {
+    background-color: #001048;
+  }
+}
