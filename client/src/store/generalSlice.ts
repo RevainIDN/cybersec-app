@@ -7,6 +7,7 @@ interface GeneralState {
 	currentLink: string,
 	notification: Record<string, string> | null,
 	overlay: boolean,
+	openHideNavbar: boolean,
 }
 
 const initialState: GeneralState = {
@@ -14,6 +15,7 @@ const initialState: GeneralState = {
 	currentLink: location,
 	notification: null,
 	overlay: false,
+	openHideNavbar: false
 }
 
 const generalSlice = createSlice({
@@ -32,8 +34,11 @@ const generalSlice = createSlice({
 		setOverlay: (state, action: PayloadAction<boolean>) => {
 			state.overlay = action.payload;
 		},
+		setOpenHideNavbar: (state, action: PayloadAction<boolean>) => {
+			state.openHideNavbar = action.payload;
+		}
 	}
 })
 
-export const { setCopiedPasswordIndex, setCurrentLink, showNotification, setOverlay } = generalSlice.actions;
+export const { setCopiedPasswordIndex, setCurrentLink, showNotification, setOverlay, setOpenHideNavbar } = generalSlice.actions;
 export default generalSlice.reducer;

@@ -1,8 +1,13 @@
 .hero-cont {
 	position: relative;
+	margin-bottom: 200px;
+}
+
+.hero-info {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	text-align: center;
 }
 

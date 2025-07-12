@@ -16,7 +16,7 @@ export default function HeroSection() {
 		<section className='hero-cont section'>
 			<motion.div
 				ref={ref}
-				className='hero-cont'
+				className='hero-info'
 				initial={{ opacity: 0 }}
 				animate={inView ? { opacity: 1 } : {}}
 				transition={{ duration: 1 }}

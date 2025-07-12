@@ -75,32 +75,6 @@ button {
 	background-color: #0b31bd;
 }
 
-/* Задний фон лендинг-компонентов */
-.section {
-	min-height: 100vh;
-}
-
-.section::before,
-.section::after {
-	content: "";
-	position: absolute;
-	top: -50%;
-	width: 150%;
-	height: 150%;
-	opacity: 0.6;
-	z-index: -10;
-}
-
-.section::before {
-	left: -50%;
-	background: radial-gradient(circle, #01196e 0%, transparent 45%);
-}
-
-.section::after {
-	right: -50%;
-	background: radial-gradient(circle, #01196e 0%, transparent 45%);
-}
-
 /* Общий стиль */
 
 input[type="text"],

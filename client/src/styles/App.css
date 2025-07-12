@@ -2,10 +2,12 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
+  min-height: 100vh;
 }
 
 body {
   overflow-x: hidden;
+  background-color: #0a153b;
 }
 
 @media (max-width: 720px) {
