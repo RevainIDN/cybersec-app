@@ -55,3 +55,10 @@
 	height: 100%;
 	border-radius: 50%;
 }
+
+@media (max-width: 680px) {
+	.navbar-auth {
+		width: 60%;
+		text-align: center;
+	}
+}
