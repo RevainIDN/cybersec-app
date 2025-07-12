@@ -4,11 +4,13 @@ import { IpVirusTotalResponse } from "../../types/AnalysisTypes/ipResultsTypes";
 import { DomainVirusTotalResponse } from "../../types/AnalysisTypes/domainResultsTypes";
 import { FileVirusTotalResponse } from "../../types/AnalysisTypes/fileResultsTypes";
 
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+
 // Запрос для анализа IP через сервер
 export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResponse> => {
 	const token = store.getState().auth.token;
 	try {
-		const response = await axios.get(`http://localhost:5000/api/virustotal/ip/${value}`, {
+		const response = await axios.get(`${serverUrl}/api/virustotal/ip/${value}`, {
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		return response.data;
@@ -22,7 +24,7 @@ export const fetchVirusTotalIp = async (value: string): Promise<IpVirusTotalResp
 export const fetchVirusTotalDomain = async (value: string): Promise<DomainVirusTotalResponse> => {
 	const token = store.getState().auth.token;
 	try {
-		const response = await axios.get(`http://localhost:5000/api/virustotal/domain/${value}`, {
+		const response = await axios.get(`${serverUrl}/api/virustotal/domain/${value}`, {
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		return response.data;
@@ -37,7 +39,7 @@ export async function fetchVirusTotalUrlScan(url: string) {
 	const token = store.getState().auth.token;
 	try {
 		const response = await axios.post(
-			'http://localhost:5000/api/virustotal/url',
+			`${serverUrl}/api/virustotal/url`,
 			{ url },
 			{
 				headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -57,7 +59,7 @@ export const fetchVirusTotalFileScan = async (file: File) => {
 	formData.append("file", file, file.name);
 
 	try {
-		const response = await fetch(`http://localhost:5000/api/virustotal/files`, {
+		const response = await fetch(`${serverUrl}/api/virustotal/files`, {
 			method: "POST",
 			body: formData,
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -81,7 +83,7 @@ export const fetchVirusTotalFileReport = async (analysisId: string, retries = 5)
 	const token = store.getState().auth.token;
 
 	try {
-		const response = await axios.get(`http://localhost:5000/api/virustotal/files/${analysisId}`, {
+		const response = await axios.get(`${serverUrl}/api/virustotal/files/${analysisId}`, {
 			headers: token ? { Authorization: `Bearer ${token}` } : {},
 		});
 		console.log("Ответ от сервера:", response.data);

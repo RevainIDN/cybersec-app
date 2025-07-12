@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { AutoCheckItem, AutoCheckSubType, AutoCheckType } from '../../types/AccountTypes/autoCheckTypes';
 
-const API_URL = 'http://localhost:5000/auth';
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+const API_URL = `${serverUrl}/auth`;
 
 // Получение всех автопроверок
 export const fetchAutoChecks = async (token: string): Promise<AutoCheckItem[]> => {

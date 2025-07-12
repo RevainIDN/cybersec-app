@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { LoginResponse, RegisterResponse } from '../../types/AuthTypes/authTypes';
 
-const API_URL = 'http://localhost:5000/auth';
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+const API_URL = `${serverUrl}/auth`;
 
 // Запрос для регистрации пользователя
 export const fetchRegister = async (

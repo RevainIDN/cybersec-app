@@ -9,6 +9,7 @@ import { usePasswordEncryption } from '../../../../hooks/usePasswordEncryption';
 import axios from 'axios';
 import zxcvbn from 'zxcvbn';
 import Notification from '../../../GeneralComponents/Notification/Notification';
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 interface CreateTabProps {
 	passwords: Password[],
@@ -59,7 +60,7 @@ export default function CreateTab({ passwords, setPasswords, remaining, setRemai
 			if (!encryptedLogin || !encryptedPassword) return;
 
 			const response = await axios.post(
-				'http://localhost:5000/api/passwords',
+				`${serverUrl}/api/passwords`,
 				{
 					site: encryptedSite,
 					login: encryptedLogin,

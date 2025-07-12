@@ -8,6 +8,7 @@ import { Password } from '../../../../types/AccountTypes/passwordManagerTypes';
 import { usePasswordEncryption } from '../../../../hooks/usePasswordEncryption';
 import axios from 'axios';
 import Notification from '../../../GeneralComponents/Notification/Notification';
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 interface AllTabProps {
 	selectedTab: string,
@@ -35,7 +36,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 
 	const fetchPasswords = async () => {
 		try {
-			const response = await axios.get('http://localhost:5000/api/passwords', {
+			const response = await axios.get(`${serverUrl}/api/passwords`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			const decryptedPasswords = response.data.passwords.map((p: Password) => {
@@ -93,7 +94,7 @@ export default function AllTab({ selectedTab, passwords, setPasswords, remaining
 	// Удаление пароля
 	const handleDelete = async (id: string) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/passwords/${id}`, {
+			await axios.delete(`${serverUrl}/api/passwords/${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			setPasswords(passwords.filter((p) => p._id !== id));
