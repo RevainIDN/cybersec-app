@@ -166,3 +166,37 @@
 .leak-result-desc ul {
 	padding: 0;
 }
+
+@media (max-width: 1040px) {
+	.leak-desc-title {
+		font-size: 0.9rem
+	}
+
+	.leak-desc-text {
+		font-size: 0.75rem;
+	}
+
+	.leak-input {
+		font-size: 1rem;
+		height: 45px;
+		padding-right: 60px !important;
+	}
+}
+
+@media (max-width: 800px) {
+
+	.leak-pwnd,
+	.leak-shorturl {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.leak-result-title {
+		font-size: 1.2rem;
+	}
+
+	.leak-result-subtitle,
+	.leak-result-desc {
+		font-size: 0.9rem;
+	}
+}

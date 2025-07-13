@@ -1,7 +1,7 @@
 import './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { setCurrentLink, setOpenHideNavbar } from '../../store/generalSlice';
+import { setCurrentLink, setOpenHideNavbar, setOverlay } from '../../store/generalSlice';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar/Navbar';
 import LanguageSelector from './LanguageSelector/LanguageSelector';
@@ -12,11 +12,16 @@ export default function Header() {
 	const { openHideNavbar } = useSelector((state: RootState) => state.general);
 	const dispatch = useDispatch<AppDispatch>();
 
+	const handleOpenHideNavbar = () => {
+		dispatch(setOpenHideNavbar(true));
+		dispatch(setOverlay(true));
+	}
+
 	return (
 		<>
 			<div className='header'>
 				<div className='logo-cont'>
-					<button onClick={() => dispatch(setOpenHideNavbar(true))} className="burger-button">
+					<button onClick={handleOpenHideNavbar} className="burger-button">
 						<span></span>
 						<span></span>
 						<span></span>

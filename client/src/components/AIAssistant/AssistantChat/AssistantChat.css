@@ -110,3 +110,9 @@
 	margin-right: auto;
 	background-color: #92a2e1de;
 }
+
+@media (max-width: 800px) {
+	.assistant-chat {
+		width: 100%;
+	}
+}

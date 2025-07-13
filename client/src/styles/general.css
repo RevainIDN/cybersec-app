@@ -122,6 +122,16 @@ input:focus {
 	margin-bottom: 20px;
 }
 
+@media (max-width: 680px) {
+	.page-title {
+		font-size: 1.5rem;
+	}
+
+	.page-subtitle {
+		font-size: 0.75rem;
+	}
+}
+
 /* Задний фон проверок в профиле пользователя */
 
 .bg-item--clear {

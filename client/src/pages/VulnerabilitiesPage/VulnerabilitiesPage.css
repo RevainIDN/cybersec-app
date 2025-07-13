@@ -12,3 +12,12 @@
 	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
 	padding-top: 20px;
 }
+
+@media (max-width: 800px) {
+	.vulnerabilities {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+	}
+}

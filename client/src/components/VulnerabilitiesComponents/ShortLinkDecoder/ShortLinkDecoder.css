@@ -19,7 +19,8 @@
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	white-space: normal;
+	word-break: break-all;
 }
 
 .leak-result-url strong .visible {
@@ -32,4 +33,10 @@
 	border-top: 2px solid transparent;
 	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
 	padding: 10px 0;
+}
+
+@media (max-width: 800px) {
+	.leak-result-url {
+		font-size: 1rem;
+	}
 }
