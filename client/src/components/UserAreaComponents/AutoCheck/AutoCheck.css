@@ -205,6 +205,18 @@
 		margin-top: 10px;
 	}
 
+	.auto-check-now-btn {
+		backdrop-filter: blur(15px);
+		-webkit-backdrop-filter: blur(15px);
+		border: 1px #1f2d5f solid;
+	}
+
+	.auto-check-delete-btn {
+		color: #FAFAFADE;
+		border: none;
+		background: #be4040;
+	}
+
 	.auto-check-now-btn,
 	.auto-check-delete-btn {
 		width: 100%;

@@ -8,6 +8,7 @@ import { setCurrentLink } from '../../../../store/generalSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../store';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 import {
 	Chart as ChartJS,
 	ArcElement,
@@ -39,8 +40,20 @@ export default function ReportItem({ item, index }: ReportItemProps) {
 
 	const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.4 });
 
+	const [isMobileLayout, setIsMobileLayout] = useState(false);
+
 	const isEven = index % 2 === 0;
 	const shouldReverse = item.type === 'stat' && !isEven;
+
+	useEffect(() => {
+		const checkWidth = () => {
+			setIsMobileLayout(window.innerWidth <= 1100);
+		};
+
+		checkWidth();
+		window.addEventListener('resize', checkWidth);
+		return () => window.removeEventListener('resize', checkWidth);
+	}, []);
 
 	// Типизированные опции для графиков
 	const chartOptions: ChartOptions<'pie' | 'line' | 'bar'> = {
@@ -123,8 +136,8 @@ export default function ReportItem({ item, index }: ReportItemProps) {
 			animate={inView ? { opacity: 1, y: 0 } : {}}
 			transition={{ duration: 0.5, ease: "easeOut" }}
 		>
-			{isEven ? infoBlock : chartBlock}
-			{isEven ? chartBlock : infoBlock}
+			{isMobileLayout || isEven ? infoBlock : chartBlock}
+			{isMobileLayout || isEven ? chartBlock : infoBlock}
 		</motion.div>
 	);
 };

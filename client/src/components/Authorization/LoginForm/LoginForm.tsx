@@ -26,7 +26,7 @@ export default function LoginForm() {
 		try {
 			const data = await fetchLogin(username, password, keepSignedIn);
 			if (data.token) {
-				window.location.href = '/';
+				window.location.href = '/cybersec-app/';
 			}
 		} catch (error) {
 			console.error('Ошибка:', error);

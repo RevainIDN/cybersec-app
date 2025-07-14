@@ -9,13 +9,12 @@ interface TooltipButtonProps {
 
 const TooltipButton: React.FC<TooltipButtonProps> = ({ tooltipText, onClick, className }) => {
 	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-	let timeoutId: number; // Замінено NodeJS.Timeout на number
+	let timeoutId: number;
 
-	// Показати підказку після затримки
 	const handleMouseEnter = () => {
 		timeoutId = setTimeout(() => {
 			setIsTooltipVisible(true);
-		}, 1000); // Затримка 1 секунда
+		}, 1000);
 	};
 
 	// Сховати підказку
