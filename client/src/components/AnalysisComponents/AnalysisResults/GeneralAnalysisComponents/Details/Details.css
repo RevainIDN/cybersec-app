@@ -93,6 +93,10 @@
 	font-size: 0.9rem;
 }
 
+.details-table tbody tr td {
+	word-break: break-all;
+}
+
 .popularity-table {
 	width: 500px;
 }

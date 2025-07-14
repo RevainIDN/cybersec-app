@@ -48,17 +48,19 @@ export default function PasswordCheck() {
 					value={userPassword}
 					onChange={handleInputUserPassword}
 				/>
-				<button
-					className='input-btn button password-check-upgrade-btn'
-					disabled={!userPassword}
-					onClick={handleClickImprove}>
-					{t('passwordPage.passwordCheck.improve')}
-				</button>
-				<button
-					className='input-btn button password-check-clear-btn'
-					onClick={() => setUserPassword('')}>
-					<img src='trash.svg' alt='clear' />
-				</button>
+				<div className='password-check-btns-cont'>
+					<button
+						className='input-btn button password-check-upgrade-btn'
+						disabled={!userPassword}
+						onClick={handleClickImprove}>
+						{t('passwordPage.passwordCheck.improve')}
+					</button>
+					<button
+						className='input-btn button password-check-clear-btn'
+						onClick={() => setUserPassword('')}>
+						<img src='trash.svg' alt='clear' />
+					</button>
+				</div>
 			</div>
 
 			{/* Основной контейнер информации */}

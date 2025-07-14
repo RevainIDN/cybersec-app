@@ -2,10 +2,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 20px;
 	border-top: 2px solid transparent;
 	border-image: linear-gradient(to right, transparent, #021a71, transparent) 1;
 	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .analysis-btns {
@@ -114,3 +114,21 @@
 	font-size: 1.5rem;
 	color: #FAFAFADE;
 }
+
+@media (max-width: 900px) {
+	.analysis-btns {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		width: 100%;
+	}
+
+	.analysis-btn {
+		width: 100%;
+	}
+
+	.analysis-input-cont {
+		width: 100%;
+	}
+}
+
+@media (max-width: 500px) {}

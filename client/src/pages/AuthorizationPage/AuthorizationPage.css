@@ -1,11 +1,10 @@
 .auth {
-	width: 500px;
+	max-width: 500px;
 	margin: 0 auto;
 	padding: 20px;
 	border: 2px #021a71 solid;
 	border-radius: 12px;
 	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
-	margin-bottom: 20px;
 }
 
 .switch-auth {

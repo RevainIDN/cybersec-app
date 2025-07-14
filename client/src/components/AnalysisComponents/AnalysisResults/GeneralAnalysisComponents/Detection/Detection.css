@@ -31,3 +31,27 @@
 .result-unrated {
 	color: #929292;
 }
+
+@media (max-width: 980px) {
+	.detection {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.category-detection strong {
+		width: 65%;
+	}
+
+	.category-detection span {
+		width: 45%;
+	}
+
+	.category-detection {
+		width: 100%;
+	}
+}
+
+@media (max-width: 680px) {
+	.detection {
+		font-size: 0.65rem;
+	}
+}

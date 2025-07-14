@@ -87,6 +87,8 @@
 	background: linear-gradient(to bottom right, #001048 0%, #0B1A2B 100%);
 	padding: 10px;
 	border-radius: 12px;
+	overflow-wrap: break-word;
+	word-break: break-all;
 }
 
 .activity-item-info {
@@ -102,4 +104,34 @@
 	display: flex;
 	gap: 6px;
 	flex-direction: column;
+}
+
+@media (max-width: 680px) {
+	.activities-options {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.activities-filters {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.activities-filter-type-button {
+		width: 100%
+	}
+
+	.activities-filter-time {
+		width: 100%;
+	}
+
+	.activities-clear {
+		width: 200px;
+	}
+}
+
+@media (max-width: 480px) {
+	.activities-clear {
+		width: 100%;
+	}
 }

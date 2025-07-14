@@ -1,8 +1,8 @@
 .account-page {
 	display: flex;
 	gap: 20px;
-	width: 1000px;
-	padding: 0 24px;
+	max-width: 1000px;
+	padding: 0 24px 10px 24px;
 	margin: 0 auto;
 }
 
@@ -70,4 +70,36 @@
 
 .account-content {
 	width: 80%;
+}
+
+@media (max-width: 1040px) {
+	.account-page {
+		flex-direction: column;
+		padding: 0 0 10px 0;
+	}
+
+	.account-options {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+
+	.account-options-btns {
+		flex-direction: row;
+		flex-wrap: wrap;
+		width: 100%;
+		border-top: none;
+		border-image: none;
+		padding-top: 0;
+	}
+
+	.account-content {
+		width: 100%;
+	}
+}
+
+@media (max-width: 480px) {
+	.account-options {
+		flex-direction: column;
+	}
 }

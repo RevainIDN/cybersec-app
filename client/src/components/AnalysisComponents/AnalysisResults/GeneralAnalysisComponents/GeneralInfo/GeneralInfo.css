@@ -1,0 +1,28 @@
+.analysis-notification {
+	margin-bottom: 6px;
+}
+
+@media (max-width: 800px) {
+
+	.analysis-notification {
+		margin-bottom: 12px;
+	}
+
+	.analysis-dynamic-info {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		row-gap: 8px;
+	}
+
+	.analysis-dynamic-item {
+		padding: 0;
+		border: 0;
+		width: fit-content;
+		border-bottom: 1px #0034EE solid;
+	}
+
+	.analysis-notification,
+	.analysis-dynamic-item {
+		font-size: 0.75rem !important;
+	}
+}

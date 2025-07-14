@@ -9,6 +9,7 @@ import axios from 'axios';
 import Activities from '../../components/UserAreaComponents/Activities/Activities';
 import AutoCheck from '../../components/UserAreaComponents/AutoCheck/AutoCheck';
 import PasswordManager from '../../components/UserAreaComponents/PasswordManager/PasswordManager';
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const accountNavOptions = [
 	{ key: "1", name: "activity", label: "activities" },
@@ -35,7 +36,7 @@ export default function AccountPage() {
 		const fetchUserData = async () => {
 			if (!token) return;
 			try {
-				const response = await axios.get(`http://localhost:5000/auth/me`, {
+				const response = await axios.get(`${serverUrl}/auth/me`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				setUsername(response.data.username);
