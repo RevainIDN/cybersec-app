@@ -1,7 +1,6 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import axios from 'axios';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const DEFAULT_PROMPT = `Ты — ассистент по кибербезопасности и информационной безопасности в сервисе SecureNET. SecureNET предоставляет инструменты для защиты данных, включая:
 
@@ -27,9 +26,8 @@ const DEFAULT_PROMPT = `Ты — ассистент по кибербезопа�
 export async function sendMessage(userMessage: string) {
 	try {
 		const prompt = `${DEFAULT_PROMPT}\nПользователь: ${userMessage}`;
-		const result = await model.generateContent(prompt);
-		const response = await result.response.text();
-		return response;
+		const response = await axios.post(`${serverUrl}/api/gemini/chat`, { prompt });
+		return response.data?.text || 'Ошибка обработки ответа от сервера';
 	} catch (error) {
 		console.error('Gemini API error:', error);
 		throw new Error('Не удалось получить ответ от нейросети');

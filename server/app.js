@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { DB_PASSWORD } = require('./config/config');
+const { MONGO_URI } = require('./config/config');
 const Role = require('./models/Role');
 const virusTotalRoutes = require('./routes/virusTotal/virusTotalRoutes');
 const leakCheckRoutes = require('./routes/leakCheck/leakCheckRoutes');
 const pwnedPasswordsRoutes = require('./routes/leakCheck/pwnedPasswordsRoutes');
 const urlExpanderRoutes = require('./routes/leakCheck/urlDecoderRoutes');
+const geminiChatRoutes = require('./routes/geminiChat/geminiChatRoutes');
 const authRouter = require('./routes/authorization/authRouter');
 const passwordManagerRoutes = require('./routes/passwordManager/passwordManagerRoutes');
 
@@ -21,12 +22,13 @@ app.use('/api/virustotal', virusTotalRoutes);
 app.use('/api/leakcheck', leakCheckRoutes);
 app.use('/api/pwned', pwnedPasswordsRoutes);
 app.use('/api/expand', urlExpanderRoutes);
+app.use('/api/gemini', geminiChatRoutes);
 app.use('/api/passwords', passwordManagerRoutes);
 app.use('/auth', authRouter)
 
 const start = async () => {
     try {
-        await mongoose.connect(`mongodb+srv://kovigor94:${DB_PASSWORD}@clustercybersec.sm7cp.mongodb.net/?retryWrites=true&w=majority&appName=ClusterCybersec`)
+        await mongoose.connect(MONGO_URI);
         app.listen(PORT, () => {
             console.log(`Сервер запущен на порту ${PORT}`);
             app._router.stack.forEach((r) => {
