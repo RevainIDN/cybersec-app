@@ -2,10 +2,17 @@ import '../Authorization.css'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { fetchLogin } from '../../../services/Authorization/authorization';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { showNotification } from '../../../store/generalSlice';
+
+import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function LoginForm() {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch<AppDispatch>();
+	const { notification } = useSelector((state: RootState) => state.general);
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [keepSignedIn, setKeepSignedIn] = useState<boolean>(false);
@@ -29,65 +36,70 @@ export default function LoginForm() {
 				window.location.href = '/cybersec-app/';
 			}
 		} catch (error) {
-			console.error('Ошибка:', error);
+			dispatch(showNotification({ message: t('authorization.login.invalidCredentials'), type: 'error' }));
 		}
 	};
 
 	return (
-		<form
-			className='form-signin'
-			method='post'
-			name='form'
-			onSubmit={handleSubmitLogin}
-		>
-			<label className='signin-label' htmlFor="username">
-				{t('authorization.login.username')}
-				<input
-					className='input signin-input'
-					type="text"
-					id='username'
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-
-			</label>
-			<label className='signin-label' htmlFor="password">
-				{t('authorization.login.password')}
-				<div className='password-wrapper'>
+		<>
+			{notification && (
+				<Notification message={notification.message} time={3000} />
+			)}
+			<form
+				className='form-signin'
+				method='post'
+				name='form'
+				onSubmit={handleSubmitLogin}
+			>
+				<label className='signin-label' htmlFor="username">
+					{t('authorization.login.username')}
 					<input
 						className='input signin-input'
-						type={typePasswordInput ? 'text' : 'password'}
-						id='password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						type="text"
+						id='username'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
 					/>
-					<button
-						className='input-btn auth-btn-password button'
-						type='button'
-						onClick={handleChangeInputType}
-					>
-						<img src="icons/hide-password.svg" alt="Hide" />
-					</button>
-				</div>
 
-			</label>
-			<div className='switch-cont'>
-				<label className='switch'>
-					<input
-						className='switch-input'
-						type="checkbox"
-						onChange={handleCheckKeepSignedIn}
-					/>
-					<span className='switch-slider'></span>
 				</label>
-				{t('authorization.login.keepSignIn')}
-			</div>
-			<button
-				className='button signin-btn'
-				type='submit'
-			>
-				{t('authorization.login.signIn')}
-			</button>
-		</form>
+				<label className='signin-label' htmlFor="password">
+					{t('authorization.login.password')}
+					<div className='password-wrapper'>
+						<input
+							className='input signin-input'
+							type={typePasswordInput ? 'text' : 'password'}
+							id='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<button
+							className='input-btn auth-btn-password button'
+							type='button'
+							onClick={handleChangeInputType}
+						>
+							<img src="icons/hide-password.svg" alt="Hide" />
+						</button>
+					</div>
+
+				</label>
+				<div className='switch-cont'>
+					<label className='switch'>
+						<input
+							className='switch-input'
+							type="checkbox"
+							onChange={handleCheckKeepSignedIn}
+						/>
+						<span className='switch-slider'></span>
+					</label>
+					{t('authorization.login.keepSignIn')}
+				</div>
+				<button
+					className='button signin-btn'
+					type='submit'
+				>
+					{t('authorization.login.signIn')}
+				</button>
+			</form>
+		</>
 	)
 }

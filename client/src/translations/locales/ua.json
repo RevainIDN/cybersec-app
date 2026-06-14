@@ -26,7 +26,8 @@
 			"username": "Ім'я користувача",
 			"password": "Пароль",
 			"keepSignIn": "Залишатися в системі",
-			"signIn": "Увійти"
+			"signIn": "Увійти",
+			"invalidCredentials": "Неправильні ім'я користувача або пароль"
 		},
 		"registration": {
 			"email": "Ел. пошта",

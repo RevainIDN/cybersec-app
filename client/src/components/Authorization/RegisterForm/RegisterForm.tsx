@@ -2,6 +2,7 @@ import '../Authorization.css'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { fetchRegister } from '../../../services/Authorization/authorization'
+import Notification from '../../GeneralComponents/Notification/Notification';
 
 export default function RegisterForm() {
 	const { t } = useTranslation();
@@ -68,7 +69,6 @@ export default function RegisterForm() {
 			name='form'
 			onSubmit={handleSubmitRegister}
 		>
-			{serverMessage && serverStatus !== 201 && <span className="server-message">{serverMessage}</span>}
 			<label className='signup-label' htmlFor="email">
 				{t('authorization.registration.email')}
 				<input
@@ -127,6 +127,7 @@ export default function RegisterForm() {
 					? t('authorization.registration.signUpSuccess')
 					: t('authorization.registration.signUp')}
 			</button>
+			{serverMessage && serverStatus !== 201 && <Notification message={serverMessage} time={5000} />}
 		</form>
 	)
 }

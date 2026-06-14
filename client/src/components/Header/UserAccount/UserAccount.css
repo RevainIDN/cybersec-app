@@ -4,6 +4,13 @@
 	border-radius: 12px;
 	padding: 10px;
 	outline: 2px #021a71 solid;
+	transition: box-shadow 0.1s ease-in-out;
+}
+
+.navbar-auth:hover {
+	box-shadow:
+		0 0 40px rgba(12, 43, 155, 0.5),
+		0 0 50px rgba(12, 43, 155, 0.5);
 }
 
 .navbar-auth::before {

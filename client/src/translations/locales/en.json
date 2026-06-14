@@ -26,7 +26,8 @@
 			"username": "Username",
 			"password": "Password",
 			"keepSignIn": "Keep me signed in",
-			"signIn": "Sign In"
+			"signIn": "Sign In",
+			"invalidCredentials": "Invalid username or password"
 		},
 		"registration": {
 			"email": "Email",
