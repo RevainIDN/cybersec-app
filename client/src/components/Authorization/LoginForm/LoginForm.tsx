@@ -33,7 +33,7 @@ export default function LoginForm() {
 		try {
 			const data = await fetchLogin(username, password, keepSignedIn);
 			if (data.token) {
-				window.location.href = '/cybersec-app/';
+				window.location.href = '/';
 			}
 		} catch (error) {
 			dispatch(showNotification({ message: t('authorization.login.invalidCredentials'), type: 'error' }));
